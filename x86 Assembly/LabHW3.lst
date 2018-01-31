@@ -1,0 +1,38 @@
+     1                                  bits 32 ; assembling for the 32 bits architecture
+     2                                  
+     3                                  ; declare the EntryPoint (a label defining the very first instruction of the program)
+     4                                  global start        
+     5                                  ;Se dau octetii A si B. Sa se obtina dublucuvantul C:
+     6                                  ;   bitii 0-3 ai lui C coincid cu bitii 3-6 ai lui B
+     7                                  ;   bitii 4-7 ai lui C au valoarea 0
+     8                                  ;   bitii 8-10 ai lui C au valoarea 110
+     9                                  ;   bitii 11-15 ai lui C coincid cu bitii 0-4 ai lui A
+    10                                  ;   bitii 16-31 ai lui C sunt 1
+    11                                  ; declare external functions needed by our program
+    12                                  extern exit               ; tell nasm that exit exists even if we won't be defining it
+    13                                  import exit msvcrt.dll    ; exit is a function that ends the calling process. It is defined in msvcrt.dll
+    14                                                            ; msvcrt.dll contains exit, printf and all the other important C-runtime specific functions
+    15                                  
+    16                                  ; our data is declared here (the variables needed by our program)
+    17                                  segment data use32 class=data
+    18                                      ; ...
+    19 00000000 08                      A db 8
+    20 00000001 03                      B db 3
+    21 00000002 00000000                C dd 0
+    22                                  ; our code starts here
+    23                                  segment code use32 class=code
+    24                                      start:
+    25                                          ; ...
+    26 00000000 B800000000                  mov EAX, 0 ; EAX va fi C
+    27 00000005 8A1D[01000000]              mov BL,byte[B] ; BL=3
+    28 0000000B C0EB03                      shr BL,3 ; shiftam la dreapta cu 3 poz
+    29 0000000E 80E30F                      and BL,0Fh ; aplicam & pe 00001111
+    30 00000011 88D8                        mov AL,BL 
+    31 00000013 B406                        mov AH,6 ; 8-10 au bitii 110
+    32 00000015 C025[00000000]03            shl byte[A],3 ; shiftam la stanga cu 3 poz
+    33 0000001C 0A25[00000000]              or AH,byte[A] ; mutam primii 5 biti din A in AH
+    34 00000022 0D0000FFFF                  or EAX,0FFFF0000h ; setam 1 pe poz 16-31
+    35 00000027 A3[02000000]                mov [C],EAX
+    36                                          ; exit(0)
+    37 0000002C 6A00                            push    dword 0      ; push the parameter for exit onto the stack
+    38 0000002E FF15[00000000]                  call    [exit]       ; call exit to terminate the program

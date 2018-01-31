@@ -1,0 +1,55 @@
+     1                                  bits 32 ; assembling for the 32 bits architecture
+     2                                  
+     3                                  ; declare the EntryPoint (a label defining the very first instruction of the program)
+     4                                  global start        
+     5                                  
+     6                                  ;;;Se dau doua siruri de octeti S1 si S2 de aceeasi lungime. Sa se obtina sirul D prin intercalarea elementelor celor doua siruri. 
+     7                                  ;Exemplu:
+     8                                  
+     9                                  ;S1: 1, 3, 5, 7
+    10                                  ;S2: 2, 6, 9, 4
+    11                                  ;D: 1, 2, 3, 6, 5, 9, 7, 4
+    12                                  
+    13                                  ; declare external functions needed by our program
+    14                                  extern exit, printf              ; tell nasm that exit exists even if we won't be defining it
+    15                                  import exit msvcrt.dll    ; exit is a function that ends the calling process. It is defined in msvcrt.dll
+    16                                  import printf msvcrt.dll  ; msvcrt.dll contains exit, printf and all the other important C-runtime specific functions
+    17                                  
+    18                                  ; our data is declared here (the variables needed by our program)
+    19                                  segment data use32 class=data
+    20                                      ; ...
+    21 00000000 01030507                    S1 db 1,3,5,7
+    22 00000004 02060904                    S2 db 2,6,9,4
+    23 00000008 00<rept>                    D times 8 db 0 ; the final vector will contain 8 elements
+    24 00000010 25642C2000                  print db "%d, ",0 ; printing the final vector
+    25                                  ; our code starts here
+    26                                  segment code use32 class=code
+    27                                      start:
+    28                                          ; ...
+    29 00000000 B904000000                     mov ecx,4 ; go through the vectors S1 and S2 of length 4
+    30 00000005 BE00000000                     mov esi,0 ; we will iterate over the positions of ESI : 0,1,2,3
+    31                                         solveProb:
+    32 0000000A 8A86[00000000]                      mov al,[S1+esi]      ; we put the element indexed with ESI of S1 in D
+    33 00000010 888436[08000000]                    mov [D+esi*2],al
+    34 00000017 8A86[04000000]                      mov al,[S2+esi]      ; we put the element indexed with ESI of S2 in D
+    35 0000001D 888436[09000000]                    mov [D+esi*2+1],al
+    36 00000024 46                                  inc esi            ; increment ESI
+    37 00000025 E2E3                           loop solveProb ; LOOP WHILE ECX != 0 -> iterate 4 times
+    38 00000027 B908000000                     mov ecx,8 ; NOW WE WANT TO ITERATE 8 TIMES
+    39 0000002C BE00000000                     mov esi,0
+    40                                         printList:
+    41 00000031 B800000000                          mov eax,0
+    42 00000036 8A86[08000000]                      mov al,[D+esi]
+    43                                              
+    44 0000003C 60                                  PUSHAD
+    45 0000003D 50                                  push eax
+    46 0000003E 68[10000000]                        push dword print ; PRINT THE D LIST
+    47 00000043 FF15[00000000]                      call [printf]
+    48 00000049 83C408                              add esp,4*2
+    49 0000004C 61                                  POPAD
+    50                                              
+    51 0000004D 46                                  inc esi
+    52 0000004E E2E1                           loop printList ; LOOP PRINTLIST 8 TIMES
+    53                                          ; exit(0)
+    54 00000050 6A00                            push    dword 0      ; push the parameter for exit onto the stack
+    55 00000052 FF15[00000000]                  call    [exit]       ; call exit to terminate the program

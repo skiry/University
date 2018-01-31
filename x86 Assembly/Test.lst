@@ -1,0 +1,100 @@
+     1                                  bits 32 ; assembling for the 32 bits architecture
+     2                                  
+     3                                  ; declare the EntryPoint (a label defining the very first instruction of the program)
+     4                                  global start        
+     5                                  
+     6                                  ; declare external functions needed by our program
+     7                                  extern exit,printf
+     8                                  import printf msvcrt.dll             ; tell nasm that exit exists even if we won't be defining it
+     9                                  import exit msvcrt.dll    ; exit is a function that ends the calling process. It is defined in msvcrt.dll
+    10                                                            ; msvcrt.dll contains exit, printf and all the other important C-runtime specific functions
+    11                                  
+    12                                  ; our data is declared here (the variables needed by our program)
+    13                                  segment data use32 class=data
+    14                                      ; ...
+    15 00000000 1302                        a db 13h,2h
+    16 00000002 FCFF0300FEFF                b dw -4,3,-2
+    17 00000008 DEF89A00                    c dd 9AF8DEh
+    18 0000000C 7800FF000A00                d dw 78h, 0FFh, 0Ah
+    19 00000012 0000                        n dw 0
+    20 00000014 00000000                    aux dd 0
+    21 00000018 4E756D6172756C2065-         pozitiv db "Numarul e pozitiv",0
+    21 00000021 20706F7A6974697600 
+    22 0000002A 4E756D6172756C2065-         negativ db "Numarul e negativ",0
+    22 00000033 206E65676174697600 
+    23 0000003C 546865206279746520-         message db "The byte from the memory area, from the position given by the absolute value of n is: %d",0
+    23 00000045 66726F6D2074686520-
+    23 0000004E 6D656D6F7279206172-
+    23 00000057 65612C2066726F6D20-
+    23 00000060 74686520706F736974-
+    23 00000069 696F6E20676976656E-
+    23 00000072 206279207468652061-
+    23 0000007B 62736F6C7574652076-
+    23 00000084 616C7565206F66206E-
+    23 0000008D 2069733A20256400   
+    24 00000095 00<rept>                    final times 100 db 0
+    25 000000F9 266400                      afis db "&d",0
+    26 000000FC 0000                        maska dw 0
+    27 000000FE 00                          value db 0
+    28                                  ; our code starts here
+    29                                  segment code use32 class=code
+    30                                      start:
+    31                                          ; ...
+    32 00000000 A1[08000000]                    mov EAX,[c]
+    33 00000005 2500FF0000                      and EAX,0FF00h 
+    34 0000000A A3[12000000]                    mov [n],EAX
+    35                                          verificare_n:
+    36 0000000F 2500800000                          and EAX,08000h
+    37 00000014 A3[14000000]                        mov dword [aux],EAX 
+    38 00000019 83F800                              cmp EAX,0 ;;; daca rezultatul e diferit de 0,nr e negativ, sarim la operatia de afisare 
+    39 0000001C 7509                                jne afiseazaNeg
+    40 0000001E 833D[14000000]00                    cmp dword [aux],0 ;; daca e pozitiv, sarim la cealalta op de afisare
+    41 00000025 7410                                je afiseazaPoz
+    42                                          afiseazaNeg:
+    43 00000027 68[2A000000]                        push dword negativ
+    44 0000002C FF15[00000000]                      call [printf]
+    45 00000032 83C404                              add ESP,4 ; afisam negativ, sarim la functia cont, pentru a sari peste afisarea de nr poztitiv
+    46 00000035 EB10                                jmp cont
+    47                                          afiseazaPoz:
+    48 00000037 68[18000000]                        push dword pozitiv
+    49 0000003C FF15[00000000]                      call [printf]
+    50 00000042 83C404                              add ESP,4  
+    51 00000045 EB00                                jmp cont
+    52                                          cont:  
+    53 00000047 A1[12000000]                        mov EAX,dword [n]
+    54 0000004C 66A3[FC000000]                      mov word [maska],AX
+    55 00000052 66C13D[FC000000]0F                  sar word[maska],15 ;;; facem o masca de 15 biti cu 1 pt nr neg,resp 0 pt nr poz
+    56 0000005A B800000000                          mov EAX,0
+    57 0000005F 66A1[FC000000]                      mov AX,word [maska]
+    58 00000065 660305[12000000]                    add AX,word[n] ; adunam masca cu n
+    59 0000006C 663305[FC000000]                    xor AX,[maska] ; facem xor pe masca si suma dintre masca si n=> modul n
+    60 00000073 66A3[12000000]                      mov word[n],AX ; in n avem modul n => n=abs(n)
+    61                                              
+    62 00000079 BE[00000000]                        mov ESI,a
+    63 0000007E FFB6[12000000]                      push dword [ESI+n]; m am gandit sa pun offsetul din var A in ESI=> cand trece de a, trece la urmatoarele variabile de dupa a
+    64 00000084 68[3C000000]                        push dword message 
+    65 00000089 FF15[00000000]                      call [printf]
+    66 0000008F 83C408                              add ESP,4*2 ; deci asta afiseaza ESI+n, byteul cu indexul n din memorie
+    67                                              
+    68 00000092 B200                            mov DL,0
+    69 00000094 8815[FE000000]                  mov byte[value],DL  ; am pus value=0
+    70 0000009A 8B0D[12000000]                  mov ECX,dword[n] ; ECX=n
+    71                                          do:
+    72 000000A0 8B15[FE000000]                      mov EDX, dword[value]     ;rulam DO de n/2 ori, deoarece decrementam ECX la sfarsit inca o data
+    73 000000A6 8915[95000000]                      mov dword[final],EDX ; punem in EDX value, apoi in vectorul final EDX
+    74 000000AC FE05[FE000000]                      inc byte[value]
+    75 000000B2 49                                  dec ECX
+    76 000000B3 E2EB                            loop do
+    77 000000B5 8B0D[FE000000]                  mov ECX,dword[value]
+    78                                          afis_final:
+    79 000000BB 60                                  PUSHAD
+    80 000000BC FF35[95000000]                      push dword[final] ; afisam final
+    81 000000C2 68[F9000000]                        push dword afis
+    82 000000C7 FF15[00000000]                      call [printf]
+    83 000000CD 83C408                              add ESP,4*2
+    84 000000D0 61                                  POPAD
+    85 000000D1 FE0D[FE000000]                      dec byte[value]
+    86 000000D7 E2E2                            loop afis_final
+    87                                          ; exit(0)
+    88 000000D9 6A00                            push    dword 0      ; push the parameter for exit onto the stack
+    89 000000DB FF15[00000000]                  call    [exit]       ; call exit to terminate the program

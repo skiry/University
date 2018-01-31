@@ -1,0 +1,176 @@
+     1                                  bits 32 ; assembling for the 32 bits architecture
+     2                                  
+     3                                  ; declare the EntryPoint (a label defining the very first instruction of the program)
+     4                                  global start        
+     5                                  
+     6                                  ; declare external functions needed by our program
+     7                                  extern exit,printf               ; tell nasm that exit exists even if we won't be defining it
+     8                                  import printf msvcrt.dll
+     9                                  import exit msvcrt.dll    ; exit is a function that ends the calling process. It is defined in msvcrt.dll
+    10                                                            ; msvcrt.dll contains exit, printf and all the other important C-runtime specific functions
+    11                                                            
+    12                                  ;Se da un sir de cuvinte. Sa se construiasca doua siruri de octeti, s1 si s2, astfel: pentru fiecare cuvant,
+    13                                  ;daca numarul de biti 1 din octetul high al cuvantului este mai mare decat numarul de biti 1 din octetul low, atunci s1 va contine octetul high, iar s2 octetul low al cuvantului
+    14                                  ;daca numarul de biti 1 din cei doi octeti ai cuvantului sunt egali, atunci s1 va contine numarul de biti 1 din octet, iar s2 valoarea 0
+    15                                  ;altfel, s1 va contine octetul low, iar s2 octetul high al cuvantului.
+    16                                  
+    17                                  ; our data is declared here (the variables needed by our program)
+    18                                  segment data use32 class=data
+    19                                      ; ...
+    20 00000000 571337371357                sir dw 0x1357,0x3737,0x5713
+    21                                      len equ $-sir
+    22 00000006 00<rept>                    s1 times len db 0
+    23 0000000C 00<rept>                    s2 times len db 0
+    24 00000012 00                          bitesS1 db 0
+    25 00000013 00                          bitesS2 db 0
+    26 00000014 00000000                    aux dd 0
+    27 00000018 00                          counter db 0
+    28 00000019 00                          testByte db 0
+    29 0000001A 00                          stringCounter db 0
+    30 0000001B 73313A202578206269-         format1 db "s1: %x bits of 1 ",10,13,0
+    30 00000024 7473206F662031200A-
+    30 0000002D 0D00               
+    31 0000002F 73323A202578206269-         format2 db "s2: %x bits of 1",10,13,0
+    31 00000038 7473206F6620310A0D-
+    31 00000041 00                 
+    32 00000042 25782000                    format db "%x ",0
+    33                                  ; our code starts here
+    34                                  segment code use32 class=code
+    35                                  
+    36                                      start:
+    37 00000000 BE[00000000]                mov ESI, sir            ; ESI = offset sir    
+    38 00000005 FC                          cld                     ; DF = 0
+    39 00000006 C605[1A000000]00            mov byte [stringCounter], 0
+    40 0000000D B903000000                  mov ECX, len/2         ; ECX = 3 ( words to go through )
+    41                                      main:
+    42 00000012 C605[12000000]00                    mov byte [bitesS1], 0 
+    43 00000019 890D[14000000]                      mov [aux], ECX
+    44                                              
+    45 0000001F B908000000                          mov ECX,8 
+    46 00000024 C605[18000000]01                    mov byte [counter], 1
+    47 0000002B EB7A                                jmp calcS1
+    48                                              afterCalcS1:
+    49                                              
+    50 0000002D B800000000                          mov eax,0
+    51 00000032 A0[12000000]                        mov al,[bitesS1]
+    52 00000037 50                                  push eax
+    53 00000038 68[1B000000]                        push dword format1
+    54 0000003D FF15[00000000]                      call [printf]
+    55 00000043 83C408                              add esp,4*2
+    56                                              
+    57                                              
+    58 00000046 46                                  inc ESI
+    59                                              
+    60 00000047 B908000000                          mov ECX, 8
+    61 0000004C C605[18000000]01                    mov byte [counter], 1
+    62 00000053 C605[13000000]00                    mov byte [bitesS2], 0
+    63 0000005A EB6E                                jmp calcS2
+    64                                              afterCalcS2:
+    65                                              
+    66 0000005C B800000000                          mov eax,0
+    67 00000061 A0[13000000]                        mov al,[bitesS2]
+    68 00000066 50                                  push eax
+    69 00000067 68[2F000000]                        push dword format2
+    70 0000006C FF15[00000000]                      call [printf]
+    71 00000072 83C408                              add esp,4*2
+    72                                              
+    73                                              
+    74 00000075 A0[12000000]                        mov AL, [bitesS1]
+    75 0000007A 3A05[13000000]                      cmp AL, [bitesS2]
+    76 00000080 7F6B                                jg S1puneLOW
+    77 00000082 0F8496000000                        je S2pune0
+    78 00000088 0F8CAD000000                        jl S1puneHIGH 
+    79                                              
+    80                                              continua:
+    81 0000008E FE05[1A000000]                          inc byte [stringCounter]
+    82                                                  
+    83 00000094 8B0D[14000000]                          mov ECX, [aux]
+    84 0000009A 49                                      dec ECX
+    85                                                  
+    86 0000009B 0F8571FFFFFF                            jnz main
+    87 000000A1 0F84C5000000                            jz EndOf
+    88                                              
+    89                                      calcS1:
+    90 000000A7 AC                                  LODSB
+    91 000000A8 4E                                  dec ESI
+    92 000000A9 2205[18000000]                      and AL, [counter] ; test bit 'counter' of byte ESI
+    93 000000AF 3C00                                cmp AL, 0
+    94 000000B1 750F                                jne incrementS1 ; if !0 -> inc no of bites 1
+    95                                              interiorCalcS1:
+    96 000000B3 D025[18000000]                              shl byte [counter], 1
+    97 000000B9 49                                          dec ECX
+    98 000000BA 75EB                                        jnz calcS1
+    99 000000BC 0F846BFFFFFF                                jz afterCalcS1
+   100                                                              
+   101                                             
+   102                                      incrementS1:
+   103 000000C2 FE05[12000000]                      inc byte [bitesS1]
+   104 000000C8 EBE9                                jmp interiorCalcS1
+   105                                              
+   106                                      calcS2:
+   107 000000CA AC                                  LODSB 
+   108 000000CB 4E                                  dec ESI
+   109 000000CC 2205[18000000]                      and AL, [counter] ; test bit 'counter' of byte ESI
+   110 000000D2 3C00                                cmp AL, 0
+   111 000000D4 750F                                jne incrementS2 ; if !0 -> inc no of bites 1
+   112                                              interiorCalcS2:
+   113 000000D6 D025[18000000]                              shl byte [counter], 1
+   114 000000DC 49                                          dec ECX
+   115 000000DD 75EB                                        jnz calcS2
+   116 000000DF 0F8477FFFFFF                                jz afterCalcS2
+   117                                                              
+   118                                             
+   119                                      incrementS2:
+   120 000000E5 FE05[13000000]                      inc byte [bitesS2]
+   121 000000EB EBE9                                jmp interiorCalcS2
+   122                                      
+   123                                      S1puneLOW:
+   124                                      
+   125 000000ED BF[06000000]                        mov EDI, s1
+   126 000000F2 033D[1A000000]                      add EDI, [stringCounter]
+   127                                                 
+   128 000000F8 B800000000                          mov eax,0
+   129 000000FD 8A06                                mov al,[esi]
+   130 000000FF 89C7                                mov edi,eax
+   131 00000101 4E                                  dec ESI ; ESI = the higher part of the actual word
+   132 00000102 BF[0C000000]                        mov EDI, s2
+   133 00000107 033D[1A000000]                      add EDI, [stringCounter]
+   134                                              
+   135 0000010D B800000000                          mov eax,0
+   136 00000112 8A06                                mov al,[esi]
+   137 00000114 89C7                                mov edi,eax
+   138 00000116 83C602                              add ESI, 2 ; ESI gets the right position, next word
+   139 00000119 E970FFFFFF                          jmp continua
+   140                                              
+   141                                      S2pune0:
+   142 0000011E BF[06000000]                        mov EDI, s1
+   143 00000123 033D[1A000000]                      add EDI, [stringCounter]
+   144 00000129 B800000000                          mov eax,0
+   145 0000012E A0[12000000]                        mov AL, [bitesS1]
+   146 00000133 89C7                                mov edi,eax
+   147 00000135 46                                  inc ESI
+   148 00000136 E953FFFFFF                          jmp continua
+   149                                        
+   150                                      S1puneHIGH:
+   151 0000013B BF[0C000000]                        mov EDI, s2
+   152 00000140 033D[1A000000]                      add EDI, [stringCounter]
+   153                                              
+   154 00000146 B800000000                          mov eax,0
+   155 0000014B 8A06                                mov al,[esi]
+   156 0000014D 89C7                                mov edi,eax
+   157 0000014F 4E                                  dec ESI ; ESI = the higher part of the actual word
+   158 00000150 BF[06000000]                        mov EDI, s1
+   159 00000155 033D[1A000000]                      add EDI, [stringCounter]
+   160                                              
+   161 0000015B B800000000                          mov eax,0
+   162 00000160 8A06                                mov al,[esi]
+   163 00000162 89C7                                mov edi,eax
+   164                                              
+   165 00000164 83C602                              add ESI, 2 ; ESI gets the right position, next word
+   166 00000167 E922FFFFFF                          jmp continua
+   167                                              
+   168                                      EndOf:
+   169                                      ;afis s1,s2
+   170                                          ; exit(0)
+   171 0000016C 6A00                            push    dword 0      ; push the parameter for exit onto the stack
+   172 0000016E FF15[00000000]                  call    [exit]       ; call exit to terminate the program
