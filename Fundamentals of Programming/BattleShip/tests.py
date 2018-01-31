@@ -29,7 +29,27 @@ class gameTest(unittest.TestCase):
 		board = Repository()
 		game = Controller(board)
 		#self.assertRaises(game.validate("A2C4F7", Exception)
+		game.addShip("A2B2C2")
+		with self.assertRaises(Exception):
+			game.addShip("A2B2C2")
 
+		with self.assertRaises(Exception):
+			game.checkMove("R4")
+
+		with self.assertRaises(Exception):
+			game.checkMove("C6")
+
+		with self.assertRaises(Exception):
+			game.checkMove("RR")
+
+		with self.assertRaises(Exception):
+			game.validate("R4A4C4")
+
+		with self.assertRaises(Exception):
+			game.validate("D4A4C6")
+
+		with self.assertRaises(Exception):
+			game.validate("RRA4C4")
 if __name__ == '__main__':
 	tests = unittest.TestLoader().discover('.')
 	unittest.TextTestRunner(verbosity = 2).run(tests)

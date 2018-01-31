@@ -29,6 +29,9 @@ class UI:
 					if ok:
 						self._game.addShip(x[1])
 						counter += 1
+						print(self._game.getBoard())
+					else:
+						print("Enter something valid!")
 				except Exception as exc:
 					print(exc)
 					print("The ship is out of the board or there is an overlapping!")
@@ -37,7 +40,7 @@ class UI:
 					putShips = 0
 				else: 
 					print("Not enough ships!")
-			print(self._game.getBoard())
+			
 		self.start()
 
 	def start(self):
