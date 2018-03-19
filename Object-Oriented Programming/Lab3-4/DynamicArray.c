@@ -9,13 +9,26 @@ DynamicArray* newArray() {
 	DynamicArray* arr = (DynamicArray*)malloc(sizeof(DynamicArray));
 	arr -> capacity = 10;
 	arr -> len = 0;
-	arr -> elems = (Material**)malloc(10 * sizeof(Material*));
+	arr -> elems = (void**)malloc(10 * sizeof(Material*));
 	return arr;
 }
 
 DynamicArray* resize(DynamicArray* arr) {
+	arr -> capacity *= 2;
+	arr -> elems = (void**)realloc(arr -> elems, arr -> capacity * sizeof(DynamicArray));
+	return arr;
+}
 
-	arr -> elems = (Material**)realloc(arr -> elems, 2 * arr -> capacity * sizeof(DynamicArray));
+DynamicArray* copyOfRepo(DynamicArray* arr2) {
+
+	DynamicArray* arr = (DynamicArray*)malloc(sizeof(DynamicArray));
+	arr -> capacity = arr2 -> capacity;
+	arr -> len = arr2 -> len;
+	arr -> elems = (void**)malloc(arr2 -> capacity * sizeof(Material*));
+	for (int i = 0; i < arr -> len; i++) {
+		Material* m = arr2 -> elems[i];
+		arr -> elems[i] = newMaterial(getName(m), getSupplier(m), getQuantity(m), getDate(m));
+	}
 	return arr;
 }
 
@@ -27,14 +40,17 @@ void wipeArray(DynamicArray* arr) {
 	free(arr);
 }
 
-int addElem(DynamicArray* arr, Material* elem) {
+int addElem(DynamicArray* arr, void* element) {
+	Material* elem = element;
+	Material* copy;
 	int done = 0;
 	if (arr -> len == arr -> capacity - 1)
 		arr = resize(arr);
 
 	for (int i = 0; i < arr -> len; i++) {
-		if (strcmp(getName(arr -> elems[i]), elem -> name) == 0) {
-			arr -> elems[i] -> quantity += elem -> quantity;
+		copy = arr -> elems[i];
+		if (strcmp(getName(copy), elem -> name) == 0) {
+			copy -> quantity += elem -> quantity;
 			done = 1;
 		}
 	}
@@ -43,9 +59,8 @@ int addElem(DynamicArray* arr, Material* elem) {
 	return done;
 }
 
-void swap(Material** a, Material** b) {
-	Material* c;
-	c = *a;
+void swap(void** a, void** b) {
+	void *c = *a;
 	*a = *b;
 	*b = c;
 }
@@ -62,7 +77,8 @@ int removeByValue(DynamicArray* arr, value* val) {
 	return 0;
 }
 
-void updateByValue(DynamicArray* arr, value* val, with* this) {
+void updateByValue(DynamicArray* arr, value* val, void* thiss) {
+	Material* this = thiss;
 	for (int i = 0; i < arr -> len; i++) {
 		if (combination(getName(arr -> elems[i]), val)) {
 			throwMaterial(arr -> elems[i]);

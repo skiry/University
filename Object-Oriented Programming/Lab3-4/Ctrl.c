@@ -79,6 +79,6 @@ int seeOpts(Controller* ctrl, char* string, int nr, DynamicArray** res, int(*fun
 	return repOpts(ctrl -> repo, string, nr, res, function);
 }
 
-int filterYear(Controller* ctrl, char* string, DynamicArray** result, int(*choose)(Material* a)){
+int filterYear(Controller* ctrl, char* string, DynamicArray** result, int(*choose)(Material* a)) {
 	return thYear(ctrl -> repo, string, result, choose);
 }

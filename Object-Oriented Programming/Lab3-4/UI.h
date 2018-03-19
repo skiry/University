@@ -1,11 +1,13 @@
 #pragma once
 #include "Ctrl.h"
+#include "undoController.h"
 
 typedef struct{
 	Controller* ctrl;
+	undoCtrl* undo;
 }UI;
 
-UI* createUI(Controller* ctrl);
+UI* createUI(Controller* ctrl, undoCtrl*);
 //create UI
 
 void deleteAll(UI* ui);
