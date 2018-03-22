@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <time.h>
 
+
 DynamicArray* newArray() {
 
 	DynamicArray* arr = (DynamicArray*)malloc(sizeof(DynamicArray));
@@ -65,10 +66,16 @@ void swap(void** a, void** b) {
 	*b = c;
 }
 
-int removeByValue(DynamicArray* arr, value* val) {
+int removeByValue(DynamicArray* arr, value* val){//, OperationStack* undo, OperationStack* redo) {
 	for (int i = 0; i < arr -> len; i++) {
 		if (combination(getName(arr -> elems[i]), val)) {
 			swap(&arr -> elems[i], &arr -> elems[arr -> len - 1]);
+
+			/*Operation* one = createOperation(arr -> elems[arr -> len - 1], "Add");
+			Operation* two = createOperation(arr -> elems[arr -> len - 1], "Delete");
+			push(undo, one);
+			push(redo, two);*/
+
 			throwMaterial(arr -> elems[arr -> len - 1]);
 			arr -> len --;
 			return 1;
@@ -209,7 +216,3 @@ int dateGT(Date a) {
 	if (isOk == 3) return 1;
 	return 0;
 }
-/*
-it4
-bonus 2
-*/

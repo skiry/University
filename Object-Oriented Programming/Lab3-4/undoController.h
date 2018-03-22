@@ -1,29 +1,22 @@
 #pragma once
-#include "DynamicArray.h"
-#include <stdlib.h>
 #include "Ctrl.h"
+#include <stdlib.h>
+#include "DynamicArray.h"
 
-typedef struct {
-	DynamicArray** repos;
-	int length;
-	int capacity;
-	int valMax;
-} undoCtrl;
-
-undoCtrl* newUndo();
+DynamicArray* newUndo();
 //creates a new undo-redo list
 
-undoCtrl* resizeCtrl(undoCtrl* unCtrl);
+DynamicArray* resizeCtrl(DynamicArray* unCtrl);
 //double the capacity of unCtrl
 
-void addRepo(undoCtrl* unCtrl, DynamicArray* unRepo);
+void addRepo(DynamicArray* unCtrl, DynamicArray* unRepo);
 //add unRepo to unCtrl
 
-void removeUndo(undoCtrl* undo);
+void removeUndo(DynamicArray* undo);
 //deletes the undo-redo list
 
-int doUndo(undoCtrl* unCtrl, Controller* ctrl);
+int doUndo(DynamicArray* unCtrl, Controller* ctrl);
 //step 1 time back
 
-int doRedo(undoCtrl* unCtrl, Controller* ctrl);
+int doRedo(DynamicArray* unCtrl, Controller* ctrl);
 //step 1 time forward

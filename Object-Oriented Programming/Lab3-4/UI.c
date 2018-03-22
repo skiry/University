@@ -1,11 +1,9 @@
-#include <stdio.h>
 #include "UI.h"
-#include "DynamicArray.h"
+#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "undoController.h"
 
-UI* createUI(Controller* ctrl, undoCtrl* undo) {
+UI* createUI(Controller* ctrl, DynamicArray* undo) {
 	UI* ui = (UI*)malloc(sizeof(UI));
 	ui -> ctrl = ctrl;
 	ui -> undo = undo;
@@ -46,70 +44,69 @@ void run(UI* ui) {
 	Material* f = newMaterial("Milk", "Cow's milk", 210, d4);
 	Material* g = newMaterial("Juice", "Olympus", 120, d2);
 	Material* h = newMaterial("Candies", "Chockotoff", 30, d3);
-	//Material* i = newMaterial("Bread", "Brutarelu", 890, d5);
-	addMaterial(ctrl, a);
-	addMaterial(ctrl, b);
-	addMaterial(ctrl, c);
-	addMaterial(ctrl, d);
-	addMaterial(ctrl, e);
-	addMaterial(ctrl, f);
-	addMaterial(ctrl, g);
-	addMaterial(ctrl, h);
+	Material* i = newMaterial("Bread", "Brutarelu", 890, d5);
+	addMaterial(ctrl, a, ui -> undo);
+	addMaterial(ctrl, b, ui -> undo);
+	addMaterial(ctrl, c, ui -> undo);
+	addMaterial(ctrl, d, ui -> undo);
+	addMaterial(ctrl, e, ui -> undo);
+	addMaterial(ctrl, f, ui -> undo);
+	addMaterial(ctrl, g, ui -> undo);
+	addMaterial(ctrl, h, ui -> undo);
+	addMaterial(ctrl, i, ui -> undo);
 	addRepo(ui -> undo, ctrl -> repo);
-	DynamicArray* toDelete = ctrl -> repo;
-	//addMaterial(ctrl, i);
-	//Material* j = newMaterial("Sticks", "Chio", 4000, d1);
+	printf("\n\nladsadsala\n\n");
 	int opt;
 	while (True) {
 		printf("\n0. Exit.");
 		printf("\n1. Add a material. \n2. Update a material. \n3. Remove a material.");
 		printf("\n4. See materials past their exp date, search by string.");
 		printf("\n5. For a given supplier sort materials ascending by name.");
-		printf("\n6. See materials with quantity less than a number, search by supplier.");
-		printf("\n7. See materials from this year, search by string.");
-		printf("\n8. Undo\n9. Redo\n10. Print all\n");
+		printf("\n6. For a given supplier sort materials ascending by exp month.");
+		printf("\n7. See materials with quantity less than a number, search by supplier.");
+		printf("\n8. See materials from this year, search by string.");
+		printf("\n9. Undo\n10. Redo\n11. Print all\n");
 		int first;
 		scanf("%d", &first);
 		switch (first) {
 		case 0:
-			printf("bye");
-			wipeArray(toDelete);
+			printf("\nHave a great day!\n");
 			break;
 		case 1:
-			readAdd(ctrl);
-			addRepo(ui -> undo, ctrl -> repo);
+			readAdd(ctrl, ui -> undo);
 			break;
-		case 2:
-			readUpdate(ctrl);
-			addRepo(ui -> undo, ctrl -> repo);
+		case 2:		
+			readUpdate(ctrl, ui -> undo);
 			break;
 		case 3:
-			readDelete(ctrl);
-			addRepo(ui -> undo, ctrl -> repo);
+			readDelete(ctrl, ui -> undo);
 			break;
 		case 4:
 			thisYear(ctrl, goodDate);
 			break;
 		case 5:
-			readSupp(ctrl);
+			readSupp(ctrl, dupaNume);
 			break;
 		case 6:
-			readOpt(ctrl);
+			readSupp(ctrl, dupaLuna);
 			break;
 		case 7:
-			thisYear(ctrl, goodYear);
+			readOpt(ctrl);
 			break;
 		case 8:
-			opt = doUndo(ui -> undo, ctrl);
-			if(opt) printf("\nUndo OK");
-			else printf("\nCan't UNDO.");
+			thisYear(ctrl, goodYear);
 			break;
 		case 9:
-			opt = doRedo(ui -> undo, ctrl);
-			if(opt) printf("\nRedo OK");
-			else printf("\nCan't REDO.");
+			opt = doUndo(ui -> undo, ctrl);
+			if (opt) printf("\nUndo OK");
+			else printf("\nCan't UNDO.");
 			break;
 		case 10:
+			opt = doRedo(ui -> undo, ctrl);
+			if (opt) printf("\nRedo OK");
+			else printf("\nCan't REDO.");
+			break;
+		case 11:
 			printAll(ctrl);
 			break;
 		default:
@@ -121,7 +118,7 @@ void run(UI* ui) {
 }
 
 
-void readAdd(Controller* ctrl) {
+void readAdd(Controller* ctrl, DynamicArray* undo) {
 	char *name = (char*)malloc(100 * sizeof(char)), *supp = (char*)malloc(100 * sizeof(char));
 	int q;
 	printf("\nName: ");
@@ -134,7 +131,7 @@ void readAdd(Controller* ctrl) {
 
 	Material* this = newMaterial(name, supp, q, expDate);
 
-	int result = addMaterial(ctrl, this);
+	int result = addMaterial(ctrl, this, undo);
 	switch (result) {
 	case 2:
 		printf("\nNames should not be empty.");
@@ -177,7 +174,7 @@ void printAll(Controller* ctrl) {
 	printDyn(ctrl -> repo);
 }
 
-void readUpdate(Controller* ctrl) {
+void readUpdate(Controller* ctrl, DynamicArray* undo) {
 	char* name = (char*)malloc(100 * sizeof(char)), *supp = (char*)malloc(100 * sizeof(char));
 	char* old = (char*)malloc(100 * sizeof(char));
 	int q;
@@ -193,7 +190,7 @@ void readUpdate(Controller* ctrl) {
 
 	Material* this = newMaterial(name, supp, q, expDate);
 
-	int result = updateByName(ctrl, old, this);
+	int result = updateByName(ctrl, old, this, undo);
 	switch (result) {
 	case 2:
 		printf("\nNames should not be empty.");
@@ -221,18 +218,18 @@ void readUpdate(Controller* ctrl) {
 	free(supp);
 }
 
-void readDelete(Controller* ctrl) {
+void readDelete(Controller* ctrl, DynamicArray* undo) {
 	char* name = (char*)malloc(100 * sizeof(char));
 	printf("\nProduct to throw away: ");
 	scanf("%s", name);
 
-	if (delMaterial(ctrl, name)) printf("\nMaterial thrown away");
+	if (delMaterial(ctrl, name, undo)) printf("\nMaterial thrown away");
 	else printf("\nMaterial not found");
 
 	free(name);
 }
 
-void readSupp(Controller* ctrl) {
+void readSupp(Controller* ctrl, int(*function)(void*, void*)) {
 	//For a given supplier, see all materials, sorted ascending by name
 	char* supp = (char*)malloc(100 * sizeof(char));;
 	printf("\nSupplier to check: ");
@@ -242,10 +239,11 @@ void readSupp(Controller* ctrl) {
 
 	for (int i = 0; i < length - 1; ++i)
 		for (int j = i + 1; j < length; ++j)
-			if (strcmp(getName(result -> elems[i]), getName(result -> elems[j])) > 0)
+			if (function(result -> elems[i], result -> elems[j]))
 				swap(&result -> elems[i], &result -> elems[j]);
 	for (int i = 0; i < length; ++i)
-		printf("\nName %d is %s ", i + 1, getName(result -> elems[i]));
+		printf("\nName %d is %s produced in month %d.", i + 1,
+		       getName(result -> elems[i]), getDate(result -> elems[i]).month);
 
 	wipeArray(result);
 	free(supp);
@@ -253,11 +251,9 @@ void readSupp(Controller* ctrl) {
 }
 
 void deleteAll(UI* ui) {
-	//deleteCtrl(ui -> ctrl);
 	removeUndo(ui -> undo);
-	free(ui -> ctrl);
+	deleteCtrl(ui -> ctrl);
 	free(ui);
-
 }
 
 void readOpt(Controller* ctrl) {

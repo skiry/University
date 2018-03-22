@@ -1,52 +1,61 @@
 #include "undoController.h"
 #include <stdio.h>
 
-undoCtrl* newUndo() {
-	undoCtrl* undo = (undoCtrl*)malloc(sizeof(undoCtrl));
-	undo -> capacity = 2;
-	undo -> length = 0;
-	undo -> repos = (DynamicArray**)malloc(sizeof(DynamicArray) * undo -> capacity);
+DynamicArray* newUndo() {
+
+	DynamicArray* undo = (DynamicArray*)malloc(sizeof(DynamicArray));
+	undo -> capacity = 10;
+	undo -> len = 0;
+	undo -> elems = (void**)malloc(sizeof(DynamicArray) * undo -> capacity);
 	undo -> valMax = 0;
 	return undo;
-
 }
 
-undoCtrl* resizeCtrl(undoCtrl* unCtrl) {
-	printf("\nAm facut resize.\n");
+DynamicArray* resizeCtrl(DynamicArray* unCtrl) {
 	unCtrl -> capacity *= 2;
-	unCtrl -> repos = (DynamicArray**)realloc(unCtrl -> repos, sizeof(DynamicArray) * unCtrl -> capacity);
+	unCtrl -> elems = (void**)realloc(unCtrl -> elems, sizeof(DynamicArray) * unCtrl -> capacity);
 	return unCtrl;
 }
 
-void addRepo(undoCtrl* unCtrl, DynamicArray* unRepo) {
-	if (unCtrl -> length == unCtrl -> capacity - 1)
+void addRepo(DynamicArray* unCtrl, DynamicArray* unRepo) {
+	if (unCtrl -> len == unCtrl -> capacity - 1)
 		unCtrl = resizeCtrl(unCtrl);
 
-	unCtrl -> repos[unCtrl -> length++] = copyOfRepo(unRepo);
-	if(unCtrl -> length > unCtrl -> valMax) unCtrl -> valMax = unCtrl -> length;
+	if (unCtrl -> len == 0) {
+		unCtrl -> elems[unCtrl -> len++] = copyOfRepo(unRepo);
+		unCtrl -> valMax = 1;
+	}
+	else {
+			for (int i = unCtrl -> len; i < unCtrl -> valMax; ++i)
+				wipeArray(unCtrl -> elems[i]);
+			unCtrl -> elems[unCtrl -> len++] = copyOfRepo(unRepo);
+			unCtrl -> valMax = unCtrl -> len;
+		}
 }
 
-void removeUndo(undoCtrl* undo) {
+void removeUndo(DynamicArray* undo) {
 	for (int i = 0; i < undo -> valMax; ++i) {
-		wipeArray(undo -> repos[i]);
+		wipeArray(undo -> elems[i]);
 	}
-	free(undo -> repos);
+	free(undo -> elems);
 	free(undo);
 }
 
-int doUndo(undoCtrl* unCtrl, Controller* ctrl) {
-	if (unCtrl -> length - 1== 0) return 0;
+int doUndo(DynamicArray* unCtrl, Controller* ctrl) {
+	if (unCtrl -> len - 1 <= 0) return 0;
 	else {
-		unCtrl -> length -= 1;
-		ctrl -> repo = unCtrl -> repos[unCtrl -> length - 1];
+		unCtrl -> len -= 1;
+		wipeArray(ctrl -> repo);
+		ctrl -> repo = copyOfRepo(unCtrl -> elems[unCtrl -> len - 1]);
 		return 1;
 	}
 }
 
-int doRedo(undoCtrl* unCtrl, Controller* ctrl) {
-	if (unCtrl -> length == unCtrl -> valMax) return 0;
+int doRedo(DynamicArray* unCtrl, Controller* ctrl) {
+	if (unCtrl -> len == unCtrl -> valMax) return 0;
 	else {
-		ctrl -> repo = unCtrl -> repos[unCtrl -> length++];
+		wipeArray(ctrl -> repo);
+		ctrl -> repo = copyOfRepo(unCtrl -> elems[unCtrl -> len++]);
 		return 1;
 	}
 }

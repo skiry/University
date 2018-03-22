@@ -6,12 +6,15 @@
 #include "DynamicArray.h"
 #include "UI.h"
 #include "undoController.h"
+#include "operationsStack.h"
 
 int main() {
 
 	DynamicArray* Repository = newArray();
-	undoCtrl* undo = newUndo();
-	Controller* controller = createController(Repository);
+	DynamicArray* undo = newUndo();
+	//OperationStack* isUndo = createStack();
+	//OperationStack* isRedo = createStack();
+	Controller* controller = createController(Repository);//, isUndo, isRedo);
 	UI* Ui = createUI(controller, undo);
 	run(Ui);
 	deleteAll(Ui);

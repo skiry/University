@@ -1,13 +1,15 @@
 #pragma once
 #include "Ctrl.h"
 #include "undoController.h"
+#include "DynamicArray.h"
+#include "operationsStack.h"
 
 typedef struct{
 	Controller* ctrl;
-	undoCtrl* undo;
+	DynamicArray* undo;
 }UI;
 
-UI* createUI(Controller* ctrl, undoCtrl*);
+UI* createUI(Controller* ctrl, DynamicArray*);
 //create UI
 
 void deleteAll(UI* ui);
@@ -16,13 +18,13 @@ void deleteAll(UI* ui);
 void run();
 //main function in UI
 
-void readAdd(Controller* ctrl);
+void readAdd(Controller* ctrl, DynamicArray* undo);
 //read components for adding an element
 
-void readUpdate(Controller* ctrl);
+void readUpdate(Controller* ctrl, DynamicArray* undo);
 //read components for updating an element
 
-void readDelete(Controller* ctrl);
+void readDelete(Controller* ctrl, DynamicArray* undo);
 //read components for deleting an element
 
 Date readDate();
@@ -31,7 +33,7 @@ Date readDate();
 void printAll(Controller* ctrl);
 //print all Materials
 
-void readSupp(Controller *ctrl);
+void readSupp(Controller *ctrl, int(*function)(void*, void*));
 //function for reading a supplier and printing the materials sorted asc by name
 
 void readSee(Controller* ctrl);
