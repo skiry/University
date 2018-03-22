@@ -1,16 +1,6 @@
 #pragma once
 #include "Material.h"
-
-typedef struct {
-	Material* obj;
-	char* op;
-} Operation;
-
-typedef struct {
-	Operation** elems;
-	int len;
-	int cap;
-} OperationStack;
+#include "DataStructures.h"
 
 Operation* createOperation(Material* a, char* b); 
 //create an operation for material a with the accordingly request, i.e, b
@@ -20,6 +10,12 @@ void push(OperationStack* a, Operation* b);
 
 void deleteOperation(Operation* a);
 //delete the operation a
+
+int makeUndo(OperationStack* a, DynamicArray* repo);
+//undo operation
+
+int makeRedo(OperationStack* a, DynamicArray* repo);
+//undo operation
 
 OperationStack* createStack();
 //operations stack initializer

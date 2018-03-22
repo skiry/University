@@ -55,7 +55,7 @@ void run(UI* ui) {
 	addMaterial(ctrl, h, ui -> undo);
 	addMaterial(ctrl, i, ui -> undo);
 	addRepo(ui -> undo, ctrl -> repo);
-	printf("\n\nladsadsala\n\n");
+
 	int opt;
 	while (True) {
 		printf("\n0. Exit.");

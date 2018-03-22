@@ -5,11 +5,11 @@
 
 typedef struct {
 	DynamicArray* repo;
-	//OperationStack* undo;
-	//OperationStack* redo;
+	OperationStack* undo;
+	OperationStack* redo;
 } Controller;
 
-Controller* createController(DynamicArray* repo);//, OperationStack* a, OperationStack* b);
+Controller* createController(DynamicArray* repo, OperationStack* a, OperationStack* b);
 //create controller
 
 int addMaterial(Controller* ctrl, myType elem, DynamicArray* undo);

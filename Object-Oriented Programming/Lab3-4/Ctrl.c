@@ -5,11 +5,11 @@
 #include "undoController.h"
 #include "operationsStack.h"
 
-Controller* createController(DynamicArray* repo)//, OperationStack* a, OperationStack* b) {
-	{Controller* ctrl = (Controller*)malloc(sizeof(Controller));
+Controller* createController(DynamicArray* repo, OperationStack* a, OperationStack* b) {
+	Controller* ctrl = (Controller*)malloc(sizeof(Controller));
 	ctrl -> repo = repo;
-	//ctrl -> undo = a;
-	//ctrl -> redo = b;
+	ctrl -> undo = a;
+	ctrl -> redo = b;
 	return ctrl;
 }
 
@@ -27,10 +27,10 @@ int addMaterial(Controller* ctrl, myType elem, DynamicArray* undo) {
 	if (ok == 1) {
 		sec = addElem(ctrl -> repo, elem);
 		addRepo(undo, ctrl -> repo);
-		/*Operation* one = createOperation(elem, "Add");
+		Operation* one = createOperation(elem, "Add");
 		Operation* two = createOperation(elem, "Delete");
 		push(ctrl -> undo, two);
-		push(ctrl -> redo, one);*/
+		push(ctrl -> redo, one);
 	}
 	else throwMaterial(elem);
 
@@ -50,7 +50,7 @@ int validDate(Date a) {
 }
 
 int delMaterial(Controller* ctrl, value* val, DynamicArray* undo) {
-	int v = removeByValue(ctrl -> repo, val);//, ctrl -> undo, ctrl -> redo);
+	int v = removeByValue(ctrl -> repo, val, ctrl -> undo, ctrl -> redo, 1);
 	if (v) {
 		addRepo(undo, ctrl -> repo);
 	}
@@ -86,8 +86,8 @@ int seeMats(Controller *ctrl, char* cuv, DynamicArray** result) {
 
 void deleteCtrl(Controller* ctrl) {
 	wipeArray(ctrl -> repo);
-	//deleteStack(ctrl -> undo);
-	//deleteStack(ctrl -> redo);
+	deleteStack(ctrl -> undo);
+	deleteStack(ctrl -> redo);
 	free(ctrl);
 }
 

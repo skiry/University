@@ -66,16 +66,16 @@ void swap(void** a, void** b) {
 	*b = c;
 }
 
-int removeByValue(DynamicArray* arr, value* val){//, OperationStack* undo, OperationStack* redo) {
+int removeByValue(DynamicArray* arr, value* val, OperationStack* undo, OperationStack* redo, int nr) {
 	for (int i = 0; i < arr -> len; i++) {
 		if (combination(getName(arr -> elems[i]), val)) {
 			swap(&arr -> elems[i], &arr -> elems[arr -> len - 1]);
-
-			/*Operation* one = createOperation(arr -> elems[arr -> len - 1], "Add");
-			Operation* two = createOperation(arr -> elems[arr -> len - 1], "Delete");
-			push(undo, one);
-			push(redo, two);*/
-
+			if (nr) {
+				Operation* one = createOperation(arr -> elems[arr -> len - 1], "Add");
+				Operation* two = createOperation(arr -> elems[arr -> len - 1], "Delete");
+				push(undo, one);
+				push(redo, two);
+			}
 			throwMaterial(arr -> elems[arr -> len - 1]);
 			arr -> len --;
 			return 1;

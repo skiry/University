@@ -1,17 +1,11 @@
 #pragma once
+#include "DataStructures.h"
 #include "Material.h"
 #include "operationsStack.h"
 
 typedef Material* myType;
 typedef char value;
 typedef Material with;
-
-typedef struct {
-	int capacity;
-	int len;
-	int valMax;
-	void** elems;
-} DynamicArray;
 
 DynamicArray* newArray();
 //dynamic array with initial size 10 creator
@@ -31,7 +25,7 @@ int addElem(DynamicArray* arr, void*);
 void swap(void** a, void** b);
 //swap materials between themselves
 
-int removeByValue(DynamicArray* arr, value* val);//, OperationStack* undo, OperationStack* redo);
+int removeByValue(DynamicArray* arr, value* val, OperationStack* undo, OperationStack* redo, int nr);
 //remove an element - val - by its name
 
 void updateByValue(DynamicArray* arr, value* val, void*);
