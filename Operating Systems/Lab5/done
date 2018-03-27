@@ -1,0 +1,12 @@
+find . -name "*.txt" -type f -perm /400 (at least 400) -exec file {} ( {} e rezultatul )
+
+find . -type f -perm /400 | while read x; do file $x | grep -q "text" && echo $x ; done
+find . -type f -perm /400 -exec file {} \;| grep "text" | awk -F':' '{print $1}'
+
+#!/bin/sh
+
+echo $# $@
+for a in $@
+do
+echo $a
+done                                                                                                                                  

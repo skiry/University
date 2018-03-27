@@ -1,0 +1,33 @@
+UNIX File Types
+- regular
+- directory
+- hard links
+- soft links
+- sockets
+- FIFO
+
+Soft Links
+- ln -s target linkname
+
+Volume mounting
+- mount, umount
+- To make them permanent look into /etc/fstab, but watch out, you may make your system unbootable.
+
+UNIX File System Structure
+Block  -  Content
+  0      Boot block
+  1      Superblock
+ 2..n   I-node blocks
+n+1..   Data blocks
+
+I-Node
+13 blocks
+1-10 4 kb
+11 - 128 * 4 kb
+12 - 128 * 128 * 4 kb
+13 - 128 * 128 * 128 * 4 kb
+
+UNIX Processes: fork, exit, wait
+- to create a process, use the FORK system call
+- fork, clones the current process(parent) in a new process(child)
+
