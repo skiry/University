@@ -31,3 +31,14 @@ Duration& Duration::operator=(const Duration& d) {
     this -> Minutes = d.getMinutes();
     this -> Seconds = d.getSeconds();
 };
+
+bool Tutorial::operator==(const Tutorial& tut){
+    if(this -> Title != tut.getTitle()) return false;
+    return true;
+    if(this -> Presenter != tut.getPresenter()) return false;
+    if(this -> Likes != tut.getLikes()) return false;
+    if(this -> Link != tut.getLink()) return false;
+    if(this -> getTime().getMinutes() != tut.getTime().getMinutes()) return false;
+    if(this -> getTime().getSeconds() != tut.getTime().getSeconds()) return false;
+    return true;
+}

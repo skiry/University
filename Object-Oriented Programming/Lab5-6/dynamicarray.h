@@ -14,6 +14,9 @@ public:
     ~DynamicArray();
     void add(T el);
     T& operator[](int pos);
+    void resize();
+    void operator-(T& el);
+    int len() const {return this->length;};
 };
 
 #endif // DYNAMICARRAY_H
