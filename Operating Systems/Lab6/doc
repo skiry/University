@@ -1,0 +1,9 @@
+zip -r [nume arch] [ce]
+unzip -l [ce]
+
+tar -cvf [nume arch] [ce]
+c -> t for printing
+
+ls | sort | while read x; do cat $x; done
+
+md5sum file1 file2

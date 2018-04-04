@@ -1,0 +1,30 @@
+#include <errno.h>
+perror("The error is :");
+printf("The error is : %s", strerror(errno));
+
+RUNNING
+ORPHAN - child with dead parent
+ZOMBIE - dead, but still in process table
+
+fork()
+exit(n) - codul de retur cu care se termina procesul
+wait(p) - pointer la un intreg unde fiul intoarce codul de retur
+exec*(c, lc) - c UNIX cmd, lc linia de comanda
+system(c) 
+pipe(f) - tablou de 2 intregi, descriptori de citire/scriere din/in pipe
+mkfifo(nume, drepturi) - numele fisierului FIFO, drepturile de acces la acesta
+FILE *popen(c, "r|w")
+pclose(FILE *)
+dup2(fo, fn) - descriptori de fisiere, fo deschis in progr cu open, fn pozitia
+			in care e duplicat fo
+
+#include <unistd.h>
+pid_t p;
+p = fork();
+p = 0 -> child
+getpid() - child pid
+getppid() - parent pid
+
+execl - list
+execp - path
+execv - vector

@@ -1,0 +1,24 @@
+UNIX Signals
+------------
+- List of available signals: man 7 signal
+- API
+     - signal(...) - sets the handles function to be called for a certain signal
+     	 	   - it does not signal anything
+     - kill(...) - send the given signal to the given process
+     - alarm(...) - raises a signal after a given time
+
+EXEC
+----
+execl - absolute path
+execlp - searches itself
+execv - execl, multiple params
+execvp - execlp, multiple params
+
+P - searches the path
+L - list
+V - array
+E - environment  variables
+
+PIPE
+----
+- close the pipe ends that you do not need, as soon as possible
