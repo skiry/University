@@ -9,10 +9,39 @@ private:
 public:
     UI(const Controller& ctrl) : ui(ctrl) {};
     //constructor
+
     void start();
     //the main function in which to program will run
+
     ~UI() {};
     //destructor
+
+    void update();
+    //update a tutorial in administrator mode
+
+    void addA();
+    //add a tutorial in administrator mode
+
+    void deleteA();
+    //delete a tutorial in administrator mode
+
+    void printMenu();
+    //print the menu
+
+    void printWmenu();
+    //print the watch list's menu
+
+    void printRepo();
+    //print the repo
+
+    void showTuts();
+    //print the tutorials
+
+    void delTut();
+    //delete a tutorial
+
+    void printWlist();
+    //print the watch list's tutorials
 };
 
 #endif // UI_H

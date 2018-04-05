@@ -1,0 +1,41 @@
+				NORMAL			O_NDELAY
+open a FIFO for reading	wait until the FIFO is
+			also open for writing
+
+open a FIFO for writing wait until the FIFO is
+			also open for reading
+
+read from empty pipe	wait until there is sth 
+    or FIFO		or there are no writers
+
+write to full pipe 	wait until there is some space
+    or FIFO
+
+Flags
+-----
+
+open("sth", O_CREAT | O_RDWR);
+	     11000...
+eg: O_CREAT = 1 1000..
+    O_RDWR = 2  0100..
+    O_RDONLY = 4 0010.
+
+
+pipe(x);
+File descriptors:
+0 - stdin
+1 - stdout
+2 - stderr
+3 - x[0]
+4 - x[1]
+
+dup2(g2s[1], 1); //grep
+dup2(g2s[0], 0); //sort
+dup2(s2h[1], 1); //sort
+dup2(s2h[0], 0); //head
+
+FIFO
+----
+- create with mkfifo either as command or C command
+- use open to open the FIFOs
+- read/write/close as you saw for pipes

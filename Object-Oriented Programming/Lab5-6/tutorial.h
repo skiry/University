@@ -30,20 +30,37 @@ private:
 public:
     Tutorial() {};
     //standard constructor
+
     Tutorial(std::string t, std::string p, Duration d, int l, std::string link);
     //tutorial constructor
+
     Tutorial(const Tutorial& tut);
     //copy constructor
+
     Tutorial& operator=(const Tutorial& tut);
     //assignment operator
-    ~Tutorial() {};
+
+    ~Tutorial() {}
     //destructor
-    std::string getTitle() const { return this -> Title; };
-    std::string getPresenter() const { return this -> Presenter; };
-    Duration getTime() const { return this -> Time; };
-    int getLikes() const { return this -> Likes; };
-    std::string getLink() const { return this -> Link; };
-    //getters
+
+    std::string getTitle() const { return this -> Title; }
+    //title getter
+
+    std::string getPresenter() const { return this -> Presenter; }
+    //presenter getter
+
+    Duration getTime() const { return this -> Time; }
+    //time getter
+
+    int getLikes() const { return this -> Likes; }
+    //likes getter
+
+    std::string getLink() const { return this -> Link; }
+    //link getter
+
+    void operator++() { this-> Likes++; }
+    //likes incrementor
+
     bool operator==(const Tutorial& tut);
     //equality tutorial overloading
 };
