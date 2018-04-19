@@ -61,7 +61,10 @@ void UI::run(){
             addVertex();
         else if( command == 12 )
             delVertex();
-        // = \+ ()
+        else if( command == 13 )
+            bfs();
+        else if( command == 14 )
+            Tarjan();
     }
 
 }
@@ -84,6 +87,8 @@ void UI::printMenu(){
     std::cout << "10. Delete Edge." << '\n';
     std::cout << "11. Add Vertex." << '\n';
     std::cout << "12. Delete Vertex." << '\n';
+    std::cout << "13. FWD BFS." << '\n';
+    std::cout << "14. Print the strongly connected components." << '\n';
 }
 
 void UI::checkEdge(){
@@ -215,5 +220,49 @@ void UI::delVertex(){
     if( G.delVertex(id) )
             std::cout << "The vertex has been deleted " << '\n';
     else std::cout << "The vertex does not exist." << '\n';
+}
+
+void UI::bfs(){
+    int id1, id2;
+    std::unordered_map<int, int> dist;
+    std::stack<int> s;
+    
+    std::cout << "From: ";
+    std::cin >> id1;
+    
+    std::cout << "To: ";
+    std::cin >> id2;
+    
+    dist[id1] = 1;
+    s.push(id1);
+    G.bfs(dist, s);
+    
+    if( dist[id2] != 0 )
+            std::cout << "The distance between " << id1 << " and " << id2 << " is " << dist[id2] - 1<< '\n';
+    else 
+        std::cout << "There is no path between them." << '\n';
+}
+
+void UI::Tarjan(){
+    std::unordered_map<int, int> scc, visited, lowlink, level;
+    std::stack<int> s;
+    std::unordered_map<int, bool> onStack;
+    int index = 0, comps = 0;
+    
+    for( auto i : G.getNodes() )
+        if( visited[i] == 0 )
+            G.Tarjan(i, scc, visited, lowlink, level, s, onStack, index, comps);
+
+    for( auto i : scc ){
+        if( level[i.first] == 0 ){
+            std::cout << "The strongly connected component " << i.second << " is made of: ";
+            for( auto j : scc )
+                if( i.second == j.second ){
+                    level[j.first] = 1;
+                    std::cout << j.first << " ";
+                }
+            std::cout << '\n';
+        }
+    }
 }
 

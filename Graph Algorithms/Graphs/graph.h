@@ -126,6 +126,13 @@ public:
     bool delVertex(int id);
     //true if vertex is existent -> delete vertex, false otherwise
 
+    void bfs(std::unordered_map<int, int>&, std::stack<int>&);
+    //compute the min. distance between 2 vertices
+    
+    void Tarjan(int&, std::unordered_map<int, int>&, std::unordered_map<int, int>&, std::unordered_map<int, int>&, 
+        std::unordered_map<int, int>&, std::stack<int>&, std::unordered_map<int, bool>&, int&, int&);
+    //compute the strongly connected components in O(n+m)
+    
     ~Graph() {}
 
 };

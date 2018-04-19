@@ -54,6 +54,12 @@ public:
 
     void delVertex();
     //delete a vertex
+    
+    void bfs();
+    //compute forward bfs
+    
+    void Tarjan();
+    //compute sccs
 };
 
 #endif // UI_H

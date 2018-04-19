@@ -122,6 +122,57 @@ bool Graph::delVertex(int id){
     return true;
 }
 
+void Graph::bfs(std::unordered_map<int, int>& dist, std::stack<int>& s){
+    int edge, neighb;
+    
+   while( s.size() ){
+        edge = s.top();
+        s.pop();
+        for( auto i : parseOut(edge) ){
+            neighb = E.getOut(i);
+            if( dist[neighb] == 0 ){
+                dist[neighb] = dist[edge] + 1;
+                s.push(neighb);
+            }
+        }
+    }
+}
+
+void Graph::Tarjan(int& e, std::unordered_map<int, int>& scc, std::unordered_map<int, int>& visited,
+ std::unordered_map<int, int>&lowlink, std::unordered_map<int, int>& level, std::stack<int>& s,
+  std::unordered_map<int, bool>& onStack, int& index, int& comps){
+        
+        int edge, aux;
+        
+        visited[e] = index;
+        lowlink[e] = index;
+        index++;
+        s.push(e);
+        onStack[e] = true;
+        
+        for( auto i : parseOut(e) ){
+            edge = E.getOut(i);
+            if( visited[edge] == 0 ){
+                Tarjan(edge, scc, visited, lowlink, level, s, onStack, index, comps);
+                lowlink[e] = std::min(lowlink[e], lowlink[edge]);
+            }
+            else if( onStack[edge] == true ){
+                lowlink[e] = std::min(lowlink[e], visited[edge]);
+            }
+        }
+        
+        if( lowlink[e] == visited[e] ){
+            ++comps;
+            do{
+                aux = s.top();
+                s.pop();
+                onStack[aux] = false;
+                scc[aux] = comps;
+            
+            }while( aux != e);
+        }
+        
+}
 
 
 
