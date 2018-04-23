@@ -14,7 +14,7 @@ void smallTest(){
     ui.run();
 }
 int main()
-{
+{//5!
     smallTest();
 
     return 0;

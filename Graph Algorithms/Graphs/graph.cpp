@@ -122,7 +122,7 @@ bool Graph::delVertex(int id){
     return true;
 }
 
-void Graph::bfs(std::unordered_map<int, int>& dist, std::stack<int>& s){
+void Graph::bfs(std::unordered_map<int, int>& dist, std::stack<int>& s, std::unordered_map<int, int>& prev){
     int edge, neighb;
     
    while( s.size() ){
@@ -130,8 +130,9 @@ void Graph::bfs(std::unordered_map<int, int>& dist, std::stack<int>& s){
         s.pop();
         for( auto i : parseOut(edge) ){
             neighb = E.getOut(i);
-            if( dist[neighb] == 0 ){
+            if( dist[neighb] == 0 || dist[neighb] > dist[edge] + 1){
                 dist[neighb] = dist[edge] + 1;
+                prev[neighb] = edge;
                 s.push(neighb);
             }
         }

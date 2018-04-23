@@ -223,9 +223,9 @@ void UI::delVertex(){
 }
 
 void UI::bfs(){
-    int id1, id2;
-    std::unordered_map<int, int> dist;
-    std::stack<int> s;
+    int id1, id2, nr, now;
+    std::unordered_map<int, int> dist, prev;
+    std::stack<int> s, res;
     
     std::cout << "From: ";
     std::cin >> id1;
@@ -235,10 +235,24 @@ void UI::bfs(){
     
     dist[id1] = 1;
     s.push(id1);
-    G.bfs(dist, s);
+    G.bfs(dist, s, prev);
     
-    if( dist[id2] != 0 )
+    if( dist[id2] != 0 ){
             std::cout << "The distance between " << id1 << " and " << id2 << " is " << dist[id2] - 1<< '\n';
+            nr = dist[id2] - 1;
+            now = id2;
+            std::cout << "The path is: ";
+            while( nr >= 0 ){
+                --nr;
+                res.push(now);
+                now = prev[now];
+                }
+            while( res.size() ){
+                std::cout << res.top() << " ";
+                res.pop();
+                }
+                std::cout << '\n';
+        }
     else 
         std::cout << "There is no path between them." << '\n';
 }
