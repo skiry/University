@@ -4,9 +4,9 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    graph.cpp \
-    ui.cpp
+    ui.cpp \
+    graph.cpp
 
 HEADERS += \
-    graph.h \
-    ui.h
+    ui.h \
+    graph.h

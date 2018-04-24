@@ -16,11 +16,23 @@ public:
     void run();
     //the main program
 
+    void run1();
+    //the main program of work 1
+
+    void run2();
+    //the main program of work 2
+
     int getNoOfVertices();
     //noOfVertices caller
 
     void printMenu();
-    //print the options
+    //print the main options
+
+    void printMenu1();
+    //print the options from work 1
+
+    void printMenu2();
+    //print the options from work 2
 
     void checkEdge();
     //print the options
@@ -54,12 +66,21 @@ public:
 
     void delVertex();
     //delete a vertex
-    
+
     void bfs();
     //compute forward bfs
-    
+
     void Tarjan();
     //compute sccs
+
+    void Bellman();
+    //compute the min dist between 2 vertices/print if negative cycles exist
+
+    void noOfWalks();
+    //compute the number of distinct walks of minimum cost between two vertices
+
+    void noOfWalksDAG();
+    //compute the number of distinct walks between two vertices
 };
 
 #endif // UI_H

@@ -122,9 +122,9 @@ bool Graph::delVertex(int id){
     return true;
 }
 
-void Graph::bfs(std::unordered_map<int, int>& dist, std::stack<int>& s, std::unordered_map<int, int>& prev){
+void Graph::bfs( std::unordered_map<int, int>& dist, std::stack<int>& s, std::unordered_map<int, int>& prev ){
     int edge, neighb;
-    
+
    while( s.size() ){
         edge = s.top();
         s.pop();
@@ -139,18 +139,18 @@ void Graph::bfs(std::unordered_map<int, int>& dist, std::stack<int>& s, std::uno
     }
 }
 
-void Graph::Tarjan(int& e, std::unordered_map<int, int>& scc, std::unordered_map<int, int>& visited,
+void Graph::Tarjan( int& e, std::unordered_map<int, int>& scc, std::unordered_map<int, int>& visited,
  std::unordered_map<int, int>&lowlink, std::unordered_map<int, int>& level, std::stack<int>& s,
-  std::unordered_map<int, bool>& onStack, int& index, int& comps){
-        
+  std::unordered_map<int, bool>& onStack, int& index, int& comps ){
+
         int edge, aux;
-        
+
         visited[e] = index;
         lowlink[e] = index;
         index++;
         s.push(e);
         onStack[e] = true;
-        
+
         for( auto i : parseOut(e) ){
             edge = E.getOut(i);
             if( visited[edge] == 0 ){
@@ -161,7 +161,7 @@ void Graph::Tarjan(int& e, std::unordered_map<int, int>& scc, std::unordered_map
                 lowlink[e] = std::min(lowlink[e], visited[edge]);
             }
         }
-        
+
         if( lowlink[e] == visited[e] ){
             ++comps;
             do{
@@ -169,13 +169,65 @@ void Graph::Tarjan(int& e, std::unordered_map<int, int>& scc, std::unordered_map
                 s.pop();
                 onStack[aux] = false;
                 scc[aux] = comps;
-            
+
             }while( aux != e);
         }
-        
+
 }
 
+int Graph::Bellman( int& b, std::unordered_map<int, int>& dist, std::unordered_map<int, int>& prev ){
+    int len = getNodes().size();
 
+    for( int j = 0; j < len; ++j ){
+        for( auto &i : E.getEdges() )
+            if( dist[ std::get<1>(i.second) ] > dist[ std::get<0>(i.second) ] + std::get<2>(i.second) ){
+                dist[ std::get<1>(i.second) ] = dist[ std::get<0>(i.second) ] + std::get<2>(i.second);
+                prev[ std::get<1>(i.second) ] = std::get<0>(i.second);
+            }
+    }
 
+    for( auto &i : E.getEdges() )
+        if( dist[ std::get<1>(i.second) ] > dist[ std::get<0>(i.second) ] + std::get<2>(i.second) )
+            return -1;
 
+    return dist[b];
+}
+
+void Graph::backT( int& a, int& b, int& minim, int& actualCost,
+                  int& counter, std::unordered_map< int, bool >& visited ){
+    int edge;
+
+    if( a == b ){
+        if( actualCost < minim ){
+            minim = actualCost;
+            counter = 1;
+        }
+        else if( actualCost == minim ) ++ counter;
+    }
+    else{
+        for( auto i : parseOut(a) ){
+
+            edge = E.getOut(i);
+
+            if( visited[edge] == false ){
+
+                actualCost += std::get<2>( E.getEdge(i) );
+                visited[edge] = true;
+                backT(edge, b, minim, actualCost, counter, visited);
+                actualCost -= std::get<2>( E.getEdge(i) );
+                visited[edge] = false;
+            }
+
+        }
+    }
+}
+
+void Graph::backTDAG( int& a, int& b, int& counter ){
+    int edge;
+
+    if( a == b ) ++counter;
+    else
+        for( auto i : parseOut(a) )
+            backTDAG( edge = E.getOut(i), b, counter );
+}
 

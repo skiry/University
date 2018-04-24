@@ -13,6 +13,9 @@ public:
     void addEdge(int, int, int, T);
     //add an edge to the map
 
+    std::unordered_map< int, std::tuple< int, int, T > > getEdges() const { return E; }
+    //get all the edges
+
     std::tuple< int, int, T > getEdge(int in) {
         //get the edge with id in
         //if not existent, return sth with in and out 0 for identifying
@@ -128,11 +131,20 @@ public:
 
     void bfs(std::unordered_map<int, int>&, std::stack<int>&, std::unordered_map<int, int>&);
     //compute the min. distance between 2 vertices
-    
-    void Tarjan(int&, std::unordered_map<int, int>&, std::unordered_map<int, int>&, std::unordered_map<int, int>&, 
+
+    void Tarjan(int&, std::unordered_map<int, int>&, std::unordered_map<int, int>&, std::unordered_map<int, int>&,
         std::unordered_map<int, int>&, std::stack<int>&, std::unordered_map<int, bool>&, int&, int&);
     //compute the strongly connected components in O(n+m)
-    
+
+    int Bellman(int&, std::unordered_map<int, int>&, std::unordered_map<int, int>&);
+    //compute the smallest distance between the given vertices
+
+    void backT(int&, int&, int&, int&, int &, std::unordered_map< int, bool >&);
+    //compute the number of distinct walks of minimum cost between 2 vertices
+
+    void backTDAG(int&, int&, int&);
+    //compute the number of distinct walks between 2 vertices
+
     ~Graph() {}
 
 };

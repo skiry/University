@@ -1,6 +1,7 @@
 #include "ui.h"
 #include "graph.cpp"
 #include <bits/stdc++.h>
+#define INF 99999999
 
 UI::UI()
 {
@@ -38,6 +39,22 @@ void UI::run(){
             break;
         }
         else if( command == 1 )
+            run1();
+        else if( command == 2 )
+            run2();
+    }
+
+}
+
+void UI::run1(){
+    int command;
+    while(true){
+        printMenu1();
+        std::cin >> command;
+        if( command == 0 ) {
+            break;
+        }
+        else if( command == 1 )
             std::cout << "The number of vertices in the graph is " << getNoOfVertices() << '\n';
         else if( command == 2 )
             checkEdge();
@@ -61,10 +78,29 @@ void UI::run(){
             addVertex();
         else if( command == 12 )
             delVertex();
-        else if( command == 13 )
+    }
+
+}
+
+void UI::run2(){
+    int command;
+    while(true){
+        printMenu2();
+        std::cin >> command;
+        if( command == 0 ) {
+            break;
+        }
+
+        else if( command == 1 )
             bfs();
-        else if( command == 14 )
+        else if( command == 2 )
             Tarjan();
+        else if( command == 3 )
+            Bellman();
+        else if( command == 4 )
+            noOfWalks();
+        else if( command == 5 )
+            noOfWalksDAG();
     }
 
 }
@@ -73,8 +109,8 @@ int UI::getNoOfVertices(){
     return G.noOfVertices();
 }
 
-void UI::printMenu(){
-    std::cout << "0. Exit" << '\n';
+void UI::printMenu1(){
+    std::cout << "0. Back" << '\n';
     std::cout << "1. Show the number of vertices." << '\n';
     std::cout << "2. Check edge." << '\n';
     std::cout << "3. Get the IN degree." << '\n';
@@ -87,8 +123,22 @@ void UI::printMenu(){
     std::cout << "10. Delete Edge." << '\n';
     std::cout << "11. Add Vertex." << '\n';
     std::cout << "12. Delete Vertex." << '\n';
-    std::cout << "13. FWD BFS." << '\n';
-    std::cout << "14. Print the strongly connected components." << '\n';
+}
+
+void UI::printMenu2(){
+    std::cout << "0. Back" << '\n';
+    std::cout << "1. FWD BFS." << '\n';
+    std::cout << "2. Print the strongly connected components." << '\n';
+    std::cout << "3. Bellman-Ford." << '\n';
+    std::cout << "4. The no of distinct walks of min cost from a graph with costs, having no negative cost cycles." << '\n';
+    std::cout << "5. The no of distinct walks of min cost from a directed acyclic graph." << '\n';
+
+}
+
+void UI::printMenu(){
+    std::cout << "0. Exit" << '\n';
+    std::cout << "1. Work 1." << '\n';
+    std::cout << "2. Work 2." << '\n';
 }
 
 void UI::checkEdge(){
@@ -155,7 +205,7 @@ void UI::byEdge(){
 }
 
 void UI::updEdge(){
-    int vertex, in, out, cost;
+    int vertex, cost;
 
     std::cout << "Vertex: ";
     std::cin >> vertex;
@@ -226,17 +276,17 @@ void UI::bfs(){
     int id1, id2, nr, now;
     std::unordered_map<int, int> dist, prev;
     std::stack<int> s, res;
-    
+
     std::cout << "From: ";
     std::cin >> id1;
-    
+
     std::cout << "To: ";
     std::cin >> id2;
-    
+
     dist[id1] = 1;
     s.push(id1);
     G.bfs(dist, s, prev);
-    
+
     if( dist[id2] != 0 ){
             std::cout << "The distance between " << id1 << " and " << id2 << " is " << dist[id2] - 1<< '\n';
             nr = dist[id2] - 1;
@@ -253,7 +303,7 @@ void UI::bfs(){
                 }
                 std::cout << '\n';
         }
-    else 
+    else
         std::cout << "There is no path between them." << '\n';
 }
 
@@ -262,7 +312,7 @@ void UI::Tarjan(){
     std::stack<int> s;
     std::unordered_map<int, bool> onStack;
     int index = 0, comps = 0;
-    
+
     for( auto i : G.getNodes() )
         if( visited[i] == 0 )
             G.Tarjan(i, scc, visited, lowlink, level, s, onStack, index, comps);
@@ -278,5 +328,59 @@ void UI::Tarjan(){
             std::cout << '\n';
         }
     }
+}
+
+void UI::Bellman(){
+    int id1, id2, res;
+    std::unordered_map< int, int > dist, prev;
+
+    std::cout << "From: ";
+    std::cin >> id1;
+
+    std::cout << "To: ";
+    std::cin >> id2;
+
+    for( auto i : G.getNodes() )
+        dist[i] = INF, prev[i] = -1;
+
+    dist[id1] = 0;
+
+    res = G.Bellman( id2, dist, prev );
+    if( res == -1 )
+        std::cout << "There is a negative cost cycle." << '\n';
+    else
+        std::cout << "The minimum distance between " << id1 << " and " << id2 << " is " << res << '\n';
+
+}
+
+void UI::noOfWalks(){
+    int id1, id2, res = 0, minim = INF, actualCost = 0;
+    std::unordered_map< int, bool > visited;
+
+    std::cout << "From: ";
+    std::cin >> id1;
+
+    std::cout << "To: ";
+    std::cin >> id2;
+
+    G.backT( id1, id2, minim, actualCost, res, visited );
+
+    std::cout << "The number of minimum cost walks between " << id1 << " and " << id2 << " is " << res << '\n';
+
+}
+
+void UI::noOfWalksDAG(){
+    int id1, id2, res = 0;
+
+    std::cout << "From: ";
+    std::cin >> id1;
+
+    std::cout << "To: ";
+    std::cin >> id2;
+
+    G.backTDAG( id1, id2, res );
+
+    std::cout << "The number of distinct walks between " << id1 << " and " << id2 << " is " << res << '\n';
+
 }
 
