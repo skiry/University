@@ -50,11 +50,17 @@ public:
     void rmFromPL(std::string title);
     //add tutorial to the playlist
 
-    void writeToFile(std::string);
-    //write to file
+    void readRepo();
+    //read tutorials from file
 
-    void readFromFile(std::string);
-    //read from file
+    void writeRepo();
+    //write tutorials to file
+
+    void readWlist();
+    //read the watch list from file
+
+    void writeWList();
+    //write the watch list to file
 
     ~Repository() {};
 };

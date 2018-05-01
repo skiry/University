@@ -2,7 +2,7 @@
 #include "tutorialvalidator.h"
 #include <utility>
 #include <algorithm>
-#include <iostream>
+#include <bits/stdc++.h>
 Repository::Repository(){
     //this -> repo = DynamicArray<Tutorial>(10);
     this -> length = 0;
@@ -87,6 +87,40 @@ void Repository::rmFromPL(std::string title){
             this -> wList.erase(wList.begin() + i);
             //this -> wLen--;
         }
+}
+
+void Repository::readRepo(){
+    std::ifstream f( "Tutorials.CSV" );
+    Tutorial t{};
+    if( f.is_open() ){
+        while( f>>t )
+            this -> addTut(t);
+    }
+}
+
+void Repository::readWlist(){
+    std::ifstream f( "WatchList.CSV" );
+    Tutorial t{};
+    if( f.is_open() ){
+        while( f>>t )
+            addToPL(t);
+    }
+}
+
+void Repository::writeRepo(){
+    std::ofstream g( "Tutorials.CSV" );
+    if( g.is_open() ){
+        for( auto it : repo )
+            g << it;
+    }
+}
+
+void Repository::writeWList(){
+    std::ofstream g( "WatchList.CSV" );
+    if( g.is_open() ){
+        for( auto it : wList )
+            g << it;
+    }
 }
 
 Repository& Repository::getRepo(){

@@ -29,4 +29,7 @@ HEADERS += \
     include/repository.h \
     include/tutorial.h \
     include/ui.h \
-    tutorialvalidator.h
+    tutorialvalidator.h \
+    fileplaylist.h \
+    csvplaylist.h \
+    htmlplaylist.h

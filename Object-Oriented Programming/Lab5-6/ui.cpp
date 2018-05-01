@@ -11,14 +11,10 @@ void UI::start() {
     cout << "1. Administrator";
     cout << "\n2. User Mode";
     cin >> p;
-    if( p == 1)
+
+    if( p == 1){
+        ui.readR();
         while(ok) {
-            ifstream f("Tutorials.CSV");
-            Tutorial t{};
-            if( f.is_open() ){
-                while( f>>t )
-                    ui.add(t);
-            }
             printMenu();
             cin >> opt;
             if(opt == 5) ok = 0;
@@ -27,23 +23,21 @@ void UI::start() {
             else if(opt == 2) deleteA();
             else if(opt == 1) addA();
         }
-    else if( p == 2)
+    }
+    else if( p == 2){
+        ui.readP();
         while(ok){
-            ifstream f("WatchList.CSV");
-            Tutorial t{};
-            if( f.is_open() ){
-                while( f>>t )
-                    ui.addToPL(t);
-            }
             printWmenu();
             cin >> opt;
-            if(opt == 4) ok = 0;
-            else if(opt == 3) printWlist();
+            if(opt == 5) ok = 0;
+            else if(opt == 4) printWlist();
             else if(opt == 2) delTut();
             else if(opt == 1) showTuts();
+            else if(opt == 3) saveTuts();
 
         }
     }
+}
 
 void UI::update(){
     std::string toReplace, tt, pr, lk;
@@ -69,12 +63,7 @@ void UI::update(){
         if(this -> ui.upd(toReplace, tut) == 0) cout << "\nTutorial not found";
         else {
             cout << "\nOK!";
-            ofstream g("Tutorials.CSV");
-            if( g.is_open() ){
-                std::vector<Tutorial> all = ui.byPresenter("");
-                for( auto it : all )
-                    g << it;
-            }
+            ui.saveR();
         }
     }
     catch(TutorialException& exc){
@@ -104,12 +93,7 @@ void UI::addA(){
         if(this -> ui.add(tut)) cout << "\nTutorial already existing";
         else {
             cout << "\nOK!";
-            ofstream g("Tutorials.CSV");
-            if( g.is_open() ){
-                std::vector<Tutorial> all = ui.byPresenter("");
-                for( auto it : all )
-                    g << it;
-            }
+            ui.saveR();
         }
     }
     catch(TutorialException& exc){
@@ -125,12 +109,7 @@ void UI::deleteA(){
     if(this -> ui.rm(toDelete) == 0) cout << "\nTutorial not found";
     else {
         cout << "\nOK!";
-        ofstream g("Tutorials.CSV");
-        if( g.is_open() ){
-            std::vector<Tutorial> all = ui.byPresenter("");
-            for( auto it : all )
-                g << it;
-        }
+        ui.saveR();
     }
 }
 
@@ -146,17 +125,17 @@ void UI::printMenu(){
 void UI::printWmenu(){
     cout << "\n1. See tutorial by a presenter";
     cout << "\n2. Delete a tutorial from watch list";
-    cout << "\n3. See the watch list";
-    cout << "\n4. Done";
+    cout << "\n3. Save the watch list to file";
+    cout << "\n4. Display the watch list";
+    cout << "\n5. Done";
     cout << '\n';
 }
 
 void UI::printRepo(){
-    Controller test = this -> ui;
-    for(int i = 0; i < test.len(); i++)
-        cout << test[i].getTitle() << " presented by " << test[i].getPresenter() << " has a duration of "
-                << test[i].getTime().getMinutes() << " mins and " << test[i].getTime().getSeconds() << " secs."
-                << '\n' <<"                VIEW IT NOW ON : " << test[i].getLink() << '\n';
+    for( auto it : ui.byPresenter("") )
+        cout << it.getTitle() << " presented by " << it.getPresenter() << " has a duration of "
+                << it.getTime().getMinutes() << " mins and " << it.getTime().getSeconds() << " secs."
+                << '\n' <<"                VIEW IT NOW ON : " << it.getLink() << '\n';
 }
 
 void UI::showTuts(){
@@ -165,12 +144,7 @@ void UI::showTuts(){
     cout << "\nPresenter name: ";
     getline(cin, pr);
     getline(cin, pr);
-    ifstream f("Tutorials.CSV");
-    Tutorial t{};
-    if( f.is_open() ){
-        while( f>>t )
-            ui.add(t);
-    }
+    ui.readR();
     std::vector<Tutorial> v = ui.byPresenter(pr);
     if( v.size() != 0 ) {
         int doThis = 1;
@@ -190,12 +164,7 @@ void UI::showTuts(){
                     if( ui.addToPL(it) == 0) cout << "It is already in the watch list." << '\n';
                         else {
                         cout << "Added to the watch list succesfully." << '\n';
-                        ofstream g("WatchList.CSV");
-                        if( g.is_open() ){
-                            std::vector<Tutorial> all = ui.getWlist();
-                            for( auto it : all )
-                                g << it;
-                        }
+                        ui.saveP();
                     }
                 }
                 cout << "1.Next" << '\n';
@@ -226,21 +195,26 @@ void UI::delTut(){
         cout << "1.Like\n2.Not so useful\n";
         cin >> like;
         if( like == 1) ui.like(toDelete);
-        ofstream g("WatchList.CSV");
-        if( g.is_open() ){
-            std::vector<Tutorial> all = ui.getWlist();
-            for( auto it : all )
-                g << it;
-        }
+        ui.saveP();
     }
 }
 
+void UI::saveTuts(){
+    ui.saveToFile();
+}
+
 void UI::printWlist(){
-    std::string pr = "";
-    vector<Tutorial> v = ui.getWlist();
+    /*
+     *
+     * Normal printing
+     *
+     * vector<Tutorial> v = ui.getWlist();
     for(auto it : v)
         cout << it.getTitle() << " presented by " << it.getPresenter() << " has a duration of "
              << it.getTime().getMinutes() << " mins and " << it.getTime().getSeconds() << " secs."
              << " Likes: " << it.getLikes()
                 << '\n' <<"                VIEW IT NOW ON : " << it.getLink() << '\n';
+
+                */
+    ui.displayFile();
 }

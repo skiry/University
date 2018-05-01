@@ -1,14 +1,16 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 #include "repository.h"
+#include "fileplaylist.h"
 
 class Controller
 {
 private:
     Repository ctrl;
+    FilePlaylist* playList;
     int length;
 public:
-    Controller(const Repository& r) : ctrl(r), length(0) {}
+    Controller(const Repository& r, FilePlaylist* p) : ctrl(r), playList{ p }, length(0) {}
     //constructor
 
     int add(const Tutorial& tut);
@@ -43,6 +45,24 @@ public:
 
     bool addToPL(const Tutorial& tut) { return ctrl.addToPL(tut); }
     //add tutorial to the playlist
+
+    void readR() { ctrl.readRepo(); }
+    //read tutorials from file
+
+    void readP() { ctrl.readWlist(); }
+    //read the watch list from file
+
+    void saveR() { ctrl.writeRepo(); }
+    //write tutorials to file
+
+    void saveP() { ctrl.writeWList(); }
+    //write the watch list to file
+
+    void saveToFile() { playList->saveToFile(); }
+    //save the WL to either csv or html file
+
+    void displayFile() { playList->displayWatchList(); }
+    //display the file with the accordingly program
 
     ~Controller() {}
     //destructor for controller

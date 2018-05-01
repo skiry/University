@@ -2,6 +2,8 @@
 #include "tutorial.cpp"
 #include "tutorialvalidator.cpp"
 #include "dynamicarray.cpp"
+#include "csvplaylist.h"
+#include "htmlplaylist.h"
 #include "repository.cpp"
 #include "controller.cpp"
 #include "ui.cpp"
@@ -51,7 +53,16 @@ Tutorial tut8 = Tutorial("Easy Everything", "Mc John", d2, 1900, "http://www.cs.
     a.updTut("Easy C++", tut2);
     cout << '\n' << a[0].getTitle()<<'\n';*/
     //-------------------------------------
-    Controller ctrl = Controller(myRepo);
+    int fType;
+    FilePlaylist* p;
+    cout << "\nWhat type of file would you like to use?\n1. CSV File";
+    cout << "\n2. HTML File";
+    cin >> fType;
+    if( fType == 1 )
+        p = new CSVPlaylist { "WatchList.CSV" };
+    else if( fType == 2 )
+        p = new HTMLPlaylist { "WatchList.html" };
+    Controller ctrl = Controller(myRepo, p);
     //ctrl.add(tut);
     //ctrl.add(tut2);
     //ctrl.add(tut3);

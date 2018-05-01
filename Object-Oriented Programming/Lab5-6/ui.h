@@ -6,6 +6,7 @@ class UI
 {
 private:
     Controller ui;
+    std::string file, fileType;
 public:
     UI(const Controller& ctrl) : ui(ctrl) {};
     //constructor
@@ -42,6 +43,9 @@ public:
 
     void printWlist();
     //print the watch list's tutorials
+
+    void saveTuts();
+    //save the watch list to file
 };
 
 #endif // UI_H
