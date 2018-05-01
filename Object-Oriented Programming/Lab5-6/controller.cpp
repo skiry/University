@@ -1,9 +1,15 @@
 #include "controller.h"
+#include "tutorialvalidator.h"
 
 int Controller::add(const Tutorial& tut){
     if( this -> ctrl.find(tut.getTitle()) )
         return 1;
-    this -> ctrl.addTut(tut);
+    try{
+        this -> ctrl.addTut(tut);
+    }
+    catch(TutorialException& ){
+        throw;
+    }
     this -> length++;
     return 0;
 }
@@ -27,7 +33,12 @@ int Controller::rmW(std::string title){
 
 int Controller::upd(std::string title, const Tutorial& tut){
     if( this -> ctrl.find(title) && this -> ctrl.find(tut.getTitle()) ==0 ){
-        this -> ctrl.updTut(title, tut);
+        try{
+            this -> ctrl.updTut(title, tut);
+        }
+        catch(...){
+            throw;
+        }
         return 1;
     }
     return 0;

@@ -1,6 +1,7 @@
 #ifndef TUTORIAL_H
 #define TUTORIAL_H
 #include <string>
+#include <iostream>
 
 class Duration{
     //a Duration class needed for representing Tutorial's running time
@@ -28,7 +29,7 @@ private:
     int Likes;
     std::string Link;
 public:
-    Tutorial() {};
+    Tutorial() : Title{ "" }, Presenter{ "" }, Time{ Duration(0,0) }, Likes{ 0 }, Link{ "" } {}
     //standard constructor
 
     Tutorial(std::string t, std::string p, Duration d, int l, std::string link);
@@ -63,6 +64,10 @@ public:
 
     bool operator==(const Tutorial& tut);
     //equality tutorial overloading
+
+    friend std::istream& operator>>(std::istream &, Tutorial& );
+
+    friend std::ostream& operator<<(std::ostream &, const Tutorial& );
 };
 
 #endif // TUTORIAL_H

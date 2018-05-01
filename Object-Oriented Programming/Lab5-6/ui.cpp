@@ -1,5 +1,7 @@
 #include "ui.h"
 #include <string.h>
+#include <bits/stdc++.h>
+#include "tutorialvalidator.h"
 
 using namespace std;
 
@@ -11,6 +13,12 @@ void UI::start() {
     cin >> p;
     if( p == 1)
         while(ok) {
+            ifstream f("Tutorials.CSV");
+            Tutorial t{};
+            if( f.is_open() ){
+                while( f>>t )
+                    ui.add(t);
+            }
             printMenu();
             cin >> opt;
             if(opt == 5) ok = 0;
@@ -21,6 +29,12 @@ void UI::start() {
         }
     else if( p == 2)
         while(ok){
+            ifstream f("WatchList.CSV");
+            Tutorial t{};
+            if( f.is_open() ){
+                while( f>>t )
+                    ui.addToPL(t);
+            }
             printWmenu();
             cin >> opt;
             if(opt == 4) ok = 0;
@@ -51,8 +65,21 @@ void UI::update(){
     getline(cin, lk);
     d = Duration(min, sec);
     Tutorial tut = Tutorial(tt, pr, d, 0, lk);
-    if(this -> ui.upd(toReplace, tut) == 0) cout << "\nTutorial not found";
-    else cout << "\nOK!";
+    try{
+        if(this -> ui.upd(toReplace, tut) == 0) cout << "\nTutorial not found";
+        else {
+            cout << "\nOK!";
+            ofstream g("Tutorials.CSV");
+            if( g.is_open() ){
+                std::vector<Tutorial> all = ui.byPresenter("");
+                for( auto it : all )
+                    g << it;
+            }
+        }
+    }
+    catch(TutorialException& exc){
+        std::cout << exc.what();
+    }
 }
 
 void UI::addA(){
@@ -73,8 +100,21 @@ void UI::addA(){
     getline(cin, lk);
     d = Duration(min, sec);
     Tutorial tut = Tutorial(tt, pr, d, 0, lk);
-    if(this -> ui.add(tut)) cout << "\nTutorial already existing";
-    else cout << "\nOK!";
+    try{
+        if(this -> ui.add(tut)) cout << "\nTutorial already existing";
+        else {
+            cout << "\nOK!";
+            ofstream g("Tutorials.CSV");
+            if( g.is_open() ){
+                std::vector<Tutorial> all = ui.byPresenter("");
+                for( auto it : all )
+                    g << it;
+            }
+        }
+    }
+    catch(TutorialException& exc){
+        std::cout << exc.what();
+    }
 }
 
 void UI::deleteA(){
@@ -83,7 +123,15 @@ void UI::deleteA(){
     getline(cin, toDelete);
     getline(cin, toDelete);
     if(this -> ui.rm(toDelete) == 0) cout << "\nTutorial not found";
-    else cout << "\nOK!";
+    else {
+        cout << "\nOK!";
+        ofstream g("Tutorials.CSV");
+        if( g.is_open() ){
+            std::vector<Tutorial> all = ui.byPresenter("");
+            for( auto it : all )
+                g << it;
+        }
+    }
 }
 
 void UI::printMenu(){
@@ -117,6 +165,12 @@ void UI::showTuts(){
     cout << "\nPresenter name: ";
     getline(cin, pr);
     getline(cin, pr);
+    ifstream f("Tutorials.CSV");
+    Tutorial t{};
+    if( f.is_open() ){
+        while( f>>t )
+            ui.add(t);
+    }
     std::vector<Tutorial> v = ui.byPresenter(pr);
     if( v.size() != 0 ) {
         int doThis = 1;
@@ -134,7 +188,15 @@ void UI::showTuts(){
                 cin >> opt;
                 if(opt == 1){
                     if( ui.addToPL(it) == 0) cout << "It is already in the watch list." << '\n';
-                        else cout << "Added to the watch list succesfully." << '\n';
+                        else {
+                        cout << "Added to the watch list succesfully." << '\n';
+                        ofstream g("WatchList.CSV");
+                        if( g.is_open() ){
+                            std::vector<Tutorial> all = ui.getWlist();
+                            for( auto it : all )
+                                g << it;
+                        }
+                    }
                 }
                 cout << "1.Next" << '\n';
                 cout << "2.Exit" << '\n';
@@ -164,6 +226,12 @@ void UI::delTut(){
         cout << "1.Like\n2.Not so useful\n";
         cin >> like;
         if( like == 1) ui.like(toDelete);
+        ofstream g("WatchList.CSV");
+        if( g.is_open() ){
+            std::vector<Tutorial> all = ui.getWlist();
+            for( auto it : all )
+                g << it;
+        }
     }
 }
 

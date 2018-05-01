@@ -1,5 +1,6 @@
 #include <iostream>
 #include "tutorial.cpp"
+#include "tutorialvalidator.cpp"
 #include "dynamicarray.cpp"
 #include "repository.cpp"
 #include "controller.cpp"
@@ -24,7 +25,7 @@ int main()
     d1.add(tut);*/
     //
    // cout<<'\n' <<"nesters"<< d1.len() << '\n';
-   // d1-tut;
+   // d1-tut;cd
    // cout<<'\n'<<" sters:" << d1.len() << '\n';
     //SEE THIS ERR  d1.add(tut2);
    // cout << d1[0].getTitle();
@@ -51,10 +52,10 @@ Tutorial tut8 = Tutorial("Easy Everything", "Mc John", d2, 1900, "http://www.cs.
     cout << '\n' << a[0].getTitle()<<'\n';*/
     //-------------------------------------
     Controller ctrl = Controller(myRepo);
-    ctrl.add(tut);
-    ctrl.add(tut2);
-    ctrl.add(tut3);
-    ctrl.add(tut4);
+    //ctrl.add(tut);
+    //ctrl.add(tut2);
+    //ctrl.add(tut3);
+    //ctrl.add(tut4);
 
     //ctrl.add(tut);
     //cout << ctrl[0].getTitle()<<'\n';

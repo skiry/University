@@ -4,15 +4,29 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    tutorial.cpp \
+    controller.cpp \
     dynamicarray.cpp \
     repository.cpp \
-    controller.cpp \
-    ui.cpp
+    tutorial.cpp \
+    ui.cpp \
+    src/controller.cpp \
+    src/dynamicarray.cpp \
+    src/repository.cpp \
+    src/tutorial.cpp \
+    src/ui.cpp \
+    main.cpp \
+    tests.cpp \
+    tutorialvalidator.cpp
 
 HEADERS += \
-    tutorial.h \
+    controller.h \
     dynamicarray.h \
     repository.h \
-    controller.h \
-    ui.h
+    tutorial.h \
+    ui.h \
+    include/controller.h \
+    include/dynamicarray.h \
+    include/repository.h \
+    include/tutorial.h \
+    include/ui.h \
+    tutorialvalidator.h

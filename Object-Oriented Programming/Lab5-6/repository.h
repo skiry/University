@@ -1,14 +1,14 @@
 #ifndef REPOSITORY_H
 #define REPOSITORY_H
-#include "dynamicarray.h"
+//#include "dynamicarray.h"
 #include "tutorial.h"
 #include <vector>
 
 class Repository
 {
 private:
-    DynamicArray<Tutorial> repo;
-    DynamicArray<Tutorial> wList;
+    /*DynamicArray<Tutorial>*/ std::vector<Tutorial> repo;
+    /*DynamicArray<Tutorial>*/ std::vector<Tutorial> wList;
     int length;
     int wLen;
 public:
@@ -49,6 +49,12 @@ public:
 
     void rmFromPL(std::string title);
     //add tutorial to the playlist
+
+    void writeToFile(std::string);
+    //write to file
+
+    void readFromFile(std::string);
+    //read from file
 
     ~Repository() {};
 };
