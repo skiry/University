@@ -11,10 +11,10 @@ public:
     }
     void saveToFile() override{
         std::ofstream g( fileName );
-        if( g.is_open() ){
-            for( auto it : getWlist() )
+        std::cout<<wList.size() <<" ";
+            for( auto it : wList) //getWlist does not return anything
                 g << it;
-        }
+
     }
 
     void displayWatchList() override{

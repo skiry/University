@@ -6,7 +6,7 @@
 
 class Repository
 {
-private:
+protected:
     /*DynamicArray<Tutorial>*/ std::vector<Tutorial> repo;
     /*DynamicArray<Tutorial>*/ std::vector<Tutorial> wList;
     int length;

@@ -26,6 +26,7 @@ int Controller::rm(std::string title){
 int Controller::rmW(std::string title){
     if( this -> ctrl.findW(title) ){
         this -> ctrl.rmFromPL(title);
+        this -> playList -> rmFromPL(title);
         return 1;
     }
     return 0;
@@ -42,4 +43,11 @@ int Controller::upd(std::string title, const Tutorial& tut){
         return 1;
     }
     return 0;
+}
+
+bool Controller::addToPL(const Tutorial& tut) {
+    bool doo = ctrl.addToPL(tut);
+
+    if( doo ) this -> playList -> addToPL(tut);
+    return doo;
 }

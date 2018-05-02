@@ -103,7 +103,7 @@ void Repository::readWlist(){
     Tutorial t{};
     if( f.is_open() ){
         while( f>>t )
-            addToPL(t);
+            this -> addToPL(t);
     }
 }
 

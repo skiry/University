@@ -43,7 +43,7 @@ public:
     void like(std::string title) { ctrl.increaseLike(title); }
     //increase the number of likes of tutorial with the name title
 
-    bool addToPL(const Tutorial& tut) { return ctrl.addToPL(tut); }
+    bool addToPL(const Tutorial& tut);
     //add tutorial to the playlist
 
     void readR() { ctrl.readRepo(); }
