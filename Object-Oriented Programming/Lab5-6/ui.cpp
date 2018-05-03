@@ -1,4 +1,5 @@
 #include "ui.h"
+#include "comparator.h"
 #include <string.h>
 #include <bits/stdc++.h>
 #include "tutorialvalidator.h"
@@ -8,6 +9,7 @@ using namespace std;
 void UI::start() {
 
     int p, ok = 1, opt;
+    testComparator();
     cout << "1. Administrator";
     cout << "\n2. User Mode";
     cin >> p;
