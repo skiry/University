@@ -7,10 +7,10 @@ class Controller
 {
 private:
     Repository ctrl;
-    FilePlaylist* playList;
+    FilePlaylist* playList, *sqlR;
     int length;
 public:
-    Controller(const Repository& r, FilePlaylist* p) : ctrl(r), playList{ p }, length(0) {}
+    Controller(const Repository& r, FilePlaylist* p, FilePlaylist* _sqlR) : ctrl(r), playList{ p }, sqlR{ _sqlR }, length(0) {}
     //constructor
 
     int add(const Tutorial& tut);
@@ -46,10 +46,17 @@ public:
     bool addToPL(const Tutorial& tut);
     //add tutorial to the playlist
 
-    void readR() { ctrl.readRepo(); }
+    void readR() {
+        ctrl.readRepo();
+        sqlR -> setDB( ctrl.getWlist(), ctrl.byPresenter("") );
+    }
     //read tutorials from file
 
-    void readP() { ctrl.readWlist(); }
+    void readP() {
+        ctrl.readWlist();
+        playList -> set( ctrl.getWlist() );
+        sqlR -> setDB( ctrl.getWlist(), ctrl.byPresenter("") );
+    }
     //read the watch list from file
 
     void saveR() { ctrl.writeRepo(); }
@@ -58,7 +65,10 @@ public:
     void saveP() { ctrl.writeWList(); }
     //write the watch list to file
 
-    void saveToFile() { playList->saveToFile(); }
+    void saveToFile() {
+        playList->saveToFile();
+        sqlR -> saveToFile();
+    }
     //save the WL to either csv or html file
 
     void displayFile() { playList->displayWatchList(); }

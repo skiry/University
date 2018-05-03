@@ -34,4 +34,5 @@ HEADERS += \
     fileplaylist.h \
     csvplaylist.h \
     htmlplaylist.h \
-    sqldb.h
+    sqldb.h \
+    sqlrepo.h

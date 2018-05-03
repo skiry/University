@@ -68,6 +68,21 @@ public:
     friend std::istream& operator>>(std::istream &, Tutorial& );
 
     friend std::ostream& operator<<(std::ostream &, const Tutorial& );
+
+    std::string toStr() {
+        std::string result;
+
+        result += "<tr>";
+        result += "<td>" + this -> getTitle() + "</td>";
+        result += "<td>" + this -> getPresenter() + "</td>";
+        result += "<td>" + std::to_string(this -> getTime().getMinutes()) + ":"
+          + std::to_string(this -> getTime().getSeconds()) + "</td>";
+        result += "<td>" + std::to_string(this -> getLikes()) + "</td>";
+        result += "<td>" + this -> getLink() + "</td>";
+        result += "</tr>";
+
+        return result;
+    }
 };
 
 #endif // TUTORIAL_H

@@ -4,6 +4,7 @@
 #include "dynamicarray.cpp"
 #include "csvplaylist.h"
 #include "htmlplaylist.h"
+#include "sqlrepo.h"
 #include "repository.cpp"
 #include "controller.cpp"
 #include "ui.cpp"
@@ -54,15 +55,16 @@ Tutorial tut8 = Tutorial("Easy Everything", "Mc John", d2, 1900, "http://www.cs.
     cout << '\n' << a[0].getTitle()<<'\n';*/
     //-------------------------------------
     int fType;
-    FilePlaylist* p;
+    FilePlaylist* p, *sqlR;
     cout << "\nWhat type of file would you like to use?\n1. CSV File";
     cout << "\n2. HTML File";
     cin >> fType;
+    sqlR = new SQLRepo { "" };
     if( fType == 1 )
         p = new CSVPlaylist { "WatchList.CSV" };
     else if( fType == 2 )
         p = new HTMLPlaylist { "WatchList.html" };
-    Controller ctrl = Controller(myRepo, p);
+    Controller ctrl = Controller(myRepo, p, sqlR);
     //ctrl.add(tut);
     //ctrl.add(tut2);
     //ctrl.add(tut3);

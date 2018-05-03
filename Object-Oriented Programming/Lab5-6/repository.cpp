@@ -3,8 +3,6 @@
 #include <utility>
 #include <algorithm>
 #include <bits/stdc++.h>
-#include <stdlib.h>
-#include <sqlite3.h>
 
 Repository::Repository(){
     //this -> repo = DynamicArray<Tutorial>(10);

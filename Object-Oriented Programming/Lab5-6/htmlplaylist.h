@@ -2,6 +2,7 @@
 #define HTMLPLAYLIST_H
 #include "fileplaylist.h"
 #include <fstream>
+#include "tutorial.h"
 
 class HTMLPlaylist : public FilePlaylist
 {
@@ -16,15 +17,7 @@ public:
             g << "<body><table border=\"1\"><tr><td>Title</td><td>Presenter</td>";
             g << "<td>Duration</td><td>Likes</td><td>Youtube link</td></tr>";
             for( auto it : wList ){
-                std::cout<<it.getTitle()<<" ";
-                g << "<tr>";
-                g << "<td>" << it.getTitle() << "</td>";
-                g << "<td>" << it.getPresenter() << "</td>";
-                g << "<td>" << it.getTime().getMinutes() << ":"
-                  << it.getTime().getSeconds() << "</td>";
-                g << "<td>" << it.getLikes() << "</td>";
-                g << "<td>" << it.getLink() << "</td>";
-                g << "</tr>";
+                g << it.toStr();
             }
             g << "</table></body></html>";
         }
