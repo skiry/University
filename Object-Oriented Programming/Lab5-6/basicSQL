@@ -1,0 +1,29 @@
+sqlite3 *db;
+    char *zErrMsg = 0;
+    int rc;
+
+    rc = sqlite3_open("Tutorial.db", &db);
+
+    if( rc ) {
+       std::cout << "Can't open database: \n" << sqlite3_errmsg(db);
+    } else {
+       std::cout << "Opened database successfully\n";
+    }
+
+
+    std::string sql;
+    Tutorial t{"Progr","John",Duration(3,22),120,"www.google.ro"};
+    sql = "INSERT INTO WatchList VALUES('";
+    sql += t.getTitle() + "','" + t.getPresenter() + "'," +std::to_string(t.getTime().getMinutes()) +
+            ","+std::to_string(t.getTime().getSeconds()) + "," + std::to_string(t.getLikes()) + ",'" +t.getLink()+"');";
+    std::cout<<'\n'<<sql<<'\n';
+
+    rc = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
+
+       if( rc != SQLITE_OK ){
+          std::cout << "SQL error: \n" << zErrMsg;
+       } else {
+          std::cout << "Records created successfully\n";
+       }
+
+    sqlite3_close(db);

@@ -12,7 +12,7 @@ public:
     void saveToFile() override{
         std::ofstream g( fileName );
         std::cout<<wList.size() <<" ";
-            for( auto it : wList) //getWlist does not return anything
+            for( auto it : wList)
                 g << it;
 
     }

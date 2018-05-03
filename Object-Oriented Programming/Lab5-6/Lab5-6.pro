@@ -16,7 +16,8 @@ SOURCES += main.cpp \
     src/ui.cpp \
     main.cpp \
     tests.cpp \
-    tutorialvalidator.cpp
+    tutorialvalidator.cpp \
+    sqldb.cpp
 
 HEADERS += \
     controller.h \
@@ -32,4 +33,5 @@ HEADERS += \
     tutorialvalidator.h \
     fileplaylist.h \
     csvplaylist.h \
-    htmlplaylist.h
+    htmlplaylist.h \
+    sqldb.h
