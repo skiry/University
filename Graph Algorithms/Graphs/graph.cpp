@@ -193,6 +193,48 @@ int Graph::Bellman( int& b, std::unordered_map<int, int>& dist, std::unordered_m
     return dist[b];
 }
 
+void Graph::DFS(int & node, std::unordered_map< int, bool >& vis, std::vector<int>& tSort){
+    int var;
+    vis[node] = true;
+    for( auto i : parseOut(node) )
+        if(vis[i] == false)
+            DFS(var = E.getOut(i), vis, tSort);
+
+    tSort.push_back(node);
+}
+
+int Graph::difWalksOfMinCost( int& a, int& b, std::unordered_map<int, int>& dist,
+                    std::unordered_map<int, int>& prev,  std::unordered_map<int, int>& walks){
+
+    std::vector<int> tSort;
+    std::unordered_map<int, bool> vis;
+    int node;
+
+    int len = getNodes().size();
+
+    for( int j = 0; j < len; ++j ){
+        for( auto &i : E.getEdges() )
+            if( dist[ std::get<1>(i.second) ] > dist[ std::get<0>(i.second) ] + std::get<2>(i.second) ){
+                dist[ std::get<1>(i.second) ] = dist[ std::get<0>(i.second) ] + std::get<2>(i.second);
+                prev[ std::get<1>(i.second) ] = std::get<0>(i.second);
+            }
+    }
+    DFS(a,vis,tSort);
+    std::reverse(tSort.begin(), tSort.end());
+    for(auto i : tSort) walks[i] = 0;
+
+    for(auto i : tSort){
+       // std::cout<<i<<" s ";
+        for( auto j : parseOut(i) ){
+           // std::cout<<"out:"<<j<<" ";
+            if( dist[b] == dist[i] + E.getCost(j) )
+                walks[E.getOut(j)] += walks[i];}
+    }
+
+
+    return walks[b];
+}
+
 void Graph::backT( int& a, int& b, int& minim, int& actualCost,
                   int& counter, std::unordered_map< int, bool >& visited ){
     int edge;
@@ -223,11 +265,20 @@ void Graph::backT( int& a, int& b, int& minim, int& actualCost,
 }
 
 void Graph::backTDAG( int& a, int& b, int& counter ){
-    int edge;
 
-    if( a == b ) ++counter;
-    else
-        for( auto i : parseOut(a) )
-            backTDAG( edge = E.getOut(i), b, counter );
+
+    std::vector<int> tSort;
+    std::unordered_map<int, bool> vis;
+    std::unordered_map<int, int> walks;
+    int node;
+
+    DFS(a,vis,tSort);
+    std::reverse(tSort.begin(), tSort.end());
+    for(auto i : tSort) walks[i] = 0;
+    walks[a] = 1;
+    for( auto i : tSort )
+        for( auto j : parseOut(i) )
+            walks[node=E.getOut(j)] += walks[i];
+    counter = walks[b];
 }
 

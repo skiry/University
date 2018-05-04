@@ -131,7 +131,7 @@ void UI::printMenu2(){
     std::cout << "2. Print the strongly connected components." << '\n';
     std::cout << "3. Bellman-Ford." << '\n';
     std::cout << "4. The no of distinct walks of min cost from a graph with costs, having no negative cost cycles." << '\n';
-    std::cout << "5. The no of distinct walks of min cost from a directed acyclic graph." << '\n';
+    std::cout << "5. The no of distinct walks from a directed acyclic graph." << '\n';
 
 }
 
@@ -331,8 +331,9 @@ void UI::Tarjan(){
 }
 
 void UI::Bellman(){
-    int id1, id2, res;
+    int id1, id2, ress, nr , now;
     std::unordered_map< int, int > dist, prev;
+    std::stack<int> res;
 
     std::cout << "From: ";
     std::cin >> id1;
@@ -345,11 +346,26 @@ void UI::Bellman(){
 
     dist[id1] = 0;
 
-    res = G.Bellman( id2, dist, prev );
-    if( res == -1 )
+    ress = G.Bellman( id2, dist, prev );
+    if( ress == -1 )
         std::cout << "There is a negative cost cycle." << '\n';
-    else
-        std::cout << "The minimum distance between " << id1 << " and " << id2 << " is " << res << '\n';
+    else if( ress == INF ) std::cout << "There is no path.\n";
+    else{
+        std::cout << "The minimum distance between " << id1 << " and " << id2 << " is " << ress << '\n';
+
+    now = id2;
+    while( now != id1 ){
+        res.push(now);
+        now = prev[now];
+        }
+    res.push(now);
+    now = prev[now];
+
+    while( res.size() ){
+        std::cout << res.top() << " ";
+        res.pop();
+        }
+        std::cout << '\n';}
 
 }
 

@@ -44,6 +44,9 @@ public:
     int getOut(int out) const { return std::get<1>(E.find(out) -> second); };
     //destination no getter
 
+    T getCost(int out) const { return std::get<2>(E.find(out) -> second); };
+    //destination no getter
+
     ~Edge() {}
 };
 
@@ -139,12 +142,16 @@ public:
     int Bellman(int&, std::unordered_map<int, int>&, std::unordered_map<int, int>&);
     //compute the smallest distance between the given vertices
 
+    int difWalksOfMinCost(int&, int&, std::unordered_map<int, int>&, std::unordered_map<int, int>&, std::unordered_map<int, int>&);
+    //compute the number of distinct walks of minimum cost between 2 vertices
+
     void backT(int&, int&, int&, int&, int &, std::unordered_map< int, bool >&);
     //compute the number of distinct walks of minimum cost between 2 vertices
 
     void backTDAG(int&, int&, int&);
     //compute the number of distinct walks between 2 vertices
 
+    void DFS(int &, std::unordered_map< int, bool >&, std::vector<int>&);
     ~Graph() {}
 
 };
