@@ -143,10 +143,10 @@ public:
     //compute the smallest distance between the given vertices
 
     int difWalksOfMinCost(int&, int&, std::unordered_map<int, int>&, std::unordered_map<int, int>&, std::unordered_map<int, int>&);
-    //compute the number of distinct walks of minimum cost between 2 vertices
+    //compute the number of distinct walks of minimum cost between 2 vertices-bellman+top sorting
 
     void backT(int&, int&, int&, int&, int &, std::unordered_map< int, bool >&);
-    //compute the number of distinct walks of minimum cost between 2 vertices
+    //compute the number of distinct walks of minimum cost between 2 vertices-bcktrck
 
     void backTDAG(int&, int&, int&);
     //compute the number of distinct walks between 2 vertices
@@ -154,6 +154,14 @@ public:
     void DFS(int &, std::unordered_map< int, bool >&, std::vector<int>&);
     ~Graph() {}
 
+    bool isDAG();
+    //verify if it is a DAG
+
+    std::vector<int> TOPsort();
+    //return a vector with the vertices in the order of their top. sorting
+
+    std::vector< std::tuple<int, int> > times();
+    //return an array with tuples in the form: <earliest st. time, latest st. time>
 };
 
 #endif // GRAPH_H

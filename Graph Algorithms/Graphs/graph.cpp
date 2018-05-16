@@ -197,7 +197,7 @@ void Graph::DFS(int & node, std::unordered_map< int, bool >& vis, std::vector<in
     int var;
     vis[node] = true;
     for( auto i : parseOut(node) )
-        if(vis[i] == false)
+        if(vis[E.getOut(i)] == false)
             DFS(var = E.getOut(i), vis, tSort);
 
     tSort.push_back(node);
@@ -208,7 +208,6 @@ int Graph::difWalksOfMinCost( int& a, int& b, std::unordered_map<int, int>& dist
 
     std::vector<int> tSort;
     std::unordered_map<int, bool> vis;
-    int node;
 
     int len = getNodes().size();
 
@@ -222,16 +221,12 @@ int Graph::difWalksOfMinCost( int& a, int& b, std::unordered_map<int, int>& dist
     DFS(a,vis,tSort);
     std::reverse(tSort.begin(), tSort.end());
     for(auto i : tSort) walks[i] = 0;
-
+    walks[a]=1;
     for(auto i : tSort){
-       // std::cout<<i<<" s ";
-        for( auto j : parseOut(i) ){
-           // std::cout<<"out:"<<j<<" ";
-            if( dist[b] == dist[i] + E.getCost(j) )
-                walks[E.getOut(j)] += walks[i];}
+        for( auto j : parseOut(i) )
+            if( dist[ E.getOut(j) ] == dist[i] + E.getCost(j) )
+                walks[E.getOut(j)] += walks[i];
     }
-
-
     return walks[b];
 }
 
@@ -282,3 +277,136 @@ void Graph::backTDAG( int& a, int& b, int& counter ){
     counter = walks[b];
 }
 
+bool Graph::isDAG(){
+    std::unordered_map<int, int> vis;
+    std::queue<int> q;
+    int node, edge;
+
+    q.push(1);
+    //start from the first vertex
+
+    while( q.size() ){
+        node = q.front();
+        q.pop();
+        vis[ node ] = 1;
+        for( auto i : parseOut( node ) ){
+            edge = E.getOut(i);
+            for( auto j : parseOut( edge ) )
+                if( vis[ E.getOut(j) ] == 1 )
+                    return false;
+            if( vis[ edge ] == 0 )
+                q.push(edge);
+        }
+    }
+
+    return true;
+}
+
+std::vector<int> Graph::TOPsort(){
+    std::queue<int> q;
+    std::vector<int> res;
+    std::unordered_map<int, int> deg;
+    int node, x = (int)(getNodes().size() - 1 ), y = (int)(getNodes().size() - 2 );
+
+    for( auto i : getNodes() )
+        deg[i] = getOut(i);
+    q.push( getNodes().size() - 1 );
+    //start from the hard-coded 'finish' vertex
+
+    while( q.size() ){
+        node = q.front();
+        q.pop();
+        if( node != x && node != y )
+            //exclude the hard-coded 'start' and 'finish' vertices
+            res.push_back(node);
+        for( auto i : parseIn(node) ){
+            if( !(--deg[ E.getIn(i) ]) )
+                q.push( E.getIn(i) );
+        }
+    }
+    return res;
+}
+
+std::vector< std::tuple<int, int> > Graph::times(){
+    std::vector< std::tuple<int, int> > ts;
+    std::unordered_map< int, int > earl, lat, vis;
+    std::queue< int > q;
+    int node, firstOnes = 2;
+
+    q.push( getNodes().size() - 2 );
+    //the starting vertex
+    earl[ getNodes().size() - 2 ] = 0;
+
+    while( q.size() ){
+        node = q.front();
+        q.pop();
+        vis[ node ] = 1;
+        if( firstOnes ) --firstOnes;
+
+        for( auto i : parseOut( node ) ){
+            if( !firstOnes )
+                earl[ E.getOut(i) ] = std::max( earl[ E.getOut(i) ], earl[ node ] + E.getCost(i) );
+            else{
+                earl[ E.getOut(i) ] = E.getCost( gimmeEid( E.getOut(i), E.getOut(parseOut( E.getOut(i) )[0] ) ));
+            }
+            if( vis[ E.getOut(i) ] == 0 )
+                q.push( E.getOut(i) );
+        }
+    }
+
+    q.push( getNodes().size() - 1 );
+    //the ending vertex
+
+    for( auto i : getNodes() )//reset the visited array
+        vis[i] = lat[i] = 0;
+
+    lat[ getNodes().size() - 1 ] = earl[ getNodes().size() - 1 ];
+
+    while( q.size() ){
+        node = q.front();
+        q.pop();
+        vis[ node ] = 1;
+        for( auto i : parseIn( node ) ){
+            if( lat[ E.getIn(i) ] == 0 ){
+                //std::cout << E.getIn(i) << "->" << E.getOut(i) << "=" << lat[ E.getOut(i) ] <<'\n';//<< " / " << lat[ E.getOut(i) ] - E.getCost(i) << '\n';
+                lat[ E.getIn(i) ] = lat[ E.getOut(i) ] - E.getCost(i);
+            }
+            else{
+                lat[ E.getIn(i) ] = std::min( lat[ E.getIn(i) ], lat[ E.getOut(i) ] - E.getCost(i) );
+                //std::cout << E.getIn(i) << "->" << E.getOut(i) << "=" << lat[ E.getIn(i) ]<< " / " << lat[ E.getOut(i) ] - E.getCost(i) << '\n';
+    }
+            if( vis[ E.getIn(i) ] == 0 )
+                q.push( E.getIn(i) );
+        }
+    }
+
+    q.push( getNodes().size() - 1 );
+    //the ending vertex
+
+    for( auto i : getNodes() )//reset the visited array
+        vis[i] = 0;
+
+    while( q.size() ){
+        node = q.front();
+        q.pop();
+        vis[ node ] = 1;
+        for( auto i : parseIn( node ) ){
+                lat[ E.getIn(i) ] = std::min( lat[ E.getIn(i) ], lat[ E.getOut(i) ] - E.getCost(i) );
+                //std::cout << E.getIn(i) << "->" << E.getOut(i) << "=" << lat[ E.getIn(i) ]<< " / " << lat[ E.getOut(i) ] - E.getCost(i) << '\n';
+
+            if( vis[ E.getIn(i) ] == 0 )
+                q.push( E.getIn(i) );}
+    }
+    std::unordered_set<int> nodes = getNodes();
+    std::vector<int> sortedNodes;
+    for( auto i : nodes )
+        sortedNodes.push_back(i);
+    std::sort(sortedNodes.begin(), sortedNodes.end() );
+    for( auto i : sortedNodes ){
+        //std::cout<<"i:"<<i<<" "<<earl[i]<<" "<<lat[i]<<'\n';
+        ts.push_back( std::make_tuple( earl[i], lat[i] ) );
+    }
+
+    return ts;
+
+}

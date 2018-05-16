@@ -5,26 +5,102 @@
 
 UI::UI()
 {
-    int n, m, in, out, cost;
+    int n, m, in, out, cost, a, nos;
+
+    std::cout << "Activities(1) or a simple directed graph(2)?" << '\n';
+    std::cin >> a;
+
     std::cout << "Filename: ";
+    std::cin.ignore();
     std::getline(std::cin, fileName);
-    if( fileName != "") {
-        std::ifstream f(fileName);
-        f >> n >> m;
-        Graph g = Graph(n);
-        this -> G = g;
-        for(int i = 0; i < m; ++i){
-            f >> in >> out >> cost;
-            G.addEdge(in, out, cost);
+    if( a == 2 ){
+        if( fileName != "") {
+            std::ifstream f(fileName);
+            f >> n >> m;
+            Graph g = Graph(n);
+            this -> G = g;
+            for(int i = 0; i < m; ++i){
+                f >> in >> out >> cost;
+                G.addEdge(in, out, cost);
+            }
+        }
+        else{
+            std::cout << "No. of nodes: ";
+            std::cin >> n;
+            std::cout << "No. of edges: ";
+            std::cin >> m;
+            Graph g(n);
+            this -> G = g;
+            for(int i = 0; i < m; ++i){
+                std::cout << "From: ";
+                std::cin >> in;
+                std::cout << "To: ";
+                std::cin >> out;
+                std::cout << "Cost: ";
+                std::cin >> cost;
+                G.addEdge(in, out, cost);
+            }
         }
     }
-    else{
-        std::cin >> n >> m;
-        Graph g(n);
-        this -> G = g;
-        for(int i = 0; i < m; ++i){
-            std::cin >> in >> out >> cost;
-            G.addEdge(in, out, cost);
+    else if( a == 1 ){
+        if( fileName != "") {
+            std::ifstream f(fileName);
+            f >> n;
+            std::vector<int> dur;
+            for(int i = 0; i < n; ++i){
+                f >> cost;
+                dur.push_back(cost);
+            }
+            Graph g = Graph(n+3);
+            this -> G = g;
+            for(int i = 0; i < n; ++i){
+                f >> in >> nos;
+                for(int j = 0; j < nos; ++j){
+                    f >> out;
+                    G.addEdge(out, in, dur[out - 1]);
+                }
+            }
+            for( auto i : G.getNodes() )
+                if( G.getIn(i) == 0 && i <= n && i > 0)
+                    //edge from n+1 to i
+                    G.addEdge(n+1, i, 0);
+                else if( G.getOut(i) == 0 && i <= n && i > 0)
+                    //edge from i to n+2
+                    G.addEdge(i, n+2, dur[i - 1]);
+        }
+        else{
+            std::cout << "No. of activities: ";
+            std::cin >> n;
+            std::vector<int> dur;
+            for(int i = 0; i < n; ++i){
+                std::cout << "Duration for activity " << i + 1<< ": ";
+                std::cin >> cost;
+                dur.push_back(cost);
+            }
+            Graph g(n+3);
+
+            //from n+1 to all nodes without inbound neighbours
+            //from all nodes without outbound neighbours to n+2
+            this -> G = g;
+            for(int i = 0; i < n; ++i){
+                std::cout << "Activity number: ";
+                std::cin >> in;
+                std::cout << "No. of prerequisites: ";
+                std::cin >> nos;
+                for(int j = 0; j < nos; ++j){
+                    std::cout << "Prerequisite number " << j + 1 <<": ";
+                    std::cin >> out;
+                    G.addEdge(out, in, dur[out - 1]);
+                }
+                std::cout << '\n';
+            }
+            for( auto i : G.getNodes() )
+                if( G.getIn(i) == 0 && i <= n && i > 0){
+                    //edge from n+1 to i
+                    G.addEdge(n+1, i, 0);}
+                else if( G.getOut(i) == 0 && i <= n && i > 0){
+                    //edge from i to n+2
+                    G.addEdge(i, n+2, dur[i - 1]);}
         }
     }
 }
@@ -101,6 +177,10 @@ void UI::run2(){
             noOfWalks();
         else if( command == 5 )
             noOfWalksDAG();
+        else if( command == 6 )
+            DAGtsort();
+        else if( command == 7 )
+            times();
     }
 
 }
@@ -132,6 +212,8 @@ void UI::printMenu2(){
     std::cout << "3. Bellman-Ford." << '\n';
     std::cout << "4. The no of distinct walks of min cost from a graph with costs, having no negative cost cycles." << '\n';
     std::cout << "5. The no of distinct walks from a directed acyclic graph." << '\n';
+    std::cout << "6. Verify DAG and compute a topological sorting." << '\n';
+    std::cout << "7. Earliest and latest starting times and the critical activities." << '\n';
 
 }
 
@@ -331,7 +413,7 @@ void UI::Tarjan(){
 }
 
 void UI::Bellman(){
-    int id1, id2, ress, nr , now;
+    int id1, id2, ress , now;
     std::unordered_map< int, int > dist, prev;
     std::stack<int> res;
 
@@ -372,7 +454,7 @@ void UI::Bellman(){
 void UI::noOfWalks(){
     int id1, id2, res = 0, minim = INF, actualCost = 0;
     std::unordered_map< int, bool > visited;
-
+std::unordered_map< int, int > dist, prev, walks;
     std::cout << "From: ";
     std::cin >> id1;
 
@@ -381,7 +463,13 @@ void UI::noOfWalks(){
 
     G.backT( id1, id2, minim, actualCost, res, visited );
 
-    std::cout << "The number of minimum cost walks between " << id1 << " and " << id2 << " is " << res << '\n';
+    for( auto i : G.getNodes() )
+        dist[i] = INF, prev[i] = -1;
+
+    dist[id1] = 0;
+
+    std::cout << "The number of minimum cost walks between " << id1 << " and " << id2 << " is "
+              << G.difWalksOfMinCost( id1, id2, dist, prev, walks) << '\n';
 
 }
 
@@ -400,3 +488,37 @@ void UI::noOfWalksDAG(){
 
 }
 
+void UI::DAGtsort(){
+    if( G.isDAG() ){
+        std::cout << "It is a directed acyclic graph." << '\n';
+        std::vector<int> ts = G.TOPsort();
+
+        std::cout << "Topological Sorting: ";
+        for( auto i : ts )
+            std::cout << i << " ";
+        std::cout << '\n';
+
+    }
+    else
+        std::cout << "It is not a directed acyclic graph." << '\n';
+}
+
+void UI::times(){
+    int c1, c2, cnt = -1, val;
+    std::vector< std::tuple< int, int > > ts = G.times();
+
+    for( auto [ c1, c2 ] : ts ){
+        std::cout << "The earliest starting time for vertex " << ++cnt << " is " << c1 <<
+                     " and the latest is " << c2 << '\n';
+        val = c2;
+    }
+    std::cout << '\n' << "The total time needed is: " << val << '\n';
+
+    std::cout << '\n' << "The critical activities are: ";
+    cnt = -1;
+    for( auto [ c1, c2 ] : ts )
+        if( c2 - c1 == 0 )
+            std::cout << ++cnt << " ";
+        else ++cnt;
+    std::cout << '\n';
+}

@@ -81,6 +81,15 @@ public:
 
     void noOfWalksDAG();
     //compute the number of distinct walks between two vertices
+
+    void DAGtsort();
+    //verify if it's DAG, comp. a topological sorting
+
+    void times();
+    //earliest, latest starting times
+    //the whole time for a project
+    //the critical activities
+
 };
 
 #endif // UI_H
