@@ -1,0 +1,2 @@
+Medical analysis made on 2018.05.23 with body mass index 13.000000.
+Medical analysis made on 2018.05.24 with blood presure; systolic value 100 and diastolic value 65.
