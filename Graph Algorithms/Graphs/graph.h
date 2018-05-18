@@ -162,6 +162,9 @@ public:
 
     std::vector< std::tuple<int, int> > times();
     //return an array with tuples in the form: <earliest st. time, latest st. time>
+
+    void totMinCost(int& a, int& b, int& res);
+    //res = the number of distinct lowest cost paths between two given vertices
 };
 
 #endif // GRAPH_H

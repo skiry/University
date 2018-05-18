@@ -90,6 +90,18 @@ public:
     //the whole time for a project
     //the critical activities
 
+    void b1();
+    //Consider a tree (or a binary tree) and the list of vertices by a preorder,
+    //postorder and, for binary tree, the inorder parsing. Given two of those lists, reconstruct the tree.
+
+    void b2();
+    //verify if the corresponding graph is a DAG and performs a topological sorting of the activities;
+    //if it is a DAG, finds the number of distinct paths between two given vertices, in O(m+n).
+
+    void b3();
+    //verify if the corresponding graph is a DAG and performs a topological sorting of the activities;
+    //if it is a DAG, finds the number of distinct lowest cost paths between two given vertices, in O(m+n).
+
 };
 
 #endif // UI_H

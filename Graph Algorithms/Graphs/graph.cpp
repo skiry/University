@@ -265,7 +265,6 @@ void Graph::backTDAG( int& a, int& b, int& counter ){
     std::vector<int> tSort;
     std::unordered_map<int, bool> vis;
     std::unordered_map<int, int> walks;
-    int node;
 
     DFS(a,vis,tSort);
     std::reverse(tSort.begin(), tSort.end());
@@ -273,7 +272,7 @@ void Graph::backTDAG( int& a, int& b, int& counter ){
     walks[a] = 1;
     for( auto i : tSort )
         for( auto j : parseOut(i) )
-            walks[node=E.getOut(j)] += walks[i];
+            walks[ E.getOut(j) ] += walks[i];
     counter = walks[b];
 }
 
@@ -331,7 +330,7 @@ std::vector< std::tuple<int, int> > Graph::times(){
     std::vector< std::tuple<int, int> > ts;
     std::unordered_map< int, int > earl, lat, vis;
     std::queue< int > q;
-    int node, firstOnes = 2;
+    int node, firstOnes = 1;
 
     q.push( getNodes().size() - 2 );
     //the starting vertex
@@ -409,4 +408,26 @@ std::vector< std::tuple<int, int> > Graph::times(){
 
     return ts;
 
+}
+
+void Graph::totMinCost( int& a, int& b, int& counter ){
+        std::vector<int> tSort;
+        std::unordered_map<int, bool> vis;
+        std::unordered_map<int, int> walks, cost;
+
+        DFS(a,vis,tSort);
+        std::reverse(tSort.begin(), tSort.end());
+        for(auto i : tSort) walks[i] = 0, cost[i] = 999999;
+        walks[a] = 1;
+        cost[a] = 0;
+        for( auto i : tSort )
+            for( auto j : parseOut(i) )
+                if( cost[ E.getOut(j) ] == cost[i] + E.getCost(j) ){
+                    walks[ E.getOut(j) ] += walks[i];
+                }
+                else if( cost[ E.getOut(j) ] > cost[i] + E.getCost(j) ){
+                    cost[ E.getOut(j) ] = cost[i] + E.getCost(j);
+                    walks[ E.getOut(j) ] = walks[i];
+                }
+        counter = walks[b];
 }

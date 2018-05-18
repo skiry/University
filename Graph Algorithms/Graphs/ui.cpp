@@ -181,6 +181,10 @@ void UI::run2(){
             DAGtsort();
         else if( command == 7 )
             times();
+        else if( command == 8 )
+            b2();
+        else if( command == 9 )
+            b3();
     }
 
 }
@@ -214,6 +218,8 @@ void UI::printMenu2(){
     std::cout << "5. The no of distinct walks from a directed acyclic graph." << '\n';
     std::cout << "6. Verify DAG and compute a topological sorting." << '\n';
     std::cout << "7. Earliest and latest starting times and the critical activities." << '\n';
+    std::cout << "8. Bonus 2." << '\n';
+    std::cout << "9. Bonus 3." << '\n';
 
 }
 
@@ -521,4 +527,46 @@ void UI::times(){
             std::cout << ++cnt << " ";
         else ++cnt;
     std::cout << '\n';
+}
+
+void UI::b2(){
+    int a, b, res;
+    /*std::vector<int> tSort;
+    std::unordered_map<int, bool> vis;
+    G.DFS(a=1, vis, tSort);
+    std::reverse(tSort.begin(), tSort.end());
+    std::cout << "Topological sorting: ";
+    for(auto i : tSort)
+        std::cout << i << " ";*/
+
+    DAGtsort();
+    std::cout << "\nFrom: ";
+    std::cin >> a;
+
+    std::cout << "To: ";
+    std::cin >> b;
+    G.backTDAG(a, b, res);
+
+    std::cout << "The number of distinct paths is " << res << '\n';
+}
+
+void UI::b3(){
+    int a, b, res;
+    /*std::vector<int> tSort;
+    std::unordered_map<int, bool> vis;
+    G.DFS(a=1, vis, tSort);
+    std::reverse(tSort.begin(), tSort.end());
+    std::cout << "Topological sorting: ";
+    for(auto i : tSort)
+        std::cout << i << " ";*/
+
+    DAGtsort();
+    std::cout << "\nFrom: ";
+    std::cin >> a;
+
+    std::cout << "To: ";
+    std::cin >> b;
+    G.totMinCost(a, b, res);
+
+    std::cout << "The number of distinct paths of min cost is " << res << '\n';
 }
