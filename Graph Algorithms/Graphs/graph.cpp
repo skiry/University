@@ -460,3 +460,22 @@ void Graph::backPath(int& a, int& b, int& res, std::unordered_map<int, int>& vis
         }
     }
 }
+
+void Graph::distNegCyc(int& id1, int& b, int& res){
+    int n = getNodes().size();
+    std::cout << "n:"<<n<<'\n';
+    int val[1<<n][n];
+    res = 9999999;
+    for( int i = 0; i < (1<<n); ++i )
+        for( int j = 0; j < n; ++j )
+            val[i][j] = 9999999;
+    val[1<<id1][id1] = 0;
+    for( int i = 0; i < (1<<n); ++i )
+        for( int j = 0; j < n; ++j )
+            if( i&(1<<j) )
+                for( auto k : parseIn(j) ){
+                    val[i][j] = std::min( val[i][j], val[ i - (1<<j) ][ E.getIn(k) ] + E.getCost(k) );
+                }
+    for( int i = 1; i < (1<<n); ++i )
+        res = std::min( res, val[i][b] );
+}

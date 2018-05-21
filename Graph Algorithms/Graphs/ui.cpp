@@ -586,12 +586,12 @@ void UI::backPath(){
     std::cout << "To: ";
     std::cin >> id2;
 
-    G.backPath( id1, id2, res, vis, par, min, els );
-
-    std::cout << "The minimum cost path between " << id1 << " and " << id2 << " is " << min << '\n';
-    std::reverse( els.begin(), els.end() );
+    //G.backPath( id1, id2, res, vis, par, min, els );
+    G.distNegCyc(id1, id2, res);
+    std::cout << "The minimum cost path between " << id1 << " and " << id2 << " is " << res/*min*/ << '\n';
+    /*std::reverse( els.begin(), els.end() );
     std::cout << "The path is: " << id1 << " ";
     for( const auto& i : els )
         std::cout << i << " ";
-    std::cout << '\n';
+    std::cout << '\n';*/
 }
