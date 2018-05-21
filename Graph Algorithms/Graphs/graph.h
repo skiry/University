@@ -165,6 +165,9 @@ public:
 
     void totMinCost(int& a, int& b, int& res);
     //res = the number of distinct lowest cost paths between two given vertices
+
+    void backPath(int&, int&, int&, std::unordered_map<int, int>&, std::stack<int>&, int&, std::vector<int>&);
+    //Given a digraph with costs and two vertices, find a minimum cost path between them (negative cost cycles may exist in the graph).
 };
 
 #endif // GRAPH_H

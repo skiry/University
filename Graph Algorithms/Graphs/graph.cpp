@@ -431,3 +431,32 @@ void Graph::totMinCost( int& a, int& b, int& counter ){
                 }
         counter = walks[b];
 }
+
+void Graph::backPath(int& a, int& b, int& res, std::unordered_map<int, int>& vis, std::stack<int>& par, int &min, std::vector<int>&els){
+    int edge;
+    if( a == b ){
+        if( res < min ){
+            std::cout<<res<<'\n';
+            min = res;
+            els.clear();
+            while( par.size() ){
+                els.push_back( par.top() );
+                par.pop();
+            }
+            for( int i = els.size() - 1; i > 0; --i )
+                par.push(els[i]);
+        }
+    }
+    for( auto i : parseOut(a) ){
+        edge = E.getOut(i);
+        if( vis[ edge ] == 0 ){
+            vis[ edge ] = 1;
+            res += E.getCost(i);
+            par.push( edge );
+            backPath( edge, b, res, vis, par, min, els );
+            par.pop();
+            res -= E.getCost(i);
+            vis[ edge ] = 0;
+        }
+    }
+}

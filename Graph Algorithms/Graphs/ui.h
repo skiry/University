@@ -102,6 +102,8 @@ public:
     //verify if the corresponding graph is a DAG and performs a topological sorting of the activities;
     //if it is a DAG, finds the number of distinct lowest cost paths between two given vertices, in O(m+n).
 
+    void backPath();
+    //Given a digraph with costs and two vertices, find a minimum cost path between them (negative cost cycles may exist in the graph).
 };
 
 #endif // UI_H

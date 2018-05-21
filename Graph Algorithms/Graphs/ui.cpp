@@ -185,6 +185,8 @@ void UI::run2(){
             b2();
         else if( command == 9 )
             b3();
+        else if( command == 10 )
+            backPath();
     }
 
 }
@@ -220,6 +222,7 @@ void UI::printMenu2(){
     std::cout << "7. Earliest and latest starting times and the critical activities." << '\n';
     std::cout << "8. Bonus 2." << '\n';
     std::cout << "9. Bonus 3." << '\n';
+    std::cout << "10. Given a digraph with costs and two vertices, find a minimum cost path between them (negative cost cycles may exist in the graph). " << '\n';
 
 }
 
@@ -569,4 +572,26 @@ void UI::b3(){
     G.totMinCost(a, b, res);
 
     std::cout << "The number of distinct paths of min cost is " << res << '\n';
+}
+
+void UI::backPath(){
+    int id1, id2, res = 0, min = 99999;
+    std::unordered_map<int, int> vis;
+    std::stack<int> par;
+    std::vector<int> els;
+
+    std::cout << "From: ";
+    std::cin >> id1;
+
+    std::cout << "To: ";
+    std::cin >> id2;
+
+    G.backPath( id1, id2, res, vis, par, min, els );
+
+    std::cout << "The minimum cost path between " << id1 << " and " << id2 << " is " << min << '\n';
+    std::reverse( els.begin(), els.end() );
+    std::cout << "The path is: " << id1 << " ";
+    for( const auto& i : els )
+        std::cout << i << " ";
+    std::cout << '\n';
 }
