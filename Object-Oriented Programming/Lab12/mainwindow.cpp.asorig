@@ -1,0 +1,166 @@
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include "tutorial.h"
+#include <QMainWindow>
+#include <QFormLayout>
+#include <QLineEdit>
+#include <QLabel>
+#include <QPushButton>
+#include <QTextBrowser>
+#include <QListWidget>
+#include <QObject>
+#include <QWidget>
+#include <QLayout>
+#include <QDebug>
+#include <QHBoxLayout>
+#include <QMessageBox>
+#include <QRadioButton>
+#include <QGroupBox>
+#include <QPalette>
+
+MainWindow::MainWindow(Controller C, QWidget *parent) :
+    c{ C },
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+    init();
+    gui();
+    connectSS();
+    ui->setupUi(this);
+}
+
+void MainWindow::init(){
+
+    hL = new QHBoxLayout{this};
+    formLayout = new QFormLayout{};
+    textt = new QHBoxLayout{};
+    tB = new QTextBrowser{};
+    list = new QListWidget{};
+    nameTextBox = new QLineEdit{};
+    nameLabel = new QLabel{ "&Title:" };
+    prTextBox = new QLineEdit{};
+    prLabel = new QLabel{ "&Presenter:" };
+    minsBox = new QLineEdit{};
+    minsLabel = new QLabel{ "&Minutes:" };
+    secsBox = new QLineEdit{};
+    secsLabel = new QLabel{ "&Seconds:" };
+    linkBox = new QLineEdit{};
+    linkLabel = new QLabel{ "&Link:" };
+    add = new QPushButton{"Add Tutorial"};
+    del = new QPushButton{"Delete"};
+    upd = new QPushButton{"Update"};
+    wnd = new QWidget{};
+    aR = new QRadioButton{};
+    dR = new QRadioButton{};
+    uR = new QRadioButton{};
+    gr = new QGroupBox{};
+    //secsBox ->
+}
+
+void MainWindow::gui(){
+    hL->addLayout(formLayout);
+    hL->addLayout(textt);
+    textt->addWidget(list);
+    nameLabel->setBuddy(nameTextBox);
+    prLabel->setBuddy(prTextBox);
+    minsLabel->setBuddy(minsBox);
+    secsLabel->setBuddy(secsBox);
+    linkLabel->setBuddy(linkBox);
+    formLayout->addRow(nameLabel, nameTextBox);
+    formLayout->addRow(prLabel, prTextBox);
+    formLayout->addRow(minsLabel, minsBox);
+    formLayout->addRow(secsLabel, secsBox);
+    formLayout->addRow(linkLabel, linkBox);
+    formLayout->addRow(aR, add);
+    formLayout->addRow(dR, del);
+    formLayout->addRow(uR, upd);
+    wnd->setLayout(hL);
+    wnd->show();
+}
+
+void MainWindow::connectSS(){
+    connect( del, SIGNAL(clicked(bool)), this, SLOT(populateList()) );
+    connect( upd, SIGNAL(clicked(bool)), this, SLOT(clearList()) );
+    connect( dR, SIGNAL(clicked(bool)), this, SLOT(hideOthers()) );
+    connect( aR, SIGNAL(clicked(bool)), this, SLOT(showOthers()) );
+    connect( uR, SIGNAL(clicked(bool)), this, SLOT(showOthers()) );
+    connect( add, SIGNAL(clicked(bool)), this, SLOT(addTut()) );
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::populateList(){
+    this -> list -> addItem(QString::fromStdString( this -> c.allTuts()) );
+    QMessageBox::information(this, "Success", "Populated the list!", QMessageBox::Ok);
+    //this -> tB -> insertPlainText(QString::fromStdString( this -> c.allTuts()));
+}
+
+void MainWindow::clearList(){
+    this -> list -> clear();
+    QMessageBox::information(this, "Success", "Cleared everything!", QMessageBox::Ok);
+}
+
+void MainWindow::hideOthers(){
+    QPalette *palette = new QPalette();
+    palette->setColor(QPalette::Base,Qt::gray);
+    palette->setColor(QPalette::Text,Qt::darkGray);
+
+    prTextBox -> setReadOnly(true);
+    prTextBox ->setPalette(*palette);
+
+    minsBox -> setReadOnly(true);
+    minsBox ->setPalette(*palette);
+
+    secsBox -> setReadOnly(true);
+    secsBox ->setPalette(*palette);
+
+    linkBox -> setReadOnly(true);
+    linkBox ->setPalette(*palette);
+}
+
+void MainWindow::showOthers(){
+    QPalette *palette = new QPalette();
+    palette->setColor(QPalette::Base,Qt::white);
+    palette->setColor(QPalette::Text,Qt::black);
+
+    prTextBox -> setReadOnly(false);
+    prTextBox ->setPalette(*palette);
+
+    minsBox -> setReadOnly(false);
+    minsBox ->setPalette(*palette);
+
+    secsBox -> setReadOnly(false);
+    secsBox ->setPalette(*palette);
+
+    linkBox -> setReadOnly(false);
+    linkBox ->setPalette(*palette);
+}
+
+void MainWindow::addTut(){
+    std::string tt, pr, lk;
+    int min, sec;
+    Duration d;
+
+    tt = nameTextBox -> text().toStdString();
+    pr = prTextBox -> text().toStdString();
+    lk = linkBox -> text().toStdString();
+    min = minsBox -> text().toInt();
+    sec = secsBox -> text().toInt();
+    d = Duration(min, sec);
+    d = Duration(min, sec);
+        Tutorial tut = Tutorial(tt, pr, d, 0, lk);
+        try{
+            if(this -> ui.add(tut)) cout << "\nTutorial already existing";
+            else {
+                cout << "\nOK!";
+                ui.save();
+            }
+        }
+        catch(TutorialException& exc){
+            std::cout << exc.what();
+        }
+
+}

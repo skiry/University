@@ -13,7 +13,10 @@
 #include <QLayout>
 #include <QDebug>
 #include <QHBoxLayout>
-namespace Ui {
+#include <QRadioButton>
+#include <QGroupBox>
+namespace Ui
+{
 class MainWindow;
 }
 
@@ -23,23 +26,33 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(Controller C, QWidget *parent = 0);
+    void init();
+    void gui();
+    void connectSS();
     ~MainWindow();
 
-private slots:
+public slots:
     void populateList();
-    void clearList();
+    void hideOthers();
+    void showOthers();
+    void showUpd();
+    void addTut();
+    void delTut();
+    void updTut();
 
 private:
     Ui::MainWindow *ui;
     Controller c;
-    QHBoxLayout* hL,* textt;
+    QHBoxLayout* hL, * textt, *chs;
     QFormLayout *formLayout;
     QTextBrowser* tB;
     QListWidget* list;
-    QLineEdit* nameTextBox,* prTextBox,* minsBox,* secsBox,* linkBox;
-    QLabel* nameLabel,* prLabel,* minsLabel,* secsLabel,* linkLabel;
-    QPushButton* add,* pop,* clr;
+    QLineEdit* nameTextBox, * prTextBox, * minsBox, * secsBox, * linkBox, *nnBox;
+    QLabel* nameLabel, * prLabel, * minsLabel, * secsLabel, * linkLabel, *nn;
+    QPushButton* add, * del, * upd;
+    QRadioButton* aR, *dR, *uR;
     QWidget *wnd;
+    QGroupBox* gr;
 
 };
 
