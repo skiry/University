@@ -1,0 +1,71 @@
+if(fork()==0){
+...
+exit(0);
+}
+
+else{
+...
+wait(0);
+}
+
+read/write( pf[0/1], &, sizeof() );
+
+///////////////////////////////////
+
+if ( mkfifo("stream.fifo", 0644) < 0 ) { ... }
+int f = open("..", O_RDONLY | O_WRONLY);
+write(f, &n, sizeof(int));
+...
+close(f);
+unlink("stream.fifo");
+
+///////////////////////////////////
+
+    FILE *fi, *fo;
+    char linie[MAXLINIE], numeo[100], *p;
+    strcpy(numeo, (char*)numei);
+    strcat(numeo, ".CAPIT");
+    fi = fopen((char*)numei, "r");
+    fo = fopen(numeo, "w");
+    for ( ; ; ) {
+                   UNDE     CAT  DE UNDE
+        p = fgets(linie, MAXLINIE, fi);
+        linie[MAXLINIE-1] = '\0';
+        if (p == NULL) break;
+        if (strlen(linie) == 0) continue;
+        linie[0] = toupper(linie[0]); // Cuvant incepe in coloana 0 
+        for (p = linie; ; ) {
+            p = strstr(p, " ");
+            if (p == NULL) break;
+            p++;
+            if (*p == '\n') break;
+            *p = toupper(*p);
+        }
+        fprintf(fo, "%s", linie);
+    }
+    fclose(fo);
+    fclose(fi);
+    
+//////////////////////////////////////
+
+pthread_mutex_t mutcond; ***; pthread_mutex_init(&mutcond, NULL); ***; pthread_mutex_destroy(&mutcond);
+pthread_mutex_lock(&mutcond); ***; pthread_mutex_unlock(&mutcond);
+
+pthread_cond_t cond; ***; pthread_cond_init(&cond, NULL); ***; pthread_cond_destroy(&cond);
+pthread_cond_wait(&cond, &mutcond); ***; pthread_cond_signal(&cond); (maybe with 2 mutexex, 1 in 1st, 2 in 2nd);
+
+sem_t sem; ***; sem_init(&sem, 0, N/1); ***; sem_destroy(&sem);
+sem_wait(&sem); ***; sem_post(&sem);
+
+pthread_rwlock_t rwlock; ***; pthread_rwlock_init(&rwlock, NULL); ***; pthread_rwlock_destroy(&rwlock);
+pthread_rwlock_wrlock(&rwlock); ***; pthread_rwlock_rdlock(&rwlock); ***; pthread_rwlock_unlock(&rwlock);
+FACE NUMAI EL, LOCK LA AIA
+
+pthread_barrier_t bar; ***; pthread_barrier_init(&bar, NULL, n); ***; pthread_barrier_destroy(&bar);
+pthread_barrier_wait(&bar);
+
+for (i=0; i < M; i++) pthread_create(&tid[i], NULL, trece, &tren[i]);
+for (i=0; i < M; i++) pthread_join(tid[i], NULL);
+
+
+THREAD ID: printf("Done working in %p.\n", pthread_self());
