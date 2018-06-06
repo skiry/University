@@ -73,6 +73,14 @@ int Repository::findW(std::string title)
 	return 0;
 }
 
+Tutorial Repository::getTut(std::string title)
+{
+    for ( auto i : repo )
+        if ( i.getTitle() == title ) {
+            return i;
+        }
+}
+
 void Repository::updTut(std::string title, const Tutorial& tut)
 {
 	for (int i = 0; i < this -> repo.size() ; ++i)
@@ -92,6 +100,18 @@ std::vector<Tutorial> Repository::byPresenter(std::string pr)
 		}
 
 	return v;
+}
+
+std::vector<Tutorial> Repository::byPresenterWL(std::string pr)
+{
+    std::vector<Tutorial> v;
+
+    for ( int i = 0; i < wList.size() ; ++i )
+        if ( wList[i].getPresenter() == pr) {
+            v.push_back(repo[i]);
+        }
+
+    return v;
 }
 
 

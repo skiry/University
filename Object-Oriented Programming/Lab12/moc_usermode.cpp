@@ -22,7 +22,7 @@ static const uint qt_meta_data_userMode[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -33,12 +33,16 @@ static const uint qt_meta_data_userMode[] = {
       10,    9,    9,    9, 0x08,
       21,    9,    9,    9, 0x08,
       30,    9,    9,    9, 0x08,
+      42,    9,    9,    9, 0x08,
+      57,    9,    9,    9, 0x08,
+      64,    9,    9,    9, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_userMode[] = {
     "userMode\0\0showTuts()\0delTut()\0printTuts()\0"
+    "populateList()\0undo()\0redo()\0"
 };
 
 void userMode::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -50,6 +54,9 @@ void userMode::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 0: _t->showTuts(); break;
         case 1: _t->delTut(); break;
         case 2: _t->printTuts(); break;
+        case 3: _t->populateList(); break;
+        case 4: _t->undo(); break;
+        case 5: _t->redo(); break;
         default: ;
         }
     }
@@ -88,9 +95,9 @@ int userMode::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 6;
     }
     return _id;
 }

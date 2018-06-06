@@ -18,6 +18,8 @@
 #include <QRadioButton>
 #include <QGroupBox>
 #include <QPalette>
+#include <QShortcut>
+#include <QtGui>
 
 MainWindow::MainWindow(Controller C, QWidget *parent) :
 	c{ C },
@@ -55,12 +57,13 @@ void MainWindow::init()
 	add = new QPushButton{"Add Tutorial"};
 	del = new QPushButton{"Delete"};
 	upd = new QPushButton{"Update"};
+    u = new QPushButton{"Undo"};
+    r = new QPushButton{"Redo"};
 	wnd = new QWidget{};
 	aR = new QRadioButton{};
 	dR = new QRadioButton{};
 	uR = new QRadioButton{};
-	gr = new QGroupBox{};
-	//secsBox ->
+    gr = new QGroupBox{};
 }
 
 void MainWindow::gui()
@@ -82,12 +85,19 @@ void MainWindow::gui()
 	formLayout->addRow(aR, add);
 	formLayout->addRow(dR, del);
 	formLayout->addRow(uR, upd);
+    formLayout->addWidget(u);
+    formLayout->addWidget(r);
     aR -> setChecked(false);
     dR -> setChecked(false);
     uR -> setChecked(false);
     QPalette *palette = new QPalette();
     palette->setColor(QPalette::Base, Qt::gray);
     palette->setColor(QPalette::Text, Qt::darkGray);
+
+    und = new QShortcut(this);//QKeySequence(Qt::CTRL + Qt::Key_Z), this, SLOT(undo()));
+    red = new QShortcut(this);//QKeySequence(Qt::CTRL + Qt::Key_Y), this, SLOT(redo()));
+    und->setKey(Qt::CTRL + Qt::Key_Z);
+    red->setKey(Qt::CTRL + Qt::Key_Y);
 
     prTextBox -> setReadOnly(true);
     prTextBox ->setPalette(*palette);
@@ -107,8 +117,10 @@ void MainWindow::gui()
     nameTextBox -> setReadOnly(true);
     nameTextBox ->setPalette(*palette);
 
-	wnd->setLayout(hL);
+    wnd->setLayout(hL);
 	wnd->show();
+
+
 }
 
 void MainWindow::connectSS()
@@ -120,6 +132,10 @@ void MainWindow::connectSS()
 	connect( add, SIGNAL(clicked(bool)), this, SLOT(addTut()) );
     connect( del, SIGNAL(clicked(bool)), this, SLOT(delTut()) );
     connect( upd, SIGNAL(clicked(bool)), this, SLOT(updTut()) );
+    connect( und, SIGNAL(activated()), this, SLOT(undo()));
+    connect( red, SIGNAL(activated()), this, SLOT(redo()));
+    connect( u, SIGNAL(clicked(bool)), this, SLOT( undo()) );
+    connect( r, SIGNAL(clicked(bool)), this, SLOT( redo()) );
 }
 
 MainWindow::~MainWindow()
@@ -279,7 +295,7 @@ void MainWindow::delTut()
         }
 
     } else {
-        QMessageBox::information(this, "Error", "You haven't selected the delete button", QMessageBox::Ok);
+        QMessageBox::information(this, "Error", "You haven't selected the delete button", QMessageBox::Rejected);
     }
 
 }
@@ -317,5 +333,29 @@ void MainWindow::updTut()
 
     } else {
         QMessageBox::information(this, "Error", "You haven't selected the update button", QMessageBox::Ok);
+    }
+}
+
+void MainWindow::undo()
+{
+    if ( c.doUndo() ) {
+        QMessageBox::information(this, "OK", "Undo done", QMessageBox::Ok);
+        c.save();
+        populateList();
+
+    } else {
+        QMessageBox::information(this, "Error", "You can't undo", QMessageBox::Rejected);
+    }
+}
+
+void MainWindow::redo()
+{
+    if ( c.doRedo() ) {
+        QMessageBox::information(this, "OK", "Redo done", QMessageBox::Ok);
+        c.save();
+        populateList();
+
+    } else {
+        QMessageBox::information(this, "Error", "You can't redo", QMessageBox::Rejected);
     }
 }

@@ -7,7 +7,8 @@
 class Repository
 {
 protected:
-    /*DynamicArray<Tutorial>*/ std::vector<Tutorial> repo;
+    /*DynamicArray<Tutorial>*/
+    std::vector<Tutorial> repo;
     /*DynamicArray<Tutorial>*/ std::vector<Tutorial> wList;
     int length;
     int wLen;
@@ -28,18 +29,34 @@ public:
     int findW(std::string title);
     // find a tutorial in watch list
 
+    Tutorial getTut(std::string title);
+    //return the tutorial with the title 'title'
+
     Repository& getRepo();
     //repo getter
 
-    int len() { return this -> length; }
+    int len()
+    {
+        return this -> length;
+    }
     //length getter
 
-    Tutorial& operator[](int pos) { if(pos < this -> length) return this -> repo[pos]; return this->repo[0]; }
+    Tutorial& operator[](int pos)
+    {
+        if (pos < this -> length) {
+            return this -> repo[pos];
+        }
+
+        return this->repo[0];
+    }
     std::vector<Tutorial> byPresenter(std::string pr);
     //return an iterator to tutorials presented by pr
 
     std::vector<Tutorial> getWlist();
     //return an iterator to tutorials in the watch list
+
+    std::vector<Tutorial> byPresenterWL(std::string pr);
+    //return an iterator to tutorials presented by pr in the watch list
 
     void increaseLike(std::string title);
     //increase the number of likes of tutorial with the name title

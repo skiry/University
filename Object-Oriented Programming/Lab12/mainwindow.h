@@ -15,6 +15,9 @@
 #include <QHBoxLayout>
 #include <QRadioButton>
 #include <QGroupBox>
+#include <QShortcut>
+#include <QtGui>
+
 namespace Ui
 {
 class MainWindow;
@@ -39,6 +42,8 @@ public slots:
     void addTut();
     void delTut();
     void updTut();
+    void undo();
+    void redo();
 
 private:
     Ui::MainWindow *ui;
@@ -49,10 +54,11 @@ private:
     QListWidget* list;
     QLineEdit* nameTextBox, * prTextBox, * minsBox, * secsBox, * linkBox, *nnBox;
     QLabel* nameLabel, * prLabel, * minsLabel, * secsLabel, * linkLabel, *nn;
-    QPushButton* add, * del, * upd;
+    QPushButton* add, * del, * upd, *u, *r;
     QRadioButton* aR, *dR, *uR;
     QWidget *wnd;
     QGroupBox* gr;
+    QShortcut* und, *red;
 
 };
 

@@ -2,6 +2,7 @@
 #define CONTROLLER_H
 #include "fileplaylist.h"
 #include "repository.h"
+#include "undooperation.h"
 
 class Controller
 {
@@ -9,6 +10,8 @@ private:
     Repository ctrl;
     FilePlaylist* playList, *sqlR;
     int length;
+    std::vector< std::shared_ptr< undoOperation > > undo;
+    int undoCnt = 0;
 public:
     Controller(const Repository& r, FilePlaylist* p/*, FilePlaylist* _sqlR*/) : ctrl(r), playList{ p }, /*sqlR{ _sqlR },*/ length(0) {}
     //constructor
@@ -16,16 +19,16 @@ public:
     Controller(const Repository& r) : ctrl(r), length(0) {}
     //constructor 2
 
-    int add(const Tutorial& tut);
+    int add(const Tutorial& tut, int c = 0);
     //check if tut is existent, if not, add
 
-    int rm(std::string title);
+    int rm(std::string title, int c = 0);
     //if tut is not existent, remove
 
-    int rmW(std::string title);
+    int rmW(std::string title, int c = 0);
     //if tut is not existent, remove from watch list
 
-    int upd(std::string title, const Tutorial& tut);
+    int upd(std::string title, const Tutorial& tut, int c = 0);
     //if title in in the list of tuts, update it with tut
 
     Controller& getCtrl()
@@ -58,13 +61,25 @@ public:
     }
     //return an iterator to tutorials in the watch list
 
+    Repository& getRepo()
+    {
+        return ctrl.getRepo();
+    }
+    //repo getter
+
+    std::vector<Tutorial> byPresenterWL(std::string pr)
+    {
+        return ctrl.byPresenterWL(pr);
+    }
+    //return an iterator to tutorials presented by pr in the watch list
+
     void like(std::string title)
     {
         ctrl.increaseLike(title);
     }
     //increase the number of likes of tutorial with the name title
 
-    bool addToPL(const Tutorial& tut);
+    bool addToPL(const Tutorial& tut, int c = 0);
     //add tutorial to the playlist
 
     void read()
@@ -115,6 +130,12 @@ public:
     {
         return playList->wat();
     }
+
+    bool doUndo();
+    //undo operation
+
+    bool doRedo();
+    //redo operation
 
     ~Controller() {}
     //destructor for controller

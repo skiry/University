@@ -10,12 +10,12 @@
 #define UI_USERMODE_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QDialog>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QHeaderView>
+#include <QAction>
+#include <QApplication>
+#include <QButtonGroup>
+#include <QDialog>
+#include <QDialogButtonBox>
+#include <QHeaderView>
 
 QT_BEGIN_NAMESPACE
 
@@ -44,7 +44,7 @@ public:
 
     void retranslateUi(QDialog *userMode)
     {
-        userMode->setWindowTitle(QApplication::translate("userMode", "Dialog", 0, QApplication::UnicodeUTF8));
+        userMode->setWindowTitle(QApplication::translate("userMode", "Dialog", 0));
     } // retranslateUi
 
 };

@@ -15,6 +15,8 @@
 #include <QLayout>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QComboBox>
+#include <QtCharts>
 
 namespace Ui
 {
@@ -30,29 +32,37 @@ public:
     void init();
     void gui();
     void connectSS();
-    void populateList();
     ~userMode();
 
 private slots:
     void showTuts();
     void delTut();
     void printTuts();
+    void populateList();
+    void undo();
+    void redo();
+    void showTable();
 
 private:
     Ui::userMode *ui;
     Controller c;
-    QVBoxLayout* vB;
-    QHBoxLayout* hL, * textt;
+    QVBoxLayout* vB, * textt;
+    QHBoxLayout* hL;
     QFormLayout *formLayout;
     QTextBrowser* tB;
+    QString act;
     QListWidget* list;
     QLineEdit* prTextBox;
     QLabel* prLabel;
-    QPushButton* add, * del, *prt;
+    QPushButton* add, * del, *prt, *u, *r, *t;
+    QComboBox* combo;
     QWidget *wnd;
     std::string before = "", now = "";
     int counter;
     std::vector<Tutorial> v;
+    QPieSeries *series;
+    QChart *chart;
+    QChartView *chartView;
 };
 
 #endif // USERMODE_H
