@@ -157,7 +157,10 @@ void userMode::showTuts()
 
     if ( before == "" || before != now ) {
         v = c.byPresenter(now);
-        counter = 0;
+
+        if ( !(before == "" && now == "") ) {
+            counter = 0;
+        }
     }
 
     if ( counter < v.size() ) {
