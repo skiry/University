@@ -8,7 +8,7 @@ class undoOperation
 {
 public:
     undoOperation() {}
-    ~undoOperation() {}
+    virtual ~undoOperation() {}
     virtual void executeUndo() = 0;
     virtual void executeRedo() = 0;
 };
