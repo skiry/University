@@ -1,0 +1,95 @@
+10 spinner, notepad;
+https://drive.google.com/drive/folders/1a2QOO3RT6QOvyHMXrGsI_C-q3Jgqyj01
+https://www.youtube.com/watch?v=XintqJlSY1U - QT
+
+&QPushButton::clicked instead of SIGNAL(clicked(bool))
+
+void MainWindow::on_pushMe_pressed()
+{
+    QString text = ui -> plainTextEdit->toPlainText();
+    QMessageBox* m = new QMessageBox;
+    m->setText(text);
+    //m->show();
+    d = new Dialog;
+    connect(d, SIGNAL(rejected()), this, SLOT(fct()));
+    this->hide();
+    d->show();
+}
+
+void MainWindow::fct(){
+
+    this->show();
+    delete d;
+}
+
+QMessageBox::information(this, "Success", "Added the tutorial to the watchlist!", QMessageBox::Ok);
+
+auto reply = QMessageBox::question(this, "Query", "Do you want to rate the tutorial?", QMessageBox::Yes | QMessageBox::No);
+    if ( reply == QMessageBox::Yes )
+    
+LIBS += -L/ -lsqlite3
+
+TEMPLATE = app
+TARGET = Lab12
+DEPENDPATH += .
+INCLUDEPATH += .
+CONFIG += qt
+QT += widgets
+QT += core gui
+QT += charts
+
+rm moc_* ui_* *.o //works in terminal
+<QtGui/QApplication> -> <QApplication> + rm , QApplication::UnicodeUTF8 //works in qt
+
+.txt files in build directory
+
+After  an  object  QSortFilterProxyModel  is  created,  use  the
+setSourceModel()  and  set  the  QSortFilterProxyModel  on
+the view
+
+Use  the  sortingEnabled  property  of  the  QTableView  and
+QTreeView to activate sorting by clicking on the header.
+
+
+https://doc.qt.io/qt-5/qt.html Qt::ItemDataRole
+maybe: http://doc.qt.io/qt-5/modelview.html
+
+ switch(role){
+    case Qt::DisplayRole:
+        if (row == 0 && col == 1) return QString("<--left");
+        if (row == 1 && col == 1) return QString("right-->");
+
+        return QString("Row%1, Column%2")
+                .arg(row + 1)
+                .arg(col +1);
+        break;
+    case Qt::FontRole:
+        if (row == 0 && col == 0) //change font only for cell(0,0)
+        {
+            QFont boldFont;
+            boldFont.setBold(true);
+            return boldFont;
+        }
+        break;
+    case Qt::BackgroundRole:
+
+        if (row == 1 && col == 2)  //change background only for cell(1,2)
+        {
+            QBrush redBackground(Qt::red);
+            return redBackground;
+        }
+        break;
+    case Qt::TextAlignmentRole:
+
+        if (row == 1 && col == 1) //change text alignment only for cell(1,1)
+        {
+            return Qt::AlignRight + Qt::AlignVCenter;
+        }
+        break;
+    case Qt::CheckStateRole:
+
+        if (row == 1 && col == 0) //add a checkbox to cell(1,0)
+        {
+            return Qt::Checked;
+        }
+    }

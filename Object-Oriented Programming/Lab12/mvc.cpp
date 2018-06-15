@@ -6,7 +6,7 @@
 #include <QBrush>
 #include <tutorial.h>
 #include <QMainWindow>
-
+#include <QMessageBox>
 
 TutorialsTableModel::TutorialsTableModel(Repository& _r, QObject* parent) : QAbstractTableModel{ parent }, r{ _r }
 {
@@ -129,65 +129,47 @@ QVariant TutorialsTableModel::headerData(int section, Qt::Orientation orientatio
 
 bool TutorialsTableModel::setData(const QModelIndex & index, const QVariant & value, int role)
 {
-    /*
-       if (!index.isValid() || role != Qt::EditRole) {
-           return false;
-       }
 
-       // set the new data to the tutorial
-       int tutIndex = index.row();
+    if (!index.isValid() || role != Qt::EditRole) {
+        return false;
+    }
 
-       // get the tutorials
-       std::vector<Tutorial> tuts = r.getWlist();
+    int row = index.row();
+    int col = index.column();
 
-       // Allow adding in the table
-       //if the index is >= number of tuts => a new tut is added
-       if (tutIndex == tuts.size()) {
-           this->beginInsertRows(QModelIndex{}, tutIndex, tutIndex);
+    Tutorial& currentTut = this->r.getWlist()[row];
 
-           switch (index.column()) {
-           case 0:
-               r.addToPL(Gene{ value.toString().toStdString(), "", "" });
-               break;
+    if (role == Qt::EditRole) {
+        switch (col) {
+        case 0:
+            break;
 
-           case 1:
-               r.addToPL(Gene{ "", value.toString().toStdString(), ""});
-               break;
+        case 1:
+            break;
 
-           case 2:
-               r.addToPL(Gene{ "", "", value.toString().toStdString() });
-               break;
-           }
+        case 2:
+            break;
 
-           this->endInsertRows();
-           return true;
-       }
+        case 3: {
+            std::string likes = value.toString().toStdString();
+            r.setLikes(r.getWlist()[row].getTitle(), std::stoi(likes));
+            std::cout << r.getWlist()[row].getLikes();
+            break;
+        }
+        }
+    }
 
-       Gene& currentGene = genes[geneIndex];
-
-       switch (index.column()) {
-       case 0:
-           currentGene.setName(value.toString().toStdString());
-           break;
-
-       case 1:
-           currentGene.setOrganismName(value.toString().toStdString());
-           break;
-
-       case 2:
-           currentGene.setFunction(value.toString().toStdString());
-       }
-
-       this->repo.updateGene(geneIndex, currentGene);
-
-       // emit the dataChanged signal
-       emit dataChanged(index, index);
-
-       return true;*/
+    emit dataChanged(index, index);
+    return true;
 }
 
 Qt::ItemFlags TutorialsTableModel::flags(const QModelIndex & index) const
 {
+    int col = index.column();
+
+    if (col == 0 || col == 1)
+        return Qt::ItemFlags{};
+
     return Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsEnabled;
 }
 

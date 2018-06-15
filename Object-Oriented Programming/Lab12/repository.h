@@ -29,6 +29,14 @@ public:
     int findW(std::string title);
     // find a tutorial in watch list
 
+    void setLikes(std::string name, int likes)
+    {
+        for (auto& i : wList) {
+            if ( i.getTitle() == name ) {
+                i.setLikes(likes);
+            }
+        }
+    }
     Tutorial getTut(std::string title);
     //return the tutorial with the title 'title'
 

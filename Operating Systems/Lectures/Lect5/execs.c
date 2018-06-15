@@ -7,7 +7,7 @@ int main(){
 	printf("Before\n");
 	if(fork() == 0){
 	execlp("echo", "echo", "here", NULL);
-//	exit(0);
+	exit(0);
 	}
 	printf("After\n");
 	wait(0);

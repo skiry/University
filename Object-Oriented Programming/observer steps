@@ -1,0 +1,13 @@
+base classes + file reading
+observer
+exception
+repository: vectors, filenames
+            readfromfile x 2
+            getter x 2
+            writetofile
+            add remove update
+controller:public observable
+           make objects; send to repo; notify
+gui
+
+MVC:same, just gui:TableView and AbstractClass + main QSortFilter

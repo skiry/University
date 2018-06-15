@@ -17,6 +17,6 @@ int main() {
 	signal(SIGSTOP, f);
 //	while(1);
 int 	p = fork();
-	printf("%d",p);
+	printf("%d\n",p);
 	return 0;
 }

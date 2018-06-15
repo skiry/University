@@ -1,0 +1,191 @@
+
+    vector<int> a{1, 2, 3, 4, 5, 6};
+    a.erase(remove(a.begin(), a.end(), 4));
+    
+    auto multiply = [factor](int x) -> int { return x * factor; };	
+
+////////////////////////////////////////////////////////////////////////////////
+*WITH SPACES AS DELIMITER*
+
+#include <sstream>
+#include <iostream>
+
+friend std::istream& operator>>(std::istream& os, Student& s);
+friend std::ostream& operator<<(std::ostream& os, Student& s);
+	
+istream & operator>>(istream & stream, Animal & a)
+{
+	stream >> a.colour >> a.weight;
+	return stream;
+}
+
+ostream & operator<<(ostream & stream, const Animal & a)
+{
+	stream << a.weight << ", " << a.colour << endl;
+	return stream;
+}
+
+********************************************************************************
+### DONT FORGET 'FRIEND'. REMOVE STD IF NECESSARY
+### 'STOI' IF U HAVE NUMBERS. 'TOKENIZE' MUST NOT BE IN CLASS
+
+std::vector<std::string> tokenize(std::string str, char delimiter)
+{
+	std::vector <std::string> result;
+	std::stringstream ss(str);
+	std::string token;
+	while (getline(ss, token, delimiter))
+		result.push_back(token);
+
+	return result;
+}
+
+std::istream& operator>>(std::istream & is, Student & s)
+{
+    std::string line;
+    getline(is, line);
+
+    std::vector<std::string> tokens = tokenize(line, ',');
+
+    if (tokens.size() != 5) {
+        return is;
+    }
+
+    s.id = std::stoi(tokens[0]);
+    s.name = tokens[1];
+    s.group = std::stoi(tokens[2]);
+    s.grade = std::stod(tokens[3]);
+    s.teacher = tokens[4];
+    return is;
+}
+
+std::ostream& operator<<(std::ostream & os, Student & s)
+{
+    os << s.id << "," << s.name << "," << s.group << "," << s.grade << "," << s.teacher << "\n";
+    return os;
+}
+********************************************************************************
+
+class ValidationExceptionInherited : public std::exception
+{
+private:
+	std::string message;
+
+public:
+	ValidationExceptionInherited(std::string _message);
+	const char* what() const noexcept override;
+};
+
+class SpaceshipValidator
+{
+public:
+	static void validate(const Spaceship& s);
+};
+
+and cppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp
+
+ValidationExceptionInherited::ValidationExceptionInherited(std::string _message) : message{ _message }
+{
+}
+
+const char * ValidationExceptionInherited::what() const noexcept
+{
+	return message.c_str();
+}
+
+
+void SpaceshipValidator::validate(const Spaceship & s)
+{
+	string errors;
+	if (s.getName().size() < 3)
+		errors += string("The spaceship name cannot be less than 2 characters!\n");
+	if (!isupper(s.getCaptain()[0]))
+		errors += string("The captain's name must start with a capital letter!\n");
+	if (s.getType().size() < 3)
+		errors += string("The spaceship type cannot be less than 2 characters!\n");
+	
+	/*if (errors.size() > 0)
+		throw ValidationException(errors);*/
+
+	if (errors.size() > 0)
+		throw ValidationExceptionInherited(errors);
+}
+
++++++++++++++++++++++++++++++++++++
+class myException : public exception
+{
+    virtual const char* what() const throw()
+    {
+        return "Stack is full";
+    }
+} myex;
++++++++++++++++++++++++++++++++++++
+
+USE:::::::::::::::::*/; SpaceshipValidator::validate(deathStar);
+
+////////////////////////////////////////////////////////////////////////////////
+#include <memory>
+UNIQUE POINTERS
+
+EXAMPLE
+    std::unique_ptr<std::string> ptr1 = std::make_unique<std::string>("Hello, I am a string owned by a unique_ptr.");
+	auto ptr2 = std::move(ptr1); // ptr2 has taken ownership of the string and ptr1 is now nullptr
+
+	if (ptr1 == nullptr)
+	{
+		std::cout << "ptr1 is now nullptr." << std::endl;
+	}
+	
+APPLIED EXAMPLE
+    unique_ptr<Aircraft> aircraft;
+    aircraft = make_unique<HotAirBalloon>(id, model, maxWeight);
+    this->ctrl.add(std::move(aircraft));
+    void Controller::add(std::unique_ptr<Aircraft> aircraft)
+{
+	this->aircraft.push_back(std::move(aircraft));
+}
+
+////////////////////////////////////////////////////////////////////////////////
+SHARED POINTERS
+
+EXAMPLE
+    std::shared_ptr<Spaceship> ptr1 = std::make_shared<Spaceship>("Enterprise", "Jean-Luc Picard", "heavy cruiser");
+	
+	{
+		auto ptr2 = ptr1; // 2 shared pointers point to the same spaceship 
+		auto ptr3 = ptr2; // 3 shared pointers point to the same spaceship
+	}
+	// at the end of this scope, ptr2 and ptr3 are destroyed => reference count is now 1
+	// the spaceship is not yet destroyed, since there still is one pointer which owns it (ptr1)
+	
+	auto ptr4 = std::move(ptr1); // ptr1 is nullptr, but there is still 1 reference count (ptr4)
+	
+	
+	
+	QMessageBox msgBox;
+msgBox.setWindowTitle("title");
+msgBox.setText("Question");
+msgBox.setStandardButtons(QMessageBox::Yes);
+msgBox.addButton(QMessageBox::No);
+msgBox.setDefaultButton(QMessageBox::No);
+if(msgBox.exec() == QMessageBox::Yes){
+  // do something
+}else {
+  // do something else
+}
+----------------------------------------------------
+void AuctionLeader::setCurrent()
+{
+	if (this->ui.housesListWidget->count() == 0)
+		return;
+
+	// get selected index
+	QModelIndexList index = this->ui.housesListWidget->selectionModel()->selectedIndexes();
+	if (index.size() == 0)
+	{
+		return;
+	}
+
+	int idx = index.at(0).row();
+	this->auct.setCurrent(idx);
+}
