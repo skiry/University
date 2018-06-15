@@ -33,7 +33,7 @@ void Map::add(int k, int v)
     int pos = h1(k);
     int i = 1;
 
-    while ( elems[pos].key != -1 && elems[pos].key != -2 ) { //vezi exact conditia aici si schimba pseudocodul
+    while ( elems[pos].key != -1 && elems[pos].key != -2 ) {
 
         if ( elems[pos].key == k ) {
             throw ("The key is already existing\n");
