@@ -8,13 +8,13 @@ public class ProgramState {
 
     public ProgramState(IStack<IStatement> exeStack,
                       IDictionary<String, Integer> symTable,
-                      IList<Integer> out){
-                      //IStatement originalProgram){
+                      IList<Integer> out,
+                      IStatement originalProgram){
         this.exeStack = exeStack;
         this.symTable = symTable;
         this.out = out;
-        //this.originalProgram = deepcopy(originalProgram);
-        //this.exeStack.push(originalProgram);
+        this.originalProgram = originalProgram;
+        this.exeStack.push(originalProgram);
     }
 
     public IStack<IStatement> getExeStack() {

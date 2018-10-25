@@ -6,4 +6,5 @@ public interface IDictionary<K,V> {
     boolean containsKey(K key);
     boolean containsValue(V value);
     V get(K key) throws MyException;
+    String toString();
 }

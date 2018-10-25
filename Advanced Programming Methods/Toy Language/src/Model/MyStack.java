@@ -1,6 +1,6 @@
 package Model;
 
-import java.util.Stack;
+import java.util.*;
 
 public class MyStack<T> implements IStack<T> {
     private Stack<T> stack;
@@ -31,5 +31,14 @@ public class MyStack<T> implements IStack<T> {
     @Override
     public boolean isEmpty() {
         return stack.isEmpty();
+    }
+
+    public String toString(){
+        String res = "exeStack={";
+        Collections.reverse(stack);
+        res = res.concat(stack.toString());
+        Collections.reverse(stack);
+        res = res.concat("}");
+        return res;
     }
 }

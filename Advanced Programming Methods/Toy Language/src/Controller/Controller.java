@@ -12,11 +12,15 @@ public class Controller {
 
     public ProgramState oneStep(ProgramState state) throws MyException{
         IStack<IStatement> stk = state.getExeStack();
+        System.out.println(state.getExeStack());
+        System.out.println(state.getSymTable());
+        System.out.println(state.getOut());
         if(stk.isEmpty()) {
             throw new MyException("Empty Execution Stack!!!");
         }
         IStatement current = stk.pop();
         System.out.println(current.toString());
+
         return current.execute(state);
     }
     public void allSteps(){
@@ -26,10 +30,9 @@ public class Controller {
             while (!stk.isEmpty()) {
                 oneStep(prg);
             }
-            IList<Integer> outList = repo.getCurrentProgram().getOut();
-            for(int i = 0; i < outList.size(); ++i) {
-                System.out.println(outList.get(i));
-            }
+            System.out.println(prg.getExeStack());
+            System.out.println(prg.getSymTable());
+            System.out.println(prg.getOut());
         }
         catch(MyException exc){
             System.out.println(exc.getMessage());

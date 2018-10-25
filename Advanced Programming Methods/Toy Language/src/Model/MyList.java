@@ -1,12 +1,13 @@
 package Model;
 
-import java.util.ArrayList;
+import java.util.ArrayDeque;
+import java.util.Queue;
 
 public class MyList<T> implements IList<T> {
-    private ArrayList<T> list;
+    private Queue<T> list;
 
     public MyList(){
-        this.list = new ArrayList<>();
+        this.list = new ArrayDeque<>();
     }
 
     @Override
@@ -15,14 +16,22 @@ public class MyList<T> implements IList<T> {
     }
 
     @Override
-    public T get(int index)throws MyException {
-        if(index >= size())
-            throw new MyException("Index out of range!");
-        return list.get(index);
+    public T get()throws MyException {
+        if(list.isEmpty())
+            throw new MyException("Empty Out Array!");
+        return this.list.peek();
     }
 
     @Override
     public int size() {
         return list.size();
+    }
+
+    @Override
+    public String toString(){
+        String res = "Out={";
+        res = res.concat(list.toString());
+        res = res.concat("}");
+        return res;
     }
 }

@@ -5,4 +5,5 @@ public interface IStack<T> {
     T pop() throws MyException;
     int length();
     boolean isEmpty();
+    String toString();
 }

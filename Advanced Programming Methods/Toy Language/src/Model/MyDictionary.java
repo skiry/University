@@ -35,4 +35,11 @@ public class MyDictionary<K,V> implements IDictionary<K,V>  {
             throw new MyException("No " + " key");
         return hm.get(key);
     }
+
+    public String toString(){
+        String res = "symTable={";
+        res = res.concat(hm.toString());
+        res = res.concat("}");
+        return res;
+    }
 }
