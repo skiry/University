@@ -1,5 +1,6 @@
 package Model;
 
+//compund has 2 statements which are pushed onto the Execution Stack
 public class CompoundStatement implements IStatement {
     private IStatement first, second;
 

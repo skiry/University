@@ -3,8 +3,9 @@ package UI;
 import Controller.Controller;
 import Model.MyException;
 
-import java.awt.desktop.SystemSleepEvent;
+import java.io.IOException;
 
+//before the TextMenu class there was the UI class that received a controller and ran according to a boolean all/one step(s)
 public class UI {
     private Controller ctrl;
 
@@ -12,7 +13,12 @@ public class UI {
         this.ctrl = ctrl;
     }
 
-    public void run(){
-        ctrl.allSteps();
+    public void run(boolean flag) throws MyException, IOException {
+        if(flag) {
+            ctrl.allSteps();
+        }
+        else {
+            ctrl.oneStep();
+        }
     }
 }

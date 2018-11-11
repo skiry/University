@@ -1,0 +1,166 @@
+ExeStack:
+openRFile(var_f,test.in)
+(readRFile(var_f,var_c);(print(var_c);(IF(var_c) THEN((readRFile(var_f,var_c);print(var_c))) ELSE(print(0));closeRFile(var_f))))
+
+SymTable:
+
+Out:
+
+FileTable:
+
+-------------------------
+ExeStack:
+(readRFile(var_f,var_c);(print(var_c);(IF(var_c) THEN((readRFile(var_f,var_c);print(var_c))) ELSE(print(0));closeRFile(var_f))))
+
+SymTable:
+var_f --> 2
+
+Out:
+
+FileTable:
+2 --> test.in
+
+-------------------------
+ExeStack:
+readRFile(var_f,var_c)
+(print(var_c);(IF(var_c) THEN((readRFile(var_f,var_c);print(var_c))) ELSE(print(0));closeRFile(var_f)))
+
+SymTable:
+var_f --> 2
+
+Out:
+
+FileTable:
+2 --> test.in
+
+-------------------------
+ExeStack:
+(print(var_c);(IF(var_c) THEN((readRFile(var_f,var_c);print(var_c))) ELSE(print(0));closeRFile(var_f)))
+
+SymTable:
+var_f --> 2
+var_c --> 15
+
+Out:
+
+FileTable:
+2 --> test.in
+
+-------------------------
+ExeStack:
+print(var_c)
+(IF(var_c) THEN((readRFile(var_f,var_c);print(var_c))) ELSE(print(0));closeRFile(var_f))
+
+SymTable:
+var_f --> 2
+var_c --> 15
+
+Out:
+
+FileTable:
+2 --> test.in
+
+-------------------------
+ExeStack:
+(IF(var_c) THEN((readRFile(var_f,var_c);print(var_c))) ELSE(print(0));closeRFile(var_f))
+
+SymTable:
+var_f --> 2
+var_c --> 15
+
+Out:
+15
+
+FileTable:
+2 --> test.in
+
+-------------------------
+ExeStack:
+IF(var_c) THEN((readRFile(var_f,var_c);print(var_c))) ELSE(print(0))
+closeRFile(var_f)
+
+SymTable:
+var_f --> 2
+var_c --> 15
+
+Out:
+15
+
+FileTable:
+2 --> test.in
+
+-------------------------
+ExeStack:
+(readRFile(var_f,var_c);print(var_c))
+closeRFile(var_f)
+
+SymTable:
+var_f --> 2
+var_c --> 15
+
+Out:
+15
+
+FileTable:
+2 --> test.in
+
+-------------------------
+ExeStack:
+readRFile(var_f,var_c)
+print(var_c)
+closeRFile(var_f)
+
+SymTable:
+var_f --> 2
+var_c --> 15
+
+Out:
+15
+
+FileTable:
+2 --> test.in
+
+-------------------------
+ExeStack:
+print(var_c)
+closeRFile(var_f)
+
+SymTable:
+var_f --> 2
+var_c --> 50
+
+Out:
+15
+
+FileTable:
+2 --> test.in
+
+-------------------------
+ExeStack:
+closeRFile(var_f)
+
+SymTable:
+var_f --> 2
+var_c --> 50
+
+Out:
+15
+50
+
+FileTable:
+2 --> test.in
+
+-------------------------
+ExeStack:
+
+SymTable:
+var_f --> 2
+var_c --> 50
+
+Out:
+15
+50
+
+FileTable:
+
+-------------------------

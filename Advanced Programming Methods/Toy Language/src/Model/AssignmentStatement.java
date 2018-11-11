@@ -1,5 +1,7 @@
 package Model;
 
+//assigns to a variable(string) an expression that will be recursively evaluated
+//until it returns an integer value and adds this pair variable-value in the Symbol Table
 public class AssignmentStatement implements IStatement{
     private String id;
     private Expression exp;

@@ -1,5 +1,8 @@
 package Model;
 
+//arithmetic expression receives 2 operands and 1 operator and evaluates recursively each operand
+//until it gets an integer
+//throws error if user wants to divide by 0
 public class ArithmeticExpression extends Expression {
     private Expression e1, e2;
     private char operation;
@@ -24,7 +27,11 @@ public class ArithmeticExpression extends Expression {
         int nr = e2.eval(dict);
         if(nr == 0)
             throw new MyException("Division by zero!");
-        return e1.eval(dict) / nr;
+        else if (nr != 0){
+            return e1.eval(dict) / nr;
+        }
+        else System.out.println("Only the basic arithmetic operations are permitted!");
+        return 0;
     }
 
     @Override

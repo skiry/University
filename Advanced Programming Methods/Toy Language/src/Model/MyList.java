@@ -3,6 +3,7 @@ package Model;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
+//Out Table implemented as an array deque because we needed the most recent output on the first positions
 public class MyList<T> implements IList<T> {
     private Queue<T> list;
 
@@ -29,9 +30,11 @@ public class MyList<T> implements IList<T> {
 
     @Override
     public String toString(){
-        String res = "Out={";
-        res = res.concat(list.toString());
-        res = res.concat("}");
+        String res = "Out:";
+        for(T el:list){
+            res = res.concat(System.lineSeparator());
+            res = res.concat(el.toString());
+        }
         return res;
     }
 }

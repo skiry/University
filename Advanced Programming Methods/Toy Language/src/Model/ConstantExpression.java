@@ -1,5 +1,6 @@
 package Model;
 
+//simply a constant expression that stops the recursivity from other expressions and has just a number
 public class ConstantExpression extends Expression {
     private int number;
 

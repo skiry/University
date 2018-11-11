@@ -2,6 +2,7 @@ package Model;
 
 import java.util.*;
 
+//Execution Stack
 public class MyStack<T> implements IStack<T> {
     private Stack<T> stack;
     private int nr;
@@ -34,11 +35,14 @@ public class MyStack<T> implements IStack<T> {
     }
 
     public String toString(){
-        String res = "exeStack={";
+        String res = "ExeStack:";
         Collections.reverse(stack);
-        res = res.concat(stack.toString());
+        ArrayList<T> list = new ArrayList<>(stack);
+        for(Object el:list){
+            res = res.concat(System.lineSeparator());
+            res = res.concat(el.toString());
+        }
         Collections.reverse(stack);
-        res = res.concat("}");
         return res;
     }
 }

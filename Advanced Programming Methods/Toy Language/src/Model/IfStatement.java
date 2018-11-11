@@ -1,7 +1,8 @@
 package Model;
 
-import java.util.Collections;
-
+//has 3 parameters: an expression and 2 statemets
+//if the result of expression if evaluated as <> 0, then the first statement is pushed onto the Execution Stack
+//otherwise, the second statement is pushed onto the Execution Stack
 public class IfStatement implements IStatement {
     private Expression exp;
     private IStatement thenStatement, elseStatement;
@@ -15,15 +16,12 @@ public class IfStatement implements IStatement {
     public ProgramState execute(ProgramState state) throws MyException {
         IStack<IStatement> stk = state.getExeStack();
         IDictionary<String, Integer> symTbl = state.getSymTable();
-        try {
-            if (exp.eval(symTbl) != 0)
-                stk.push(thenStatement);
-            else
-                stk.push(elseStatement);
-        }
-        catch(MyException e){
-            throw e;
-        }
+
+        if (exp.eval(symTbl) != 0)
+            stk.push(thenStatement);
+        else
+            stk.push(elseStatement);
+
         return state;
     }
     public String toString(){

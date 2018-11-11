@@ -3,6 +3,7 @@ package Model;
 import java.util.Collections;
 import java.util.List;
 
+//adds to the Out Table the integer result from the exp's evaluation
 public class PrintStatement implements IStatement {
     private Expression exp;
 
@@ -13,12 +14,7 @@ public class PrintStatement implements IStatement {
     public ProgramState execute(ProgramState state) throws MyException {
         IList<Integer> out = state.getOut();
         IDictionary<String, Integer> symTbl = state.getSymTable();
-        try{
-            out.add(exp.eval(symTbl));
-        }
-        catch(MyException e){
-            throw e;
-        }
+        out.add(exp.eval(symTbl));
         return state;
     }
     public String toString(){

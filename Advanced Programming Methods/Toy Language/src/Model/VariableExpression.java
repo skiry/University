@@ -1,5 +1,7 @@
 package Model;
 
+//returns the value associated to id from the Symbol Table given as parameter
+//error if id not found
 public class VariableExpression extends Expression {
     private String id;
 

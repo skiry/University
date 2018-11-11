@@ -1,0 +1,33 @@
+ExeStack:
+v=2
+print(v)
+
+SymTable:
+
+Out:
+
+FileTable:
+
+-------------------------
+ExeStack:
+print(v)
+
+SymTable:
+v --> 2
+
+Out:
+
+FileTable:
+
+-------------------------
+ExeStack:
+
+SymTable:
+v --> 2
+
+Out:
+2
+
+FileTable:
+
+-------------------------
