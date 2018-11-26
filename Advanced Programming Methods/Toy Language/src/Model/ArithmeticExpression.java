@@ -14,21 +14,21 @@ public class ArithmeticExpression extends Expression {
     }
 
     @Override
-    int eval(IDictionary<String, Integer> dict) throws MyException{
+    int eval(IDictionary<String, Integer> dict, IHeap<Integer, Integer> heap) throws MyException{
         if( operation == '+' ){
-            return e1.eval(dict) + e2.eval(dict);
+            return e1.eval(dict, heap) + e2.eval(dict, heap);
         }
         else if( operation == '-' ){
-            return e1.eval(dict) - e2.eval(dict);
+            return e1.eval(dict, heap) - e2.eval(dict, heap);
         }
         else if( operation == '*' ){
-            return e1.eval(dict) * e2.eval(dict);
+            return e1.eval(dict, heap) * e2.eval(dict, heap);
         }
-        int nr = e2.eval(dict);
+        int nr = e2.eval(dict, heap);
         if(nr == 0)
             throw new MyException("Division by zero!");
         else if (nr != 0){
-            return e1.eval(dict) / nr;
+            return e1.eval(dict, heap) / nr;
         }
         else System.out.println("Only the basic arithmetic operations are permitted!");
         return 0;

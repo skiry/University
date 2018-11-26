@@ -14,7 +14,9 @@ public class PrintStatement implements IStatement {
     public ProgramState execute(ProgramState state) throws MyException {
         IList<Integer> out = state.getOut();
         IDictionary<String, Integer> symTbl = state.getSymTable();
-        out.add(exp.eval(symTbl));
+        IHeap<Integer, Integer> heap = state.getHeap();
+
+        out.add(exp.eval(symTbl, heap));
         return state;
     }
     public String toString(){

@@ -10,7 +10,7 @@ public class VariableExpression extends Expression {
     }
 
     @Override
-    int eval(IDictionary<String, Integer> dict) throws MyException{
+    int eval(IDictionary<String, Integer> dict, IHeap<Integer, Integer> heap) throws MyException{
         if(!dict.containsKey(id))
             throw new MyException("Variable not in symbol table!");
         return dict.get(id);

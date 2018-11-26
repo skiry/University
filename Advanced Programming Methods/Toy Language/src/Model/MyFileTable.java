@@ -2,7 +2,9 @@ package Model;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 
 //FileTable implementation, also generic
 //actually keeps <integer, pair<string,bufferedReader>> pairs
@@ -64,5 +66,9 @@ public class MyFileTable<K, V> implements IDictionary<K, V> {
     @Override
     public void remove(K key){
         hm.remove(key);
+    }
+
+    public Stream<Map.Entry<K,V>> stream(){
+        return this.hm.entrySet().stream();
     }
 }

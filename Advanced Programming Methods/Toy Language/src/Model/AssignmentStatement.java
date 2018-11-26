@@ -14,8 +14,10 @@ public class AssignmentStatement implements IStatement{
     public ProgramState execute(ProgramState state) throws MyException {
         IStack<IStatement> stk = state.getExeStack();
         IDictionary<String, Integer> symTbl = state.getSymTable();
+        IHeap<Integer, Integer> heap = state.getHeap();
+
         try {
-            int val = exp.eval(symTbl);
+            int val = exp.eval(symTbl, heap);
             symTbl.put(id, val);
         }
         catch(MyException e){

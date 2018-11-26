@@ -17,10 +17,11 @@ public class closeRFileStatement implements IStatement{
         IStack<IStatement> stk = state.getExeStack();
         IDictionary<Integer, Pair<String, BufferedReader>> fileTable = state.getFileTable();
         IDictionary<String, Integer> symTbl = state.getSymTable();
+        IHeap<Integer, Integer> heap = state.getHeap();
 
         int result;
         try{
-            result = expFileId.eval(symTbl);
+            result = expFileId.eval(symTbl, heap);
         }
         catch(Exception e){
             throw new MyException("Error evaluating the expression");

@@ -16,8 +16,9 @@ public class IfStatement implements IStatement {
     public ProgramState execute(ProgramState state) throws MyException {
         IStack<IStatement> stk = state.getExeStack();
         IDictionary<String, Integer> symTbl = state.getSymTable();
+        IHeap<Integer, Integer> heap = state.getHeap();
 
-        if (exp.eval(symTbl) != 0)
+        if (exp.eval(symTbl, heap) != 0)
             stk.push(thenStatement);
         else
             stk.push(elseStatement);

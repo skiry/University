@@ -47,6 +47,9 @@ public class MyRepository implements IRepository {
         logFile.write(cur.getFileTable().toString());
         logFile.println();
         logFile.println();
+        logFile.write(cur.getHeap().toString());
+        logFile.println();
+        logFile.println();
         logFile.write("-------------------------");
         logFile.println();
 

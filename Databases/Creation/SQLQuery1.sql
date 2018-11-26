@@ -1,0 +1,34 @@
+CREATE DATABASE TeaShop
+GO
+USE TeaShop
+GO
+
+CREATE TABLE Ingredients(
+	Iid INT PRIMARY KEY IDENTITY,
+	Name VARCHAR(50),
+	Quantity INT NOT NULL)
+
+CREATE TABLE Menus(
+	Mid INT PRIMARY KEY,
+	NoOfPages INT,
+	NoOfTeas INT DEFAULT 1)
+
+CREATE TABLE Teas(
+	Tid INT PRIMARY KEY IDENTITY,
+	Name VARCHAR(50) DEFAULT 'Tea',
+	Price INT CHECK(Price >=5 or Price <=20),
+	Mid INT FOREIGN KEY REFERENCES Menus)
+
+CREATE TABLE Recipes(
+	Tid INT FOREIGN KEY REFERENCES Teas(Tid),
+	Iid INT FOREIGN KEY REFERENCES Ingredients(Iid),
+	UsedQuantity INT,
+	CONSTRAINT pk_Recipe PRIMARY KEY(Tid,Iid))
+
+CREATE TABLE Restaurants(
+	Rid INT FOREIGN KEY REFERENCES Menus(Mid),
+	Title VARCHAR(50),
+	Rating INT DEFAULT 1,
+	CONSTRAINT pk_R PRIMARY KEY(Rid))
+
+select table_name from TeaShop.INFORMATION_SCHEMA.tables;

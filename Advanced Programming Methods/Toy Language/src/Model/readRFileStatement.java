@@ -20,8 +20,9 @@ public class readRFileStatement implements IStatement{
         IStack<IStatement> stk = state.getExeStack();
         IDictionary<Integer, Pair<String, BufferedReader>> fileTable = state.getFileTable();
         IDictionary<String, Integer> symTbl = state.getSymTable();
+        IHeap<Integer, Integer> heap = state.getHeap();
 
-        int result = expFileId.eval(symTbl);
+        int result = expFileId.eval(symTbl, heap);
         boolean exists = false;
         BufferedReader myFile = null;
 
@@ -35,8 +36,12 @@ public class readRFileStatement implements IStatement{
             throw new MyException("Key not in File Table!");
         }
         String read = myFile.readLine();
-        if(read != null)
+        if(read != null) {
             symTbl.put(varName, Integer.parseInt(read));
+        }
+        else {
+            symTbl.put(varName, 0);
+        }
         return state;
     }
 

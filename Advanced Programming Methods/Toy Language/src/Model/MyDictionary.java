@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
 
-//Symbol Table
+//Symbol Table4
 //hashmap that keeps variable-value pairs
 public class MyDictionary<K,V> implements IDictionary<K,V>  {
     private HashMap<K,V> hm;

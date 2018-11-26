@@ -8,12 +8,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.*;
 
+import static Model.BooleanSign.*;
+
 //create each statement an add to an array of statements
 //for each statement, create the structure that it needs, together with
 //the program state, repository and controller and add it to commands menu
 public class MainApp {
     public static void main(String[] args) throws IOException {
-        int statementsCounter = 5;
+        int statementsCounter = 11;
 
         ArrayList<IStatement> ex = new ArrayList<>();
 
@@ -41,6 +43,47 @@ public class MainApp {
                                             new closeRFileStatement(new VariableExpression("var_f"))))));
         ex.add(ex5);
 
+        IStatement ex6 = new CompoundStatement(new AssignmentStatement("v",new ConstantExpression(10)),
+                new CompoundStatement(new NewStatement("v",new ConstantExpression(20)),
+                        new CompoundStatement(new NewStatement("a",new ConstantExpression(22)),
+                            new PrintStatement(new VariableExpression("v")))));
+        ex.add(ex6);
+
+        IStatement ex7 = new CompoundStatement(new AssignmentStatement("v",new ConstantExpression(10)),
+                new CompoundStatement(new NewStatement("v",new ConstantExpression(20)),
+                        new CompoundStatement(new NewStatement("a",new ConstantExpression(22)),
+                                new CompoundStatement(new PrintStatement(new ArithmeticExpression('+',new ConstantExpression(100),new ReadHeapExpression("v"))),
+                                        new PrintStatement(new ArithmeticExpression('+',new ConstantExpression(100),new ReadHeapExpression("a")))))));
+        ex.add(ex7);
+
+        IStatement ex8 = new CompoundStatement(new AssignmentStatement("v",new ConstantExpression(10)),
+                new CompoundStatement(new NewStatement("v",new ConstantExpression(20)),
+                        new CompoundStatement(new NewStatement("a",new ConstantExpression(22)),
+                                new CompoundStatement(new WriteHeapStatement("a",new ConstantExpression(30)),
+                                        new CompoundStatement(new PrintStatement(new VariableExpression("a")),
+                                            new PrintStatement(new ReadHeapExpression("a")))))));
+        ex.add(ex8);
+
+        IStatement ex9 = new CompoundStatement(new AssignmentStatement("v",new ConstantExpression(10)),
+                new CompoundStatement(new NewStatement("v",new ConstantExpression(20)),
+                        new CompoundStatement(new NewStatement("a",new ConstantExpression(22)),
+                                new CompoundStatement(new WriteHeapStatement("a",new ConstantExpression(30)),
+                                        new CompoundStatement(new PrintStatement(new VariableExpression("a")),
+                                                new CompoundStatement(new PrintStatement(new ReadHeapExpression("a")),
+                                                        new AssignmentStatement("a",new ConstantExpression(0))))))));
+        ex.add(ex9);
+
+        IStatement ex10 = new PrintStatement(new ArithmeticExpression('+', new ConstantExpression(10), new BooleanExpression(LT,new ConstantExpression(2),
+                new ConstantExpression(6))));
+        ex.add(ex10);
+
+        IStatement ex11 = new CompoundStatement(new AssignmentStatement("v", new ConstantExpression(6)),
+                new CompoundStatement(new WhileStatement(new ArithmeticExpression('-',new VariableExpression("v"), new ConstantExpression(4)),
+                        new CompoundStatement(new PrintStatement(new VariableExpression("v")),
+                                new AssignmentStatement("v",new ArithmeticExpression('-',new VariableExpression("v"),new ConstantExpression(1))))),
+                        new PrintStatement(new VariableExpression("v"))));
+        ex.add(ex11);
+
         TextMenu menu = new TextMenu();
         menu.addCommand(new ExitCommand("0","Exit"));
 
@@ -49,8 +92,9 @@ public class MainApp {
             IDictionary<String, Integer> symTable = new MyDictionary<>();
             IList<Integer> out = new MyList<>();
             IDictionary<Integer, Pair<String, BufferedReader>> fileTable = new MyFileTable<>();
+            IHeap<Integer, Integer> heap = new MyHeap<>();
 
-            ProgramState prg = new ProgramState(exeStack, symTable, out, ex.get(i), fileTable);
+            ProgramState prg = new ProgramState(exeStack, symTable, out, ex.get(i), fileTable, heap);
             IRepository repo = new MyRepository(prg, "log"+Integer.toString(i+1)+".txt");
             Controller ctrl = new Controller(repo);
 

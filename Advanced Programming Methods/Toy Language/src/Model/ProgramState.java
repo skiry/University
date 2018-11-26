@@ -9,18 +9,21 @@ public class ProgramState {
     private IList<Integer> out;
     private IStatement originalProgram;
     private IDictionary<Integer, Pair<String, BufferedReader>> fileTable;
+    private IHeap<Integer, Integer> heap;
 
     public ProgramState(IStack<IStatement> exeStack,
                       IDictionary<String, Integer> symTable,
                       IList<Integer> out,
                       IStatement originalProgram,
-                        IDictionary<Integer, Pair<String, BufferedReader>> fileTable){
+                        IDictionary<Integer, Pair<String, BufferedReader>> fileTable,
+                        IHeap<Integer, Integer> heap){
         this.exeStack = exeStack;
         this.symTable = symTable;
         this.out = out;
         this.originalProgram = originalProgram;
         this.exeStack.push(originalProgram);
         this.fileTable = fileTable;
+        this.heap = heap;
     }
 
     public IStack<IStatement> getExeStack() {
@@ -60,4 +63,11 @@ public class ProgramState {
         this.fileTable = fileTable;
     }
 
+    public IHeap<Integer, Integer> getHeap() {
+        return heap;
+    }
+
+    public void setHeap(IHeap<Integer, Integer> heap) {
+        this.heap = heap;
+    }
 }

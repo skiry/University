@@ -9,7 +9,7 @@ public class ConstantExpression extends Expression {
     }
 
     @Override
-    int eval(IDictionary<String, Integer> dict) {
+    int eval(IDictionary<String, Integer> dict, IHeap<Integer, Integer> heap) {
         return number;
     }
 

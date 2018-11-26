@@ -14,7 +14,7 @@ public class Pair<K, V> {
         return key;
     }
 
-    V getSecond(){
+   public V getSecond(){
         return value;
     }
 }
