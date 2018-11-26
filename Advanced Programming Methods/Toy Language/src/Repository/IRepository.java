@@ -1,7 +1,7 @@
 package Repository;
 
-import Model.MyException;
-import Model.ProgramState;
+import Model.DataStructures.MyException;
+import UI.Menu.ProgramState;
 
 import java.io.IOException;
 

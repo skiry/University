@@ -1,14 +1,19 @@
 import Controller.Controller;
-import Model.*;
+import Model.DataStructures.*;
+import Model.Expressions.*;
+import Model.Statements.*;
 import Repository.IRepository;
 import Repository.MyRepository;
-import UI.UI;
+import UI.Menu.ExitCommand;
+import UI.Menu.ProgramState;
+import UI.Menu.RunExample;
+import UI.Menu.TextMenu;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.*;
 
-import static Model.BooleanSign.*;
+import static Model.DataStructures.BooleanSign.*;
 
 //create each statement an add to an array of statements
 //for each statement, create the structure that it needs, together with

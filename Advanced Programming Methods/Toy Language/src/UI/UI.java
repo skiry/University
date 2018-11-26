@@ -1,7 +1,7 @@
 package UI;
 
 import Controller.Controller;
-import Model.MyException;
+import Model.DataStructures.MyException;
 
 import java.io.IOException;
 

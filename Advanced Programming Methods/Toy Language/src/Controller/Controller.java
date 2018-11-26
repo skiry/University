@@ -1,12 +1,14 @@
 package Controller;
 
-import Model.*;
+import Model.DataStructures.*;
+import Model.Statements.IStatement;
 import Repository.IRepository;
+import UI.Menu.ProgramState;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 //keeps a reference to the repository
@@ -20,8 +22,8 @@ public class Controller {
     }
 
    private IHeap<Integer, Integer> conservativeGarbageCollector(Collection symTable,
-                                                               MyHeap<Integer, Integer> heap){
-        java.util.Map<Integer, Integer> x = heap.stream().filter( e -> symTable.contains(e.getKey())).collect(Collectors.toMap( e -> e.getKey(), e -> e.getValue()));
+                                                                MyHeap<Integer, Integer> heap){
+        java.util.Map<Integer, Integer> x = heap.stream().filter( e -> symTable.contains(e.getKey())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         return new MyHeap<>(x);
     }
     public ProgramState oneStep() throws MyException, IOException {
@@ -50,7 +52,7 @@ public class Controller {
         try {
             while (!stk.isEmpty()) {
                 oneStep();
-                prg.setHeap((IHeap<Integer, Integer>) conservativeGarbageCollector(prg.getSymTable().values(), (MyHeap<Integer, Integer>) prg.getHeap()));
+                prg.setHeap(conservativeGarbageCollector(prg.getSymTable().values(), (MyHeap<Integer, Integer>) prg.getHeap()));
                 repo.logProgramStateExec();
             }
             repo.closeLogFile();
@@ -66,7 +68,6 @@ public class Controller {
             e.printStackTrace();
         }
         finally {
-            //close all opened files! functional manner
             ((MyFileTable<Integer, Pair<String, BufferedReader>>) fileTable).stream()
                     .forEach(s-> {
                         try {
