@@ -44,7 +44,7 @@ namespace A2.Repository
             logFile.Write(cur.getOut().ToString());
             logFile.WriteLine();
             logFile.WriteLine();
-            //logFile.Write(cur.getFileTable().ToString());
+            logFile.Write(cur.getFileTable().ToString());
             logFile.WriteLine();
             logFile.WriteLine();
             logFile.Write("-------------------------");
