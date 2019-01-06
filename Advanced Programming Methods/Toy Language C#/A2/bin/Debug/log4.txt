@@ -1,0 +1,156 @@
+ExeStack:
+openRFile(var_f,test.in)
+(readRFile(var_f,var_c);(print(var_c);(IF(var_c) THEN((readRFile(var_f,var_c);print(var_c))) ELSE(print(0));closeRFile(var_f))))
+
+SymTable:
+
+Out:
+
+
+
+-------------------------
+ExeStack:
+(readRFile(var_f,var_c);(print(var_c);(IF(var_c) THEN((readRFile(var_f,var_c);print(var_c))) ELSE(print(0));closeRFile(var_f))))
+
+SymTable:
+var_f --> 1
+
+Out:
+
+
+
+-------------------------
+ExeStack:
+readRFile(var_f,var_c)
+(print(var_c);(IF(var_c) THEN((readRFile(var_f,var_c);print(var_c))) ELSE(print(0));closeRFile(var_f)))
+
+SymTable:
+var_f --> 1
+
+Out:
+
+
+
+-------------------------
+ExeStack:
+(print(var_c);(IF(var_c) THEN((readRFile(var_f,var_c);print(var_c))) ELSE(print(0));closeRFile(var_f)))
+
+SymTable:
+var_f --> 1
+var_c --> 15
+
+Out:
+
+
+
+-------------------------
+ExeStack:
+print(var_c)
+(IF(var_c) THEN((readRFile(var_f,var_c);print(var_c))) ELSE(print(0));closeRFile(var_f))
+
+SymTable:
+var_f --> 1
+var_c --> 15
+
+Out:
+
+
+
+-------------------------
+ExeStack:
+(IF(var_c) THEN((readRFile(var_f,var_c);print(var_c))) ELSE(print(0));closeRFile(var_f))
+
+SymTable:
+var_f --> 1
+var_c --> 15
+
+Out:
+15
+
+
+
+-------------------------
+ExeStack:
+IF(var_c) THEN((readRFile(var_f,var_c);print(var_c))) ELSE(print(0))
+closeRFile(var_f)
+
+SymTable:
+var_f --> 1
+var_c --> 15
+
+Out:
+15
+
+
+
+-------------------------
+ExeStack:
+(readRFile(var_f,var_c);print(var_c))
+closeRFile(var_f)
+
+SymTable:
+var_f --> 1
+var_c --> 15
+
+Out:
+15
+
+
+
+-------------------------
+ExeStack:
+readRFile(var_f,var_c)
+print(var_c)
+closeRFile(var_f)
+
+SymTable:
+var_f --> 1
+var_c --> 15
+
+Out:
+15
+
+
+
+-------------------------
+ExeStack:
+print(var_c)
+closeRFile(var_f)
+
+SymTable:
+var_f --> 1
+var_c --> 50
+
+Out:
+15
+
+
+
+-------------------------
+ExeStack:
+closeRFile(var_f)
+
+SymTable:
+var_f --> 1
+var_c --> 50
+
+Out:
+15
+50
+
+
+
+-------------------------
+ExeStack:
+
+SymTable:
+var_f --> 1
+var_c --> 50
+
+Out:
+15
+50
+
+
+
+-------------------------
