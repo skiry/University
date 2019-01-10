@@ -1,0 +1,22 @@
+Matrix: [A1 A2 A3; B1 B2 B3; ...];
+Matrix Multiplication: A*B
+Matrix Element-By-Element Multiplication: A.*B
+
+Plot Line: linspace(A,B)
+
+2 Plots in the same window
+--------------------------
+ax1 = subplot(2,1,1); % top subplot
+x = linspace(0,3);
+y1 = sin(5*x);
+plot(ax1,x,y1)
+title(ax1,'Top Subplot')
+ylabel(ax1,'sin(5x)')
+
+ax2 = subplot(2,1,2); % bottom subplot
+y2 = sin(15*x);
+plot(ax2,x,y2)
+title(ax2,'Bottom Subplot')
+ylabel(ax2,'sin(15x)')
+
+randi([10 20], ROWS, COLUMNS)

@@ -1,0 +1,15 @@
+%Normal Distr.
+mu=input('mu(in R)=');
+sigmaa=input('sigma(>0)=');
+
+
+%P(X<=0) this is a CDF F:R->R, F(x)=P(X<=x)
+P1a=normcdf(0,mu,sigmaa);
+P2a=1-P1a;
+fprintf('Prob 1 in a)=%1.4f \n', P1a)
+
+%P(X>=0) = 1-P(X<0) ?
+
+%P(a<X<=b)=F(b)-F(a)
+%b) P(-1<=X<=1)
+P1b=normcdf(1,mu,sigmaa)
