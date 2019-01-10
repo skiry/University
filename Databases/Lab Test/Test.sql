@@ -1,6 +1,21 @@
 CREATE DATABASE wealthCenter
 GO
 
+IF OBJECT_ID('Shows', 'U') IS NOT NULL
+	DROP TABLE Shows
+
+IF OBJECT_ID('FoodTypes', 'U') IS NOT NULL
+	DROP TABLE FoodTypes
+
+IF OBJECT_ID('Dolphins', 'U') IS NOT NULL
+	DROP TABLE Dolphins
+
+IF OBJECT_ID('Acrobatics', 'U') IS NOT NULL
+	DROP TABLE Acrobatics
+
+IF OBJECT_ID('AcrobaticsDolphins', 'U') IS NOT NULL
+	DROP TABLE AcrobaticsDolphins
+
 CREATE TABLE Shows(
 	ID SMALLINT PRIMARY KEY IDENTITY(1, 1),
 	[Name] VARCHAR(30) UNIQUE, 
@@ -27,8 +42,7 @@ CREATE TABLE Acrobatics(
 	[Name] VARCHAR(30) UNIQUE,
 	Difficulty VARCHAR(8)
 	)
-IF OBJECT_ID('AcrobaticsDolphins', 'U') IS NOT NULL
-	DROP TABLE AcrobaticsDolphins
+
 CREATE TABLE AcrobaticsDolphins(
 	Dolphin SMALLINT FOREIGN KEY REFERENCES Dolphins(ID),
 	Acrobatic SMALLINT FOREIGN KEY REFERENCES Acrobatics(ID),
@@ -44,11 +58,15 @@ INSERT INTO FoodTypes VALUES('Proteins', 200)
 
 INSERT INTO Dolphins VALUES('Bestus', 20, 'SuperDolphin', 1, 1)
 INSERT INTO Dolphins VALUES('Dunno', 13, 'Invisible', 2, 1)
+
 INSERT INTO Acrobatics VALUES('Impressionable', 'hard')
 INSERT INTO Acrobatics VALUES('Not so Impressionable', 'easy')
+
 INSERT INTO AcrobaticsDolphins VALUES (1, 1, '5:00', 2000)
 INSERT INTO AcrobaticsDolphins VALUES (2, 2, '3:00', 800)
+
 SELECT * FROM AcrobaticsDolphins
+
 DROP PROC IF EXISTS addAcrobaticToDolphin
 GO
 
@@ -98,7 +116,7 @@ WHERE AA.ID IN(
 				SELECT t1.Acrobatic as Acrobatic
 				FROM 
 					(
-					SELECT AD.Acrobatic, MAX(AD.Acrobatic) as Dolphins
+					SELECT AD.Acrobatic, COUNT(AD.Acrobatic) as Dolphins
 					FROM AcrobaticsDolphins AD
 					INNER JOIN Acrobatics A ON AD.Acrobatic = A.ID
 					INNER JOIN Dolphins D ON D.ID = AD.Dolphin
@@ -109,7 +127,7 @@ WHERE AA.ID IN(
 									SELECT TOP 1 MAX(Dolphins)
 									FROM 
 										(
-										SELECT AD.Acrobatic, MAX(AD.Acrobatic) as Dolphins
+										SELECT AD.Acrobatic, COUNT(AD.Acrobatic) as Dolphins
 										FROM AcrobaticsDolphins AD
 										INNER JOIN Acrobatics A ON AD.Acrobatic = A.ID
 										INNER JOIN Dolphins D ON D.ID = AD.Dolphin
