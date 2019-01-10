@@ -1,0 +1,7 @@
+- clientul se conecteaza la server.
+- clientul trimite numere catre server.
+- serverul ii trimite inapoi 3 tipuri de raspunsuri.
+
+1. daca clientul a ghicit numarul ales de server.
+2. daca numarul ales de client e mai mic sau mai mare decat numarul ales de server.
+3. de cate incercari a fost nevoie.
