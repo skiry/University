@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <Button fx:id="programOk" layoutX="143.0" layoutY="329.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="244.0" text="I'll go with this program !" textFill="#4452b8db">
+         <font>
+            <Font name="Comic Sans MS Bold Italic" size="16.0" />
+         </font>
+      </Button>
+      <ListView fx:id="programsList" layoutX="25.0" layoutY="24.0" prefHeight="289.0" prefWidth="456.0" />
+   </children>
+</AnchorPane>
