@@ -276,6 +276,7 @@ public class ControllerFX {
                         }
                         catch(Exception e){
                                 error(e.getMessage());
+                                errorThrown = true;
                         }
                         int prgState = prgStatesView.getSelectionModel().getSelectedIndex();
                         if(prgList.size() != 0){
@@ -293,7 +294,6 @@ public class ControllerFX {
                         }
                         else{
                                 alert("The program is finished!");
-                                errorThrown = true;
                         }
                 }
         }
