@@ -1,0 +1,92 @@
+div#first {
+    background-color: rgb(161, 15, 15);
+    height: 700px;
+    width: 700px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    pointer-events: none;
+}
+
+div#second {
+    background-color: rgb(255, 0, 234);
+    height: 50%;
+    width: 50%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    pointer-events: none;
+}
+
+div#third {
+    background-color: rgb(27, 26, 122);
+    height: 50%;
+    width: 50%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    pointer-events: none;
+}
+
+div#fourth {
+    background-color: rgb(31, 110, 31);
+    height: 50%;
+    width: 50%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    pointer-events: auto;
+}
+
+#one:hover {
+  background-color: white;
+}
+
+#one:hover > #two {
+  background-color: rgb(27, 26, 122);
+}
+
+#one:hover > #two > #three {
+  background-color: black;
+}
+
+#one:hover > #two > #three > #four {
+  background-color: rgb(161, 15, 15);
+}
+
+div#flip {
+    background: -webkit-linear-gradient(rgb(60, 146, 9), rgb(5, 76, 97));
+    height: 100px;
+    width: 200px;
+    margin-top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: transform 6s;
+    text-align: center
+}
+
+#flip:hover {
+    transform: rotateY(360deg);
+}
+.grandparent {
+  width:250px;
+  height:250px;
+  background-color:#CCCCCC;
+  position:relative;
+}
+ 
+.parent {
+  width:150px;
+  height:150px;
+  background-color:#999999;
+  position:absolute;
+  bottom:0px;
+}
+.child {
+  width:70px;
+  height:70px;
+  background-color:#666666;
+  position:absolute;
+  right:0px;
+  top:0px;
+}

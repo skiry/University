@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="lazy@localhost" uuid="a70c392d-5914-4d62-8b93-8ad6ab60b260">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" exact-version="0" />
+      <introspection-schemas>lazy:public</introspection-schemas>
+    </data-source>
+  </component>
+</project>

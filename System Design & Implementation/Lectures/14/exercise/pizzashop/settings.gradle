@@ -1,0 +1,4 @@
+rootProject.name ='pizzashop'
+include 'catalog-core'
+include 'catalog-web'
+

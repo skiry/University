@@ -1,0 +1,32 @@
+[6, 1]
+15 no of iterations
+1 learning rate 
+<function ReLU at 0x1098DE40>
+Layer 0 : Neuron 0 has {weights}->[0.4163870151506287]
+{output}->0.9999999985028258
+Neuron 1 has {weights}->[0.3398503070706316]
+{output}->0.9978153280417901
+Neuron 2 has {weights}->[0.5679105846322245]
+{output}->0.9999999999998506
+Neuron 3 has {weights}->[0.8529988989053058]
+{output}->0.999999999996042
+Neuron 4 has {weights}->[0.6190160908733637]
+{output}->1.0
+Neuron 5 has {weights}->[0.07572846208033102]
+{output}->0.6879612519881331
+Layer 1 : Neuron 0 has {weights}->[-1.530786639445373, -2.0144748315762646, -2.3842878981141515, -2.0746570136829714, -2.1665808002853186, -0.9070851907516722]
+{output}->0
+
+170 correct out of 240 on input data
+70.83333333333334% on input data
+Sick and sick: 170
+Healthy and healthy: 0
+Sick and healthy: 0
+Healthy and sick: 70
+
+40 correct out of 70 on test data
+57.142857142857146% on test data
+Sick and sick: 40
+Healthy and healty: 0
+Sick and healthy: 0
+Healthy and sick: 30

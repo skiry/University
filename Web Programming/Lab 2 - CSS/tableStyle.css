@@ -1,0 +1,26 @@
+table { border: 5px dotted purple; 
+        margin-top: 1200px;
+        margin-bottom: 100px}
+th { border: 2px solid green}
+td { opacity: 0.4; }
+img { width: 250px; height: 150px }
+td:hover { opacity: 1 }
+div#rainbow { 
+    background: -webkit-linear-gradient( 30deg, Red, Orange, Yellow, Green, Blue, Indigo, Violet ); 
+    height: 400px; 
+    width: 100%; 
+    border-top-left-radius: 200px;
+    border-bottom-left-radius: 100px;
+    border-top-right-radius: 200px;
+    border-bottom-right-radius: 100px;
+}
+
+div#circle {
+    height: 300px;
+    width: 60%;
+    background-color: white;
+    border-radius: 60%;
+    margin-top: 200px;
+    position: absolute;
+    padding: 19%;
+}

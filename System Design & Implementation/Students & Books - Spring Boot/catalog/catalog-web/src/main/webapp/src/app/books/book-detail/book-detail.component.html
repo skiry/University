@@ -1,0 +1,27 @@
+<div *ngIf="book">
+  <h2>Book {{book.title}} details</h2>
+  <div>
+    <label>Title: </label> {{book.title}}
+    <input [(ngModel)]="book.title" placeholder="title">
+  </div>
+  <div>
+    <label>Author: </label> {{book.author}}
+    <input [(ngModel)]="book.author" placeholder="author">
+  </div>
+  <div>
+    <label>ISBN: </label> {{book.isbn}}
+    <input [(ngModel)]="book.isbn" placeholder="isbn">
+  </div>
+  <div>
+    <label>Price: </label> {{book.price}}
+    <input [(ngModel)]="book.price" placeholder="price">
+  </div>
+  <div>
+    <label>Quantity: </label> {{book.quantity}}
+    <input [(ngModel)]="book.quantity" placeholder="quantity">
+  </div>
+
+  <button (click)="goBack()">Back</button>
+  <button (click)="save()">Save</button>
+  <button (click)="delete()">Delete</button>
+</div>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            JS - Take me to a holiday
+        </title>
+        <style>
+        .firstElems-content {
+        display: none;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        }
+
+        .show {
+            display: block;
+            width: 18px
+        }
+        </style>
+    </head>
+    <body>
+        <main>
+            <div class="holiday" align=center style="margin-top:100px">
+                <button onclick="onDropDown()" class="dropFirst">Take me anywhere</button>
+                <div id="firstElems" class="firstElems-content">
+                    <div id="first">
+                        <button onclick="Click('firstHoliday')" class="dropFFirst">United Kingdom</button>
+                        <div id="firstHoliday" class="firstElems-content">
+                            <div>London</div>
+                            <div>Manchester</div>
+                            <div>Liverpool</div>
+                        </div>
+                    </div>
+                    <div id="second">
+                        <button onclick="Click('secondHoliday')" class="dropFSecond">Netherlands</button>
+                        <div id="secondHoliday" class="firstElems-content">
+                            <div>Amsterdam</div>
+                            <div>Rotterdam</div>
+                            <div>Eindhoven</div>
+                            <div>Nijmegen</div>
+                        </div>
+                    </div>
+                    <div id="third">
+                        <button onclick="Click('thirdHoliday')" class="dropFThird">Russia</button>
+                        <div id="thirdHoliday" class="firstElems-content">
+                            <div>Moscow</div>
+                            <div>Saint Petersburg</div>
+                            <div>Kazan</div>
+                        </div>
+                    </div>
+                    <div id="fourth">
+                        <button onclick="Click('fourthHoliday')" class="dropFFourth">Spain</button>
+                        <div id="fourthHoliday" class="firstElems-content">
+                            <div>Madrid</div>
+                            <div>Barcelona</div>
+                            <div>Granada</div>
+                            <div>Malaga</div>
+                            <div>Valencia</div>
+                        </div>
+                    </div>
+                    <div id="fifth">
+                        <button onclick="Click('fifthtHoliday')" class="dropFFifth">Germany</button>
+                        <div id="fifthHoliday" class="firstElems-content">
+                            <div>Berlin</div>
+                            <div>Munich</div>
+                            <div>Hamburg</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script>
+            function onDropDown() {
+                document.getElementById("firstElems").classList.toggle("show");
+            }
+
+            function Click(divId) {
+                document.getElementById(divId).classList.toggle("show");
+            }
+
+            window.onclick = function(event) {
+                var mainOptions = Array('.dropFirst', '.dropFFirst', '.dropFSecond', '.dropFThird', '.dropFFourth', '.dropFFifth', 'div div');
+                var removeAll = true;
+                for(var i = 0; i < mainOptions.length; ++i) {
+                    console.log(mainOptions[i]);
+                    if(event.target.matches(mainOptions[i])) {
+                        console.log("yes");
+                        removeAll = false;
+                    }
+                }
+                if(removeAll) {
+                   document.getElementById("firstElems").classList.remove("show");
+                   document.getElementById("firstHoliday").classList.remove("show");
+                   document.getElementById("secondHoliday").classList.remove("show");
+                   document.getElementById("thirdHoliday").classList.remove("show");
+                   document.getElementById("fourthHoliday").classList.remove("show");
+                   document.getElementById("fifthHoliday").classList.remove("show");
+                }
+            }
+            </script>
+    </body>
+</html>

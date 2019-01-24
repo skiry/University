@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Exam web</title>
+    <script>
+      var images = [];
+      window.onload = function() {
+        for(var i = 0; i < document.images.length; i++) {
+          images.push(document.images[i]);
+        }
+
+        for(var i = 0; i < images.length / 3 + 1; i++) {
+          var firstDiv = "<div style=\"display: table\" id=\"div" + i + "\"" + "></div>";
+          console.log(firstDiv);
+          document.getElementById("main").innerHTML += firstDiv;
+        }
+        arrange();
+      }
+        function arrange() {
+          for(var i = 0; i < images.length; i++) {
+            images[i].style.width = "33.33%";
+            images[i].style.cssFloat = "left";
+
+            var curDiv = "div" + Math.floor(i / 3);
+            document.getElementById(curDiv).appendChild(images[i]);
+          }
+        }
+</script>
+  </head>
+  <body>
+      <img src="https://www.jquery-az.com/html/images/banana.jpg"/>
+      <img src="https://www.jquery-az.com/html/images/banana.jpg"/>
+      <img src="https://www.jquery-az.com/html/images/banana.jpg"/>
+      <img src="https://www.jquery-az.com/html/images/banana.jpg"/>
+      <img src="https://www.jquery-az.com/html/images/banana.jpg"/>
+    <footer id="main">
+
+  </footer>
+  </body>
+</html>

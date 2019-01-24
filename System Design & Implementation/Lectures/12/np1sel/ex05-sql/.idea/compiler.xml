@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ex01_main" target="1.8" />
+      <module name="ex01_test" target="1.8" />
+      <module name="ex02-ent_main" target="1.8" />
+      <module name="ex02-ent_test" target="1.8" />
+      <module name="ex03-jpql_main" target="1.8" />
+      <module name="ex03-jpql_test" target="1.8" />
+      <module name="ex04-criteria_main" target="1.8" />
+      <module name="ex04-criteria_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

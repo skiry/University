@@ -1,0 +1,127 @@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+How to run the projects with angular from the group (the angular part):
+In the webapp folder, execute the following commands:
+npm install --- do this only once (for each project from the group)
+npm start --- starts the server
+
+Update npm and node to the latest stable version (do this only if you already have older versions installed)
+Update npm:
+	npm install npm@latest -g
+Update node:
+	sudo npm cache clean -f
+	sudo npm install -g n
+	sudo n stable
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+AnnotationProcessors - Enable
+https://www.jetbrains.com/help/idea/developing-node-js-applications.html
+https://www.jetbrains.com/help/idea/angularjs.html
+@@@@@@@
+NoClassDefFoundError JAXB?? : 
+build.gradle:
+sourceCompatibility = 10 // You can also decrease your souce compatibility to 1.8 
+
+//java 9+ does not have Jax B Dependents
+
+    compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
+    compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0'
+    compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.0'
+    compile group: 'javax.activation', name: 'activation', version: '1.1.1'
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+find ./ -type f -exec sed -i 's/1/2/g' {} \;
+find ./ -type f -exec bash -c ' mv $0 ${0/1/2}' \;
+OR
+Dir | Rename-Item -NewName {$_.name -replace "WORD","NEWORD"}
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+BUGS!!
+
+Beans could not be created - DB CONNECTION - check data regarding db, check db
+CORS No 'Access-Control-Allow-Origin' - you have different base url than the server's
+Nothing displayed in the Angular web page - you receive answer as {[{}]} or {fasfas:[{}]}instead of [[{}]], i.e, not an array
+
+Probleme cu OneToMany unidirectional - CascadeType.MERGE
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+1. https://start.spring.io/
+-Web
+-JPA
+-Postgres
+-Lombok
+
+2. create local db
+application.properties:
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/DBNAME
+spring.datasource.username=postgres
+spring.datasource.password=ionut
+spring.datasource.driver-class-name=org.postgresql.Driver
+hibernate.jdbc.lob.non_contextual_creation=true
+spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults=false
+
+3. model - entities
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+@Table( name = "Photos" )
+@Builder
+
+inside id
+@Id
+@GeneratedValue(strategy = GenerationType.AUTO)
+
+4. repository
+@NoRepositoryBean
+@Transactional
+public interface PhotoRepository extends JpaRepository<Photo, Integer> {}
+
+5. main file
+@SpringBootApplication
+@EnableJpaAuditing
+@EnableJpaRepositories
+
+6. service
+@Service
+@Autowired repo
+
+7. controller
+@Controller
+@Autowired service
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Smecherii la MPP:
+
+1) Spring Initializr -> Spring Data JPA, PostgreSQL Driver, Lombok, Spring Web Starter
+
+1') Load from Existing, second option. Enable Annotation Processing
+2) Copy to application.properties and change DB name
+
+3) Create modules(gradle, java) core and web (right click project name, New, Module, artifactId = web/core, same module name
+
+4) Copy every build.gradle, build gradle and run
+5) Create config package in web package, create Initializer class and WebConfig, copy everything
+
+6) Add @ComponentScan({"ro.ubb.web"}) annotation to Main class if routes aren't seen
+
+7) In caz ca face figuri cu application.properties:
+	
+	-> File 
+	-> Close project ca sa ajungi pe welcome screen
+	
+	-> Import project pe proiectul tau
+	
+	-> Invalidate caches and restart
+	
+	-> Clean project
+	
+	-> Gradle Refresh din dreapta
+	
+	-> Rebuild Project

@@ -1,0 +1,44 @@
+﻿@model Web2.Models.User
+
+@{
+    ViewBag.Title = "RoleSearch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Filter Users</title>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            var last = null;
+            $("#button").click(function () {
+                console.log(last);
+                if (last == null) {
+                    $("#lastSearch").html( "<h2>No last search</h2>");
+                }
+                else {
+                    $("#lastSearch").html("<h2>Last search is " + last + "</h2>");
+                }
+                last = $("#userrole").val();
+                $.get("/User/GetUsersByRole", { userrole: $("#userrole").val() },
+                    function (data, status) {
+                        $("#maindiv").html(data);
+                    });
+                
+            });
+        });
+    </script>
+</head>
+<body>
+    User Role: <input type="text" id="userrole" /><br />
+    <input id="button" type="button" value="get users" />
+    Users with this role:
+    <div id="maindiv"></div><br />
+    <div id="lastSearch"></div>
+</body>
+</html>
+

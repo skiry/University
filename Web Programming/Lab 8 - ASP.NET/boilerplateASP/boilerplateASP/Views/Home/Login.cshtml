@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    @if (Session["currentUser"] == "")
+    {
+        <form method="post" action="Authenticate">
+            Name: <input type="text" name="name" />
+            Password: <input type="password" name="password" />
+            <input type="submit" value="Login" />
+        </form>
+    }
+    else
+    {
+        <form method="post" action="Logout">
+            @Session["currentUser"], <input type="submit" value="Logout" />
+        </form>
+    }
+</body>
+</html>
+

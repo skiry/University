@@ -1,0 +1,32 @@
+[6, 1]
+5 no of iterations
+3 learning rate 
+<function sigmoid at 0x1098DF60>
+Layer 0 : Neuron 0 has {weights}->[0.18226153706134418]
+{output}->0.999862858889573
+Neuron 1 has {weights}->[0.2856723663327817]
+{output}->0.9942215008956385
+Neuron 2 has {weights}->[0.9291202058054917]
+{output}->1.0
+Neuron 3 has {weights}->[0.49798263986536406]
+{output}->0.9999997796185384
+Neuron 4 has {weights}->[0.2702686067535228]
+{output}->1.0
+Neuron 5 has {weights}->[0.8792662930132046]
+{output}->0.9998968826833906
+Layer 1 : Neuron 0 has {weights}->[0.7729232447775141, 0.42695278769149897, 1.5176568771344316, 0.6527024150518317, 1.356795714452088, -1.1896933262579346]
+{output}->0.9716642785366849
+
+70 correct out of 240 on input data
+29.166666666666668% on input data
+Sick and sick: 0
+Healthy and healthy: 70
+Sick and healthy: 170
+Healthy and sick: 0
+
+30 correct out of 70 on test data
+42.85714285714286% on test data
+Sick and sick: 0
+Healthy and healty: 30
+Sick and healthy: 40
+Healthy and sick: 0

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Lab 5 - jQuery
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <style>
+            .firstDesktop {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                background-color: rgb(19, 125, 167);
+                text-align: center;
+                font-size: 200px;
+                opacity: 0.8;
+            }
+
+            .secondDesktop {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                background-color: rgb(19, 167, 76);
+                text-align: center;
+                font-size: 200px;
+                right: 100%
+            }
+
+            .thirdDesktop {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                background-color: rgb(89, 44, 116);
+                text-align: center;
+                font-size: 200px;
+                right: 100%
+            }
+
+            .fourthDesktop {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                background-color: rgb(189, 140, 34);
+                right: 100%
+            }
+        </style>
+        <script>
+            $(document).ready(function() {
+                $("div.firstDesktop").click(function(){
+                    $("div.secondDesktop").css("right", "100%");
+                    $("div.secondDesktop").show();
+                    $("div.firstDesktop").animate({right: '-100%'});
+                    $("div.firstDesktop").hide(500);
+                    $("div.secondDesktop").animate({right: '0%'});
+                });
+                $("div.secondDesktop").click(function(){
+                    $("div.thirdDesktop").css("right", "100%");
+                    $("div.thirdDesktop").show();
+                    $("div.secondDesktop").animate({right: '-100%'});
+                    $("div.secondDesktop").hide(500);
+                    $("div.thirdDesktop").animate({right: '0%'});
+                });
+                $("div.thirdDesktop").click(function(){
+                    $("div.fourthDesktop").css("right", "100%");
+                    $("div.fourthDesktop").show();
+                    $("div.thirdDesktop").animate({right: '-100%'});
+                    $("div.thirdDesktop").hide(500);
+                    $("div.fourthDesktop").animate({right: '0%'});
+                });
+                $("div.fourthDesktop").click(function(){
+                    $("div.firstDesktop").css("right", "100%");
+                    $("div.firstDesktop").show();
+                    $("div.fourthDesktop").animate({right: '-100%'});
+                    $("div.fourthDesktop").hide(500);
+                    $("div.firstDesktop").animate({right: '0%'});
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <main>
+            <div class="firstDesktop">
+                This is
+            </div>
+            <div class="secondDesktop">
+                my jQuery
+            </div>
+            <div class="thirdDesktop">
+                homework.
+            </div>
+            <div class="fourthDesktop">
+                <img src="a.png" style="height: 100%; width: 100%"></img>
+            </div>
+        </main>
+    </body>
+</html>

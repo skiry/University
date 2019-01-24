@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Exam web</title>
+    <script>
+        window.onload = function() {
+            var divNo = 0;
+
+            function showDiv(event) {
+                if (divNo <= 9) {
+                    document.getElementById("main").innerHTML += "<div style=\"position: absolute;  background-color: #9e1972; margin-left:" + event.clientX + 
+                    "px;margin-top:" + event.clientY + "px;\">     -------    </div>";
+                    ++divNo;
+                }
+                else {
+                    alert("You are done");
+                }
+            }
+
+            document.addEventListener("click", showDiv);
+        }
+    </script>
+  </head>
+  <body id="main">
+  
+  </body>
+</html>

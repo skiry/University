@@ -1,0 +1,32 @@
+[6, 1]
+15 no of iterations
+1e-07 learning rate 
+<function threshold at 0x1098DED0>
+Layer 0 : Neuron 0 has {weights}->[0.23332563700260045]
+{output}->0.9999886501092051
+Neuron 1 has {weights}->[0.9197580095211113]
+{output}->0.9999999366150505
+Neuron 2 has {weights}->[0.24177219198985056]
+{output}->0.9999965327800445
+Neuron 3 has {weights}->[0.10147621496775527]
+{output}->0.9578492487114283
+Neuron 4 has {weights}->[0.9516984803150635]
+{output}->1.0
+Neuron 5 has {weights}->[0.7068578793730446]
+{output}->0.9993765362405104
+Layer 1 : Neuron 0 has {weights}->[0.40991537829871544, 0.184038322761261, 0.04627100780471018, 0.553457779063636, 0.7254661552590608, 0.7411616694528568]
+{output}->1
+
+59 correct out of 240 on input data
+24.583333333333336% on input data
+Sick and sick: 31
+Healthy and healthy: 28
+Sick and healthy: 139
+Healthy and sick: 42
+
+13 correct out of 70 on test data
+18.571428571428573% on test data
+Sick and sick: 0
+Healthy and healty: 13
+Sick and healthy: 40
+Healthy and sick: 17

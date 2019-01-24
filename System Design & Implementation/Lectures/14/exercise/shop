@@ -1,0 +1,21 @@
+Pizza shop 
+
+Write an application for managing the menu for a pizza shop.
+A Pizza has an id:Long (entity identifier), 
+name:String, description:String, price:float. The name is unique.
+When visiting the address
+ http://localhost:4200/pizzashop/pizzas a Load button is shown only. When pressing the button, at the same address:
+- 
+the list of pizzas is shown (pizza name only)
+When clicking on a pizza, at the same address, the following text is 
+shown below the list of pizzas in one label:
+description: <pizza description>
+price: <pizza price>
+
+Nonfunctional 
+requirements:
+You will have to use the technologies, architecture, style etc from the labs
+On the backend all 
+operations will be logged (as done at the labs)
+Use proper identifiers - related to this problem only
+

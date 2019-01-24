@@ -1,0 +1,16 @@
+<div>
+  <label>Full Name:</label>
+  <input #fullName><br>
+
+  <label>Last Name:</label>
+  <input #lastName><br>
+
+  <label>Money:</label>
+  <input money><br>
+</div>
+
+<div>
+  <button (click)="save(fullName.value,lastName.value,money.value)">Save
+  </button>
+</div>
+

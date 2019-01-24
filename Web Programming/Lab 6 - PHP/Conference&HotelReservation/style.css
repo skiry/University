@@ -1,0 +1,79 @@
+h1#title {
+    text-align: center;
+    text-decoration: underline;
+}
+
+li {
+    font-size: 30px;
+
+}
+
+.banner {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: center;
+    font-size: 60;
+    color: rgb(19, 62, 102);
+}
+
+form {
+    margin: auto;
+    display: table;
+}
+
+form p {
+    text-align: center;
+    display: table-row;
+}
+
+form label, form input {
+    margin-left: 20;
+    display: table-cell;
+    height: 25;
+}
+
+.error {
+    color: #FF0000;
+    margin: auto;
+    margin-top: 50;
+    display: table;
+    font-size: 50;
+}
+
+.success {
+    color: rgb(13, 187, 71);
+    margin: auto;
+    margin-top: 50;
+    display: table;
+    font-size: 50;
+}
+
+table,th,td {
+    border: 1px solid black;
+    margin: auto;
+    margin-top: 100;
+    font-size: 40;
+}
+
+th, td {
+    padding: 5px;
+}
+
+/* unvisited link */
+a:link {
+color: rgb(93, 196, 127);
+}
+  
+/* visited link */
+a:visited {
+color: rgb(91, 55, 189);
+}
+
+/* mouse over link */
+a:hover {
+color: hotpink;
+}
+
+/* selected link */
+a:active {
+color: blue;
+}

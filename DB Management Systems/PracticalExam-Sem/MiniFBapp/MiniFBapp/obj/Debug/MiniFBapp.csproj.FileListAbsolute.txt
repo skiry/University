@@ -1,0 +1,10 @@
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\PracticalExam-Sem\MiniFBapp\MiniFBapp\bin\Debug\MiniFBapp.exe.config
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\PracticalExam-Sem\MiniFBapp\MiniFBapp\bin\Debug\MiniFBapp.exe
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\PracticalExam-Sem\MiniFBapp\MiniFBapp\bin\Debug\MiniFBapp.pdb
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\PracticalExam-Sem\MiniFBapp\MiniFBapp\obj\Debug\MiniFBapp.csprojAssemblyReference.cache
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\PracticalExam-Sem\MiniFBapp\MiniFBapp\obj\Debug\MiniFBapp.Form1.resources
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\PracticalExam-Sem\MiniFBapp\MiniFBapp\obj\Debug\MiniFBapp.Properties.Resources.resources
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\PracticalExam-Sem\MiniFBapp\MiniFBapp\obj\Debug\MiniFBapp.csproj.GenerateResource.cache
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\PracticalExam-Sem\MiniFBapp\MiniFBapp\obj\Debug\MiniFBapp.csproj.CoreCompileInputs.cache
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\PracticalExam-Sem\MiniFBapp\MiniFBapp\obj\Debug\MiniFBapp.exe
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\PracticalExam-Sem\MiniFBapp\MiniFBapp\obj\Debug\MiniFBapp.pdb

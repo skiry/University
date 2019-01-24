@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Exam web</title>
+    <script>
+        var paragraphs = [];
+        var images = [];
+
+        window.onload = function() {
+          for(var i = 0; i < document.getElementsByTagName("p").length; i++) {
+            paragraphs.push(document.getElementsByTagName("p")[i]);
+          }
+          for(var i = 0; i < document.images.length; i++) {
+            images.push(document.images[i]);
+          }
+  
+          for(var i = 0; i < 6; i++) {
+            var firstDiv = "<div id=\"div" + i + "\" style=\'background-image: url(\"" + images[i].src + "\");\'" + "></div>";
+            console.log(firstDiv);
+            document.getElementById("main").innerHTML += firstDiv;
+          }
+          arrange();
+        }
+          function arrange() {
+            for(var i = 0; i < paragraphs.length; i++) {
+                var curDiv = "div" + Math.floor(i % 6);
+                document.getElementById(curDiv).innerHTML += paragraphs[i].innerHTML;
+                paragraphs[i].innerHTML = "";
+            }
+          }
+  </script>
+  </head>
+  <body>
+    <img src="https://www.w3schools.com/images/w3schools_green.jpg"/>
+    <img src="https://www.w3schools.com/images/w3schools_green.jpg"/>
+    <img src="https://www.w3schools.com/images/w3schools_green.jpg"/>
+    <img src="https://www.w3schools.com/images/w3schools_green.jpg"/>
+    <img src="https://www.w3schools.com/images/w3schools_green.jpg"/>
+    <img src="https://www.w3schools.com/images/w3schools_green.jpg"/>
+    <p>111;</p>
+    <p>222;</p>
+    <p>333;</p>
+    <p>444;</p>
+    <p>555;</p>
+    <p>55231;</p>
+    <p>532;</p>
+    <p>15321;</p>
+    <p>153253211;</p>
+    <p>15321;</p>
+
+    <footer id="main">
+    </footer>
+  </body>
+</html>

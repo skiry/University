@@ -1,0 +1,3 @@
+Check db info
+First, access localhost:8080/server-0.0/api[/books]
+Then, /api[/books]

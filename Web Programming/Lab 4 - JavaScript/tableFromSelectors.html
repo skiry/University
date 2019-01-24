@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Web Exam 3</title>
+    <script>
+        function process() {
+            var selectors = document.getElementById("selectors").value.split(";");
+            var table = document.createElement('table');
+
+            var tr = document.createElement('tr'); 
+            var th = document.createElement('th');     
+            var text1 = document.createTextNode('Rows');
+            th.appendChild(text1);
+            tr.appendChild(th);
+            table.appendChild(tr);
+
+            for(var i = 0; i < selectors.length; ++i){
+                var text = document.querySelectorAll(selectors[i]);
+                var myRow = "";
+                for(var j = 0; j < text.length; ++j){
+                    myRow += text[j].innerHTML;
+                }
+                console.log(myRow);
+                var tr = document.createElement('tr'); 
+                var td = document.createElement('td');     
+                var text2 = document.createTextNode(myRow);
+                td.appendChild(text2);
+                tr.appendChild(td);
+                table.appendChild(tr);
+            }
+            document.body.appendChild(table);
+        }
+    </script>
+  </head>
+  <body>
+
+    CSS selectors: <input type="text" id="selectors" />
+    <button onclick="process()">Get 1.5 points now!</button>
+    <p>should not be in the result</p>
+    <p id="id1">should be</p>
+    <p id="id1">this too</p>
+    <div>and div</div>
+    <br/>
+    <br/>
+    <br/>
+  </body>
+</html>

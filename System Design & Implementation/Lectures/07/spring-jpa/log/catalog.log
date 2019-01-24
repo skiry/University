@@ -1,0 +1,28 @@
+2019-04-08T16:11:34,320 TRACE [main]: StudentServiceImpl                   - saveStudent: student=Student{name='save', grade=9} BaseEntity{id=null} 
+2019-04-08T16:11:34,428 TRACE [main]: StudentServiceImpl                   - saveStudent --- method finished 
+2019-04-08T16:11:34,429 TRACE [main]: StudentServiceImpl                   - getAllStudents --- method entered 
+2019-04-08T16:11:34,598 TRACE [main]: StudentServiceImpl                   - getAllStudents: result=[Student{name='update', grade=10} BaseEntity{id=-1}, Student{name='save', grade=9} BaseEntity{id=4}, Student{name='update', grade=10} BaseEntity{id=-2}, Student{name='save', grade=9} BaseEntity{id=5}, Student{name='update', grade=9} BaseEntity{id=2}, Student{name='save', grade=9} BaseEntity{id=6}] 
+2019-04-08T16:11:34,599 TRACE [main]: StudentServiceImpl                   - getAllStudents --- method entered 
+2019-04-08T16:11:34,605 TRACE [main]: StudentServiceImpl                   - getAllStudents: result=[Student{name='update', grade=10} BaseEntity{id=-1}, Student{name='save', grade=9} BaseEntity{id=4}, Student{name='update', grade=10} BaseEntity{id=-2}, Student{name='save', grade=9} BaseEntity{id=5}, Student{name='update', grade=9} BaseEntity{id=2}, Student{name='save', grade=9} BaseEntity{id=6}] 
+2019-04-08T16:11:34,606 TRACE [main]: StudentServiceImpl                   - update: student=Student{name='update', grade=10} BaseEntity{id=-1} 
+2019-04-08T16:11:34,620 DEBUG [main]: StudentServiceImpl                   - update --- student updated? --- student=Student{name='update', grade=10} BaseEntity{id=-1} 
+2019-04-08T16:11:34,620 TRACE [main]: StudentServiceImpl                   - update --- method finished 
+2019-04-08T16:11:34,621 TRACE [main]: StudentServiceImpl                   - getAllStudents --- method entered 
+2019-04-08T16:11:34,637 TRACE [main]: StudentServiceImpl                   - getAllStudents: result=[Student{name='update', grade=10} BaseEntity{id=-1}, Student{name='save', grade=9} BaseEntity{id=4}, Student{name='update', grade=10} BaseEntity{id=-2}, Student{name='save', grade=9} BaseEntity{id=5}, Student{name='update', grade=9} BaseEntity{id=2}, Student{name='save', grade=9} BaseEntity{id=6}] 
+2019-04-08T16:11:34,638 TRACE [main]: StudentServiceImpl                   - getAllStudents --- method entered 
+2019-04-08T16:11:34,643 TRACE [main]: StudentServiceImpl                   - getAllStudents: result=[Student{name='update', grade=10} BaseEntity{id=-1}, Student{name='save', grade=9} BaseEntity{id=4}, Student{name='update', grade=10} BaseEntity{id=-2}, Student{name='save', grade=9} BaseEntity{id=5}, Student{name='update', grade=9} BaseEntity{id=2}, Student{name='save', grade=9} BaseEntity{id=6}] 
+2019-04-08T16:11:34,644 TRACE [main]: StudentServiceImpl                   - delete: id=-1 
+2019-04-08T16:11:34,659 TRACE [main]: StudentServiceImpl                   - delete --- method finished 
+2019-04-08T16:11:34,660 TRACE [main]: StudentServiceImpl                   - getAllStudents --- method entered 
+2019-04-08T16:11:34,670 TRACE [main]: StudentServiceImpl                   - getAllStudents: result=[Student{name='save', grade=9} BaseEntity{id=4}, Student{name='update', grade=10} BaseEntity{id=-2}, Student{name='save', grade=9} BaseEntity{id=5}, Student{name='update', grade=9} BaseEntity{id=2}, Student{name='save', grade=9} BaseEntity{id=6}] 
+2019-04-08T16:12:59,193 TRACE [main]: StudentServiceImpl                   - saveStudent: student=Student{name='save', grade=9} BaseEntity{id=null} 
+2019-04-08T16:12:59,257 TRACE [main]: StudentServiceImpl                   - saveStudent --- method finished 
+2019-04-08T16:12:59,258 TRACE [main]: StudentServiceImpl                   - getAllStudents --- method entered 
+2019-04-08T16:12:59,426 TRACE [main]: StudentServiceImpl                   - getAllStudents: result=[Student{name='save', grade=9} BaseEntity{id=4}, Student{name='update', grade=10} BaseEntity{id=-2}, Student{name='save', grade=9} BaseEntity{id=5}, Student{name='update', grade=9} BaseEntity{id=2}, Student{name='save', grade=9} BaseEntity{id=6}, Student{name='save', grade=9} BaseEntity{id=7}] 
+2019-04-08T16:12:59,428 TRACE [main]: StudentServiceImpl                   - getAllStudents --- method entered 
+2019-04-08T16:12:59,433 TRACE [main]: StudentServiceImpl                   - getAllStudents: result=[Student{name='save', grade=9} BaseEntity{id=4}, Student{name='update', grade=10} BaseEntity{id=-2}, Student{name='save', grade=9} BaseEntity{id=5}, Student{name='update', grade=9} BaseEntity{id=2}, Student{name='save', grade=9} BaseEntity{id=6}, Student{name='save', grade=9} BaseEntity{id=7}] 
+2019-04-08T16:12:59,434 TRACE [main]: StudentServiceImpl                   - update: student=Student{name='update', grade=9} BaseEntity{id=4} 
+2019-04-08T16:12:59,445 DEBUG [main]: StudentServiceImpl                   - update --- student updated? --- student=Student{name='update', grade=9} BaseEntity{id=4} 
+2019-04-08T16:12:59,446 TRACE [main]: StudentServiceImpl                   - update --- method finished 
+2019-04-08T16:12:59,451 TRACE [main]: StudentServiceImpl                   - getAllStudents --- method entered 
+2019-04-08T16:12:59,456 TRACE [main]: StudentServiceImpl                   - getAllStudents: result=[Student{name='update', grade=10} BaseEntity{id=-2}, Student{name='save', grade=9} BaseEntity{id=5}, Student{name='update', grade=9} BaseEntity{id=2}, Student{name='save', grade=9} BaseEntity{id=6}, Student{name='save', grade=9} BaseEntity{id=7}, Student{name='update', grade=9} BaseEntity{id=4}] 

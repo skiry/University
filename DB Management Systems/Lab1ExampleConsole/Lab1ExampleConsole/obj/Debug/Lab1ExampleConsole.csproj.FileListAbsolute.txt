@@ -1,0 +1,7 @@
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\Lab1ExampleConsole\Lab1ExampleConsole\bin\Debug\Lab1ExampleConsole.exe.config
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\Lab1ExampleConsole\Lab1ExampleConsole\bin\Debug\Lab1ExampleConsole.exe
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\Lab1ExampleConsole\Lab1ExampleConsole\bin\Debug\Lab1ExampleConsole.pdb
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\Lab1ExampleConsole\Lab1ExampleConsole\obj\Debug\Lab1ExampleConsole.csprojAssemblyReference.cache
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\Lab1ExampleConsole\Lab1ExampleConsole\obj\Debug\Lab1ExampleConsole.csproj.CoreCompileInputs.cache
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\Lab1ExampleConsole\Lab1ExampleConsole\obj\Debug\Lab1ExampleConsole.exe
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\Lab1ExampleConsole\Lab1ExampleConsole\obj\Debug\Lab1ExampleConsole.pdb

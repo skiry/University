@@ -1,0 +1,7 @@
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\Lab4\Lab4-deadlock\Lab4-deadlock\bin\Debug\Lab4-deadlock.exe.config
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\Lab4\Lab4-deadlock\Lab4-deadlock\bin\Debug\Lab4-deadlock.exe
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\Lab4\Lab4-deadlock\Lab4-deadlock\bin\Debug\Lab4-deadlock.pdb
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\Lab4\Lab4-deadlock\Lab4-deadlock\obj\Debug\Lab4-deadlock.csprojAssemblyReference.cache
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\Lab4\Lab4-deadlock\Lab4-deadlock\obj\Debug\Lab4-deadlock.csproj.CoreCompileInputs.cache
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\Lab4\Lab4-deadlock\Lab4-deadlock\obj\Debug\Lab4-deadlock.exe
+C:\Users\Skiry\Documents\Faculty\Sem2\SGBD\Lab4\Lab4-deadlock\Lab4-deadlock\obj\Debug\Lab4-deadlock.pdb

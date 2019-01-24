@@ -1,0 +1,13 @@
+﻿@model Web2.Models.User
+
+@{
+    ViewBag.Title = "UserSearch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-controller="User" asp-action="Index" method="get">
+    <p>
+        Title: <input type="text" name="name">
+        <input type="submit" value="Filter" />
+    </p>
+</form>

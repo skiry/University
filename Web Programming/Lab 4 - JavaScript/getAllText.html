@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Exam web</title>
+    <script>
+        window.onload = function() {
+            divs = document.getElementsByTagName("div");
+            spans = document.getElementsByTagName("span");
+            aas = document.getElementsByTagName("a");
+            tables = document.getElementsByTagName("table");
+            ps = document.getElementsByTagName("p");
+            finalString = "";
+
+            for (var i = 0; i < divs.length; ++i) {
+                finalString += divs[i].innerText;
+            }
+            for (var i = 0; i < spans.length; ++i) {
+                finalString += spans[i].innerText;
+            }
+            for (var i = 0; i < aas.length; ++i) {
+                finalString += aas[i].innerText;
+            }
+            for (var i = 0; i < tables.length; ++i) {
+                finalString += tables[i].innerText;
+            }
+            for (var i = 0; i < ps.length; ++i) {
+                finalString += ps[i].innerText;
+            }
+            for (var i = 0; i < finalString.length; ++i) {
+                if (i % 2 == 0) {
+                    document.getElementById("even").innerHTML += finalString[i];
+                }
+                else {
+                    document.getElementById("odd").innerHTML += finalString[i];
+                }
+            }
+        }
+    </script>
+  </head>
+  <body>
+  <div>
+      dsadsa
+  </div>
+  <div>
+      cifre
+  </div>
+  <span>
+      lalala
+  </span>
+  <p>
+      doremifasolasido
+  </p>
+  <a>dooooooooremiiiiiiiiii</a>
+  <pre>not allowed</pre>
+  <div id="even"></div>
+  <div id="odd"></div>
+</body>
+</html>

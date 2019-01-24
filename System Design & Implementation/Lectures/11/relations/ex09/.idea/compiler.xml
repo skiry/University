@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ex01_main" target="1.8" />
+      <module name="ex01_test" target="1.8" />
+      <module name="ex02_main" target="1.8" />
+      <module name="ex02_test" target="1.8" />
+      <module name="ex03_main" target="1.8" />
+      <module name="ex03_test" target="1.8" />
+      <module name="ex04_main" target="1.8" />
+      <module name="ex04_test" target="1.8" />
+      <module name="ex05_main" target="1.8" />
+      <module name="ex05_test" target="1.8" />
+      <module name="ex06_main" target="1.8" />
+      <module name="ex06_test" target="1.8" />
+      <module name="ex07_main" target="1.8" />
+      <module name="ex07_test" target="1.8" />
+      <module name="ex08_main" target="1.8" />
+      <module name="ex08_test" target="1.8" />
+      <module name="ex09_main" target="1.8" />
+      <module name="ex09_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Web exam</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script>
+          function swapRows() {
+            var interm = document.getElementById("r1").innerHTML;
+            document.getElementById("r1").innerHTML = document.getElementById("r2").innerHTML;
+            document.getElementById("r2").innerHTML = document.getElementById("r3").innerHTML;
+            document.getElementById("r3").innerHTML = document.getElementById("r4").innerHTML;
+            document.getElementById("r4").innerHTML = document.getElementById("r5").innerHTML;
+            document.getElementById("r5").innerHTML = interm;
+        };
+      </script>
+  </head>
+  <body>
+  <table>
+    <th>
+      <td>Column 1</td>
+      <td>Column 2</td>
+      <td>Column 3</td>
+      <td>Column 4</td>
+      <td>Column 5</td>
+    </th>
+    <tr id="r1">
+      <td>Row 1</td>
+      <td>Row 1</td>
+      <td>Row 1</td>
+      <td>Row 1</td>
+      <td>Row 1</td>
+    </tr>
+    <tr id="r2">
+      <td>Row 2</td>
+      <td>Row 2</td>
+      <td>Row 2</td>
+      <td>Row 2</td>
+      <td>Row 2</td>
+    </tr>
+    <tr id="r3">
+      <td>Row 3</td>
+      <td>Row 3</td>
+      <td>Row 3</td>
+      <td>Row 3</td>
+      <td>Row 3</td>
+    </tr>
+    <tr id="r4">
+      <td>Row 4</td>
+      <td>Row 4</td>
+      <td>Row 4</td>
+      <td>Row 4</td>
+      <td>Row 4</td>
+    </tr>
+    <tr id="r5">
+      <td>Row 5</td>
+      <td>Row 5</td>
+      <td>Row 5</td>
+      <td>Row 5</td>
+      <td>Row 5</td>
+    </tr>
+  </table>
+  
+  <header onclick="swapRows()">
+    here is the header<br/><br/>
+    here too
+  </header>
+  </body>
+</html>

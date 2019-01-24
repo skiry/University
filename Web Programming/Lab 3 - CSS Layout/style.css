@@ -1,0 +1,387 @@
+body
+{
+    margin: 0
+}
+
+header
+{
+    height: 65px;
+    box-shadow: 1px 1px 3px rgb(182, 179, 179);
+    float: left;
+    width: 100%;
+    z-index: 1;
+}
+
+header img
+{
+    float: left;
+    width: 110px;
+    height: 32px;
+    margin-left: 59px;
+    margin-top: 17px;
+}
+
+header div.grid img
+{
+    width: 13px;
+    height: 13px;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 10px;
+}
+
+header div.grid
+{
+    float: left;
+    margin-left: 36px;
+    margin-top: 27px;
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 13px;
+}
+
+header div.search
+{
+    float: left;
+    background: #f2f3f5;
+    color: #686F7A;
+
+    margin-top: 10px;
+    margin-left: 36px;
+
+    padding-left: 10px;
+    padding-right: 435px;
+    padding-top: 10px;
+    padding-bottom: 17px;
+
+    border-bottom-left-radius: 2px;
+    border-top-left-radius: 2px;
+    border-bottom-right-radius: 0;  
+    border-top-right-radius: 0;
+}
+
+header img#lupa
+{
+    background: #f2f3f5;
+    position: absolute;
+    overflow: hidden;
+
+    width: 18px;
+    height: 18px;
+    margin-left: 0;
+    margin-top: 10px;
+
+    padding-top: 7.5px;
+    padding-bottom: 20px;
+}
+
+header div.butt1
+{
+    float: left;
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 13px;
+
+    margin-left: 65px;
+    margin-top: 25px;
+}
+
+header div.butt2
+{
+    float: left;
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 13px;
+
+    margin-left: 40px;
+    margin-top: 25px;
+}
+
+header div.cart img
+{
+    width: 37px;
+    height: 43px;
+    margin-left: 25px;
+    margin-top: 10px;
+}
+
+header div.login
+{
+    float: left;
+    margin-top: 10px;    
+    margin-left: 25px;    
+    border: 1px solid #686F7A;
+    padding: 12px 13px;    
+    border-radius: 2px;    
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;    
+    font-size: 15px;
+}
+
+header div.signup
+{
+    float: left;
+    margin-top: 10px;    
+    margin-left: 5px;    
+    padding: 13px 13px;    
+    border-radius: 2px;    
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;    
+    font-size: 15px;    
+    background-color: #EC5252;    
+    color: #FFF;
+}
+
+main
+{
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+main div.first_bar
+{
+    position: absolute;
+    background-color: rgb(247, 248, 250);
+    margin-top: 64px;
+    width: 100%;
+    color: #686F7A;
+    font-size: 13px;
+    padding-left: 150px;
+    white-space: pre-wrap;
+    z-index: -1;
+}
+
+main div.description
+{
+    position: absolute;
+    margin-top: 109px;
+    background: linear-gradient(#29303B, #29303B, #29303B);
+    color: #FFF;
+    width: 100%;
+    padding-bottom: 94px;
+    padding-left: 189px;
+    padding-top: 40px;
+    font-size: 18px;
+    line-height: 1.43;
+    z-index: -2;
+}
+
+main div.description img#gft
+{
+    position: absolute;
+    width: 280px;
+    height: 49px;
+    margin-left: 859px;
+    margin-top: -38px;
+}
+
+main div.description div.title
+{
+    font-size: 37px;
+    line-height: 41px;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+main div.description div.desc
+{
+    font-size: 21px;
+    line-height: 27px;
+    margin-top: 5px;
+}
+
+main div.description div.bst
+{
+    float: left;
+    background: #F4C150;
+    color: #29303B;
+    height: 11px;
+    border-radius: 3px;
+    font-size: 9px;
+    padding: 1px 8px 1px 8px;
+    margin-top: 8px;
+    padding-bottom: 3px;
+    width: 55px;
+}
+
+main div.description img
+{
+    float: left;
+    height: 30px;
+    width: 90px;
+    padding-left: 15px;
+}
+
+
+main div.description div.data
+{
+    font-size: 16px;
+    display: inline-block;
+    padding-left: 10px;
+    padding-top: 4px;
+    white-space: pre-wrap;
+}
+
+main div.description div.meta
+{
+    white-space: pre-wrap;
+    position: absolute;
+    font-size: 15px;
+    line-height: 2.3;
+}
+
+main div.description img#msg
+{
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    margin-top: 32px;
+    margin-left: -231.5px;
+}
+
+main div.description img#cc
+{
+    position: absolute;
+    height: 30px;
+    width: 25px;
+    margin-top: 29px;
+    margin-left: -132px;
+}
+
+main div.main_info
+{
+    float: left;
+    position: absolute;
+    margin-top: 435px;
+    margin-left: 193px;
+    padding: 10px 15px;
+    font-size: 15px;
+    line-height: 1.43;
+    color: #29303B;
+    background-color: #f9f9f9;
+    border: 1px solid #DEDFE0;
+    width: 719px;
+
+}
+
+main div.main_info p
+{
+    margin-top: 0;
+    font-size: 22px;    
+    font-weight: 600;
+}
+
+main div.main_info a
+{
+    float: left;
+    color: rgb(0, 119, 145);
+    text-decoration: none;
+}
+
+main div.main_info ul li{
+    float: left;
+    width: 50%;
+}
+
+main div.main_info ul{
+    float: left;
+    list-style: none;
+    margin-left: -50px;
+    margin-top: -20px;
+}
+
+main div.main_info ul li:before {
+    content: url('bif.png');
+}
+
+main div.details
+{
+    float: left;
+    margin-top: 110px;
+    margin-left: 970px;
+    z-index: 2;
+    padding: 2px;
+    background-color: #FFF;
+    border-radius: 4px;
+    box-shadow: 0 0 1px 1px rgba(20,23,28,0.1),0 3px 1px 0 rgba(20,23,28,0.1);
+}
+
+main div.details img#prw
+{
+    height: 200px;
+    width: 350px;
+}
+
+main div.details div.price
+{
+    display: inline;
+    font-size: 36px;
+    color: #505763;
+    font-weight: 700;
+    margin-left: 32px;
+}
+
+main div.details div.lastprc
+{
+    display: inline;
+    font-size: 18px;
+    color: rgba(80,87,99,0.5);
+    text-decoration: line-through;
+}
+
+main div.details div.promo
+{
+    display: inline;
+    font-size: 18px;
+    color: rgba(80,87,99,0.5);
+    white-space: pre-wrap;
+}
+
+main div.details div.limited
+{
+    color: #992337;
+    font-size: 14px;
+    margin-left: 30px;
+}
+
+main div.details div.addtocart
+{
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    color: #FFF;
+    background-color: #EC5252;
+    border-radius: 2px;
+    padding: 16px 12px;
+    border: 1px solid transparent;
+    width: 75%;
+    margin-left: 30px;
+}
+
+main div.details div.buynow
+{
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    color: #686F7A;
+    background-color: #FFF;
+    border: 1px solid #686F7A;
+    border-radius: 2px;
+    padding: 16px 12px;
+    width: 75%;
+    margin-left: 30px;
+    margin-top: 13px;
+}
+
+main div.details div.mention
+{
+    text-align: center;
+    font-size: 12px;
+    color: #505763;
+}
+
+main div.details ul
+{
+    list-style: none;
+}
+
+main div.details ul li
+{
+    font-size: 13px;
+    color: #505763;
+    line-height: 1.83;
+}

@@ -1,0 +1,23 @@
+<div>
+  <label>Title:</label>
+  <input #title><br>
+
+  <label>Author:</label>
+  <input #author><br>
+
+  <label>ISBN:</label>
+  <input #isbn><br>
+
+  <label>Price:</label>
+  <input #price><br>
+
+  <label>Quantity:</label>
+  <input #quantity><br>
+
+</div>
+
+<div>
+  <button (click)="save(title.value,author.value,isbn.value,price.value, quantity.value)">Save
+  </button>
+</div>
+
