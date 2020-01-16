@@ -1,0 +1,19 @@
+startprogram
+
+declare main(a, b,c=0):
+{
+
+   if (b + 2) > (a + 3):
+   {
+	  give a
+   }
+   else if (c * 1) < (a * 4):
+   {
+   integer res
+	res = c + 2
+	give b
+
+   }
+}
+
+endprogram

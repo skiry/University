@@ -1,0 +1,50 @@
+startprogram
+
+declare sum(a, b,c=0):
+{
+
+   if b ** 3 == -27 + 2:
+   {
+	  give a+b
+   }
+   else if c == 1:
+   {
+   	integer res
+	res = c - 2
+	give a + b + (res + 1)
+   }	
+   else:
+   {
+   	give a + b
+   }
+}
+
+declare main():
+{
+   char excl = ""
+ d = 'a'
+   string a
+   string b
+   
+   read(a, "toks.txt")
+   read(b, "toks.txt")
+   
+
+   integer result
+
+   resuslt0 = sum(a, b)
+   result1 = sum(a, b, 1)
+   fin_res = result1 - result0
+   
+   while fin_res > 0 and true do:
+   {
+   	write(fin_res, "true.txt")
+	fin_res = fin_res - 1
+   }
+   
+   write("!", "true.txt")
+
+   give 0
+}
+
+endprogram

@@ -1,0 +1,79 @@
+		Language Specification
+
+1. Language Definition
+
+1.1 Alphabet
+
+1.1.1 a) Lower case letters (a-z) of the English alphabet
+    b) Underline character '_'
+    c) Decimal digits (0-9)
+
+1.2 Lexic
+
+1.2.1 a) Special symbols
+	-operators + - * ** / > >= = == != =< <
+		relation = ">" | ">=" | "==" | "!=" | "=<" | "<"
+		operation = "*" | "/" | "**" | sign
+	-separators [ ] { } ( ) : ,
+	-reserved words:
+		if else read write true false declare and or do while integer char string array main give startprogram endprogram
+		logical = "and" | "or"
+    b) Identifiers
+	-a sequence of letters and/or digits and/or underscore, such that the first character is a letter
+		identifier = letter{"_" | letter | digit} ;
+    c) Constants
+	constant = number | char | string | boolean
+	-integer
+		number = 0 | [sign]nz_digit{digit}
+		sign = "+" | "-"
+		digit = "0" | nz_digit ;
+		nz_digit = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
+	-character
+		char = "'"(letter | digit)"'"
+	-string
+		string = "'"char_wq"'" 	
+		char_wq = {letter | digit}
+		letter = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i"| "j" | "k" | "l" | "m" | "n" | "o" | "p"
+     			| "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" ;
+	-boolean
+		boolean = "true" | "false"
+
+2. Syntax
+
+2.1 Syntactical rules
+<code> ::= startprogram <program> endprogram
+<program> ::= <main_function> | <program> <function> | <function> <program>
+<main_function> ::= declare main( <parameters> ) : { <body> }
+<function> ::= declare <identifier>( <parameters> ) : { <body> }
+<parameters> ::= <identifier> | <identifier> <parameters> | <default_parameters>
+<default_parameters> ::= <assignment> | <assignment> <default_parameters>
+
+<body> ::= <variable_decl> | <assignment> | <conditional> | <loop> | <io_stmt> | give <expression> | <body> <body>
+<assignment> ::= <identifier> = <expression>
+
+<variable_decl> ::= <integer_decl> | <char_decl> | <string_decl> | <array_decl>
+<integer_decl> ::= integer <identifier> | integer <identifier> = <expression> 
+<char_decl> ::= char <identifier> | char <identifier> = <char> 
+<string_decl> ::= string <identifier> | string <identifier> = <string>
+
+<array_decl> ::= <identifier> | array <identifier> = <array_impl>
+<array_impl> ::= [ <elems> ]
+<elems> ::= <any_value> | <elems> <elems>
+
+<expression> ::= <term> | <expression> <operation> <term> | <function_call>
+<function_call> ::= <identifier> (<parameters>)
+<term> ::= <factor> | <term> <operation> <factor>
+<factor> ::= ( <expression> ) | <any_value>
+
+<conditional> ::= if <comparison> : { <body> } <elifs> else : { <body> }
+<elifs> ::= <elif> | <elif> <elifs>
+<elif> ::= else if <comparison> : { body }
+<comparison> ::= <expression> <relation> <expression> | <comparison> <logical> <comparison> 
+
+<io_stmt> ::= read ( <identifier>, <string> ) | write ( <any_value>, <string> )
+#where, from
+
+<loop> ::= while <while_condition> do : { <body> } | do : { <body> } while <while_condition>
+<while_condition> ::= <comparison> | <boolean>
+
+<any_value> ::= <identifier> | <constant>

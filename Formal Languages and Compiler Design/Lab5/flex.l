@@ -1,0 +1,73 @@
+%{ 	 
+#include <math.h> 
+#include <stdio.h>
+#include "yacc.tab.h"
+int lines = 0;
+%} 
+%option noyywrap
+
+DIGIT			[0-9]
+NZ_DIGIT 		[1-9] 
+LETTER 			[a-z] 
+CHAR			'([a-z]|[0-9])'
+CHAR_WQ			[a-z]|[0-9]
+STRING			"[a-z0-9]*"
+SIGN			+|-
+NUMBER			0|[+-]?[1-9][0-9]*
+IDENTIFIER		[a-z][_a-z0-9]*
+
+%% 
+
+
+"startprogram"	{ return startprogram;}
+"endprogram"	{ return endprogram;}
+"="		{ return ASSIGN;}
+">"		{ return GT;}
+"<"		{ return LT;}
+">="		{ return GE;}
+"<="		{ return LE;}
+"=="		{ return EQ;}
+"!="		{ return DIFF;}
+"**"		{ return POW;}
+"*"		{ return MUL;}
+"/"		{ return DIV;}
+"+"		{ return ADD;}
+"-"		{ return SUB;}
+"{"		{ return CBO;}
+"}"		{ return CBC;}
+"["		{ return CPO;}
+"]"		{ return CPC;}
+"("		{ return OPO;}
+")"		{ return OPC;}
+":"		{ return DD;}
+","		{ return COMMA;}
+"if"		{ return IF;}
+"else"		{ return ELSE;}
+"read"		{ return read;}
+"write"		{ return write;}
+"true"		{ return true;}
+"false"		{ return false;}
+"declare"	{ return declare;}
+"and"		{ return and;}
+"or"		{ return or;}
+"do"		{ return DO;}
+"while"		{ return WHILE;}
+"integer"	{ return integer;}
+"char"		{ return CHAR;}
+"string"	{ return string;}
+"array"		{ return array;}
+"main"		{ return mainf;}
+"give"		{ return give;}
+[a-z][_a-z0-9]{8,}	{printf("Illegal size of the identifier at line %d\n", lines); return -1;}
+{IDENTIFIER}	{ return identifier;}
+{NUMBER}	{ return constant;} 
+
+"{"[^}\n]*"}" 		/* eat up one-line comments */ 
+
+[ \t]+ 		/* eat up whitespace */ 
+		 
+[\n]+	{++lines;}
+. printf("Eroare\n");
+
+
+%% 

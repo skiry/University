@@ -1,0 +1,16 @@
+G = (N, E, P, S)
+N = set of non-terminals
+E = set of terminals
+P = set of productions
+S = starting symbol
+
+FA = (Q, E, ro, q0, F)
+Q = set of states
+E = alphabet
+ro = set of transitions
+qo = starting state
+F = set of final states
+
+A regular grammar is a left linear grammar (S->Aa, for any S, A from the non-terminals set and 'a' a terminal) \
+	or a right linear grammar (S->aA, for any S, A from the non-terminals set and 'a' a terminal) and if there are \
+	S->E with S from the non-terminals set and E the empty string, epsilon, then S does not appear in the rhs of any production
