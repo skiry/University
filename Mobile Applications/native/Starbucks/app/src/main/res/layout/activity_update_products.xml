@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".UpdateProducts">
+
+    <Button
+            android:text="@string/delete_product"
+            android:layout_width="139dp"
+            android:layout_height="54dp"
+            android:id="@+id/deleteProductsBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="16dp" android:layout_marginStart="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/updateProductBtn" android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp" android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.442"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:id="@+id/topMessage"
+            android:textColor="@color/colorPrimaryDark" android:textSize="18sp"
+            android:text="@string/hi_manager" tools:text="Actualizare produs"
+            android:layout_marginTop="32dp" app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"
+            app:layout_constraintHorizontal_bias="0.521"/>
+
+    <TextView
+            android:id="@+id/nameLabel"
+            android:layout_width="65dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="80dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+                android:text="@string/price"
+                android:layout_width="65dp"
+                android:layout_height="42dp"
+                android:id="@+id/priceLabel"
+                android:layout_marginTop="44dp" app:layout_constraintTop_toBottomOf="@+id/nameLabel"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp" android:gravity="center_vertical|center"/>
+        <TextView
+                android:text="@string/weight"
+                android:layout_width="65dp"
+                android:layout_height="41dp"
+                android:id="@+id/weightLabel" android:layout_marginTop="44dp"
+                app:layout_constraintTop_toBottomOf="@+id/priceLabel" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="16dp" android:layout_marginStart="16dp"
+                android:gravity="center_vertical|center_horizontal"/>
+        <TextView
+                android:text="@string/description"
+                android:layout_width="65dp"
+                android:layout_height="39dp"
+                android:id="@+id/descriptionLabel" android:layout_marginTop="44dp"
+                app:layout_constraintTop_toBottomOf="@+id/weightLabel" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="16dp" android:layout_marginStart="16dp" android:gravity="center"/>
+        <TextView
+                android:text="@string/upload_image"
+                android:layout_width="81dp"
+                android:layout_height="36dp"
+                android:id="@+id/imageUpload" android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionLabel" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="16dp" android:layout_marginStart="16dp" android:gravity="center"/>
+    <Button
+            android:text="@string/update_product"
+            android:layout_width="139dp"
+            android:layout_height="54dp"
+            android:id="@+id/updateProductBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp" android:layout_marginRight="16dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="18dp"/>
+        <EditText
+                android:layout_width="105dp"
+                android:layout_height="41dp"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/weightInputUpdate" app:layout_constraintEnd_toEndOf="@+id/priceInputUpdate"
+                android:autofillHints=""
+                app:layout_constraintTop_toTopOf="@+id/weightLabel"/>
+        <EditText
+                android:layout_width="233dp"
+                android:layout_height="40dp"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/nameInputUpdate"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp" android:autofillHints=""
+                app:layout_constraintTop_toTopOf="@+id/nameLabel" app:layout_constraintStart_toEndOf="@+id/nameLabel"
+                android:layout_marginStart="8dp" android:layout_marginLeft="8dp"
+                app:layout_constraintHorizontal_bias="0.772"/>
+        <EditText
+                android:layout_width="107dp"
+                android:layout_height="41dp"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/priceInputUpdate"
+                android:layout_marginEnd="88dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="88dp"
+                app:layout_constraintTop_toTopOf="@+id/priceLabel" android:autofillHints=""/>
+        <TextView
+                android:text="@string/lei"
+                android:layout_width="56dp"
+                android:layout_height="35dp"
+                android:id="@+id/currencyLabel" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp" android:textSize="24sp"
+                app:layout_constraintStart_toEndOf="@+id/priceInputUpdate" android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintTop_toTopOf="@+id/priceInputUpdate"/>
+        <EditText
+                android:layout_width="227dp"
+                android:layout_height="43dp"
+                android:inputType="textMultiLine"
+                android:ems="10"
+                android:id="@+id/editText5Update" app:layout_constraintEnd_toEndOf="@+id/nameInputUpdate"
+                app:layout_constraintTop_toTopOf="@+id/descriptionLabel" android:autofillHints=""
+                app:layout_constraintStart_toStartOf="@+id/nameInputUpdate" app:layout_constraintHorizontal_bias="1.0"/>
+        <TextView
+                android:text="@string/weightUnit"
+                android:layout_width="54dp"
+                android:layout_height="37dp"
+                android:id="@+id/textView8" app:layout_constraintEnd_toEndOf="@+id/currencyLabel"
+                app:layout_constraintStart_toStartOf="@+id/currencyLabel" app:layout_constraintHorizontal_bias="0.0"
+                android:textSize="24sp"
+                app:layout_constraintTop_toTopOf="@+id/weightInputUpdate"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>

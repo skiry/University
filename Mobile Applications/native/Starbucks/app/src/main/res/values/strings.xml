@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Starbucks Romania</string>
+    <string name="name">Nume</string>
+    <string name="hi_manager">Buna ziua, Manager!</string>
+    <string name="weight">Greutate</string>
+    <string name="price">Pret</string>
+    <string name="description">Descriere</string>
+    <string name="upload_image">Incarca o imagine</string>
+    <string name="add_product">Adauga produsul</string>
+    <string name="update_product">Actualizeaza produsul</string>
+    <string name="delete_product">Sterge produsul</string>
+    <string name="view_products">Vedeti produsele</string>
+    <string name="weightUnit">g</string>
+    <string name="lei">Lei</string>
+    <string name="drawer_item_products">Products</string>
+    <string name="drawer_item_add">Add</string>
+    <string name="drawer_item_about">Check connection</string>
+</resources>
