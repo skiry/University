@@ -1,0 +1,10 @@
+apple,1000,100
+orange,300,200
+orange juice,400,50
+phone,500,2000
+laptop,200,5000
+chocolate,3000,30
+protein shake,300,900
+vegetables,9000,30
+rubik cube,30,500
+banana,750,45

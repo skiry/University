@@ -1,0 +1,7 @@
+﻿  pch.cpp
+  MPIBUN.cpp
+c:\users\skiry\documents\faculty\pdp\mpibun\mpibun\mpibun.cpp(10): warning C4326: return type of 'main' should be 'int' instead of 'void'
+MPIBUN.obj : error LNK2019: unresolved external symbol _MPI_Init@8 referenced in function _main
+MPIBUN.obj : error LNK2019: unresolved external symbol _MPI_Finalize@0 referenced in function _main
+C:\Program Files (x86)\Microsoft SDKs\MPI\Lib\x64\\msmpi.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\Users\Skiry\Documents\Faculty\PDP\MPIBUN\Debug\MPIBUN.exe : fatal error LNK1120: 2 unresolved externals

@@ -1,0 +1,8 @@
+﻿  pch.cpp
+  MPIBUN.cpp
+c:\users\skiry\documents\faculty\pdp\mpibun - big numbers\mpibun\mpibun.cpp(21): warning C4018: '<': signed/unsigned mismatch
+c:\users\skiry\documents\faculty\pdp\mpibun - big numbers\mpibun\mpibun.cpp(29): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\skiry\documents\faculty\pdp\mpibun - big numbers\mpibun\mpibun.cpp(30): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\skiry\documents\faculty\pdp\mpibun - big numbers\mpibun\mpibun.cpp(59): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\skiry\documents\faculty\pdp\mpibun - big numbers\mpibun\mpibun.cpp(104): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  MPIBUN.vcxproj -> C:\Users\Skiry\Documents\Faculty\PDP\MPIBUN - Big numbers\x64\Debug\MPIBUN.exe

@@ -1,0 +1,11 @@
+﻿  Source.cpp
+c:\users\skiry\documents\faculty\pdp\parallelizing techniques\lab6\lab6\source.cpp(27): warning C4018: '<': signed/unsigned mismatch
+c:\users\skiry\documents\faculty\pdp\parallelizing techniques\lab6\lab6\source.cpp(28): warning C4018: '<': signed/unsigned mismatch
+c:\users\skiry\documents\faculty\pdp\parallelizing techniques\lab6\lab6\source.cpp(37): warning C4018: '>': signed/unsigned mismatch
+c:\users\skiry\documents\faculty\pdp\parallelizing techniques\lab6\lab6\source.cpp(46): warning C4018: '<': signed/unsigned mismatch
+c:\users\skiry\documents\faculty\pdp\parallelizing techniques\lab6\lab6\source.cpp(47): warning C4018: '<': signed/unsigned mismatch
+c:\users\skiry\documents\faculty\pdp\parallelizing techniques\lab6\lab6\source.cpp(63): warning C4018: '<': signed/unsigned mismatch
+c:\users\skiry\documents\faculty\pdp\parallelizing techniques\lab6\lab6\source.cpp(269): warning C4018: '<': signed/unsigned mismatch
+c:\users\skiry\documents\faculty\pdp\parallelizing techniques\lab6\lab6\source.cpp(284): warning C4018: '<': signed/unsigned mismatch
+c:\users\skiry\documents\faculty\pdp\parallelizing techniques\lab6\lab6\source.cpp(285): warning C4018: '<': signed/unsigned mismatch
+  Lab6.vcxproj -> C:\Users\Skiry\Documents\Faculty\PDP\Parallelizing techniques\Lab6\Debug\Lab6.exe

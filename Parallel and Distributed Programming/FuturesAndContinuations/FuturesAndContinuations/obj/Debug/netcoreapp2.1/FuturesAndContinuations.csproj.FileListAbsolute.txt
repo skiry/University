@@ -1,0 +1,11 @@
+C:\Users\Skiry\Documents\Faculty\PDP\FuturesAndContinuations\FuturesAndContinuations\bin\Debug\netcoreapp2.1\FuturesAndContinuations.deps.json
+C:\Users\Skiry\Documents\Faculty\PDP\FuturesAndContinuations\FuturesAndContinuations\bin\Debug\netcoreapp2.1\FuturesAndContinuations.runtimeconfig.json
+C:\Users\Skiry\Documents\Faculty\PDP\FuturesAndContinuations\FuturesAndContinuations\bin\Debug\netcoreapp2.1\FuturesAndContinuations.runtimeconfig.dev.json
+C:\Users\Skiry\Documents\Faculty\PDP\FuturesAndContinuations\FuturesAndContinuations\bin\Debug\netcoreapp2.1\FuturesAndContinuations.dll
+C:\Users\Skiry\Documents\Faculty\PDP\FuturesAndContinuations\FuturesAndContinuations\bin\Debug\netcoreapp2.1\FuturesAndContinuations.pdb
+C:\Users\Skiry\Documents\Faculty\PDP\FuturesAndContinuations\FuturesAndContinuations\obj\Debug\netcoreapp2.1\FuturesAndContinuations.csprojAssemblyReference.cache
+C:\Users\Skiry\Documents\Faculty\PDP\FuturesAndContinuations\FuturesAndContinuations\obj\Debug\netcoreapp2.1\FuturesAndContinuations.csproj.CoreCompileInputs.cache
+C:\Users\Skiry\Documents\Faculty\PDP\FuturesAndContinuations\FuturesAndContinuations\obj\Debug\netcoreapp2.1\FuturesAndContinuations.AssemblyInfoInputs.cache
+C:\Users\Skiry\Documents\Faculty\PDP\FuturesAndContinuations\FuturesAndContinuations\obj\Debug\netcoreapp2.1\FuturesAndContinuations.AssemblyInfo.cs
+C:\Users\Skiry\Documents\Faculty\PDP\FuturesAndContinuations\FuturesAndContinuations\obj\Debug\netcoreapp2.1\FuturesAndContinuations.dll
+C:\Users\Skiry\Documents\Faculty\PDP\FuturesAndContinuations\FuturesAndContinuations\obj\Debug\netcoreapp2.1\FuturesAndContinuations.pdb

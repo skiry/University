@@ -1,0 +1,7 @@
+﻿  Source.cpp
+c:\users\skiry\documents\faculty\pdp\futureasync\futureasynccpp\futureasync\source.cpp(97): warning C4018: '<': signed/unsigned mismatch
+c:\users\skiry\documents\faculty\pdp\futureasync\futureasynccpp\futureasync\source.cpp(111): warning C4018: '<': signed/unsigned mismatch
+c:\users\skiry\documents\faculty\pdp\futureasync\futureasynccpp\futureasync\source.cpp(123): warning C4018: '<': signed/unsigned mismatch
+c:\users\skiry\documents\faculty\pdp\futureasync\futureasynccpp\futureasync\source.cpp(135): warning C4018: '<': signed/unsigned mismatch
+c:\users\skiry\documents\faculty\pdp\futureasync\futureasynccpp\futureasync\source.cpp(128): warning C4101: 'result': unreferenced local variable
+  FutureAsync.vcxproj -> C:\Users\Skiry\Documents\Faculty\PDP\FutureAsync\FutureAsyncCPP\Debug\FutureAsync.exe

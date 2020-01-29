@@ -1,0 +1,5 @@
+﻿  MPIBUN.cpp
+c:\users\skiry\documents\faculty\pdp\mpibun - karatsuba\mpibun\mpibun.cpp(63): warning C4018: '<': signed/unsigned mismatch
+c:\users\skiry\documents\faculty\pdp\mpibun - karatsuba\mpibun\mpibun.cpp(71): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\skiry\documents\faculty\pdp\mpibun - karatsuba\mpibun\mpibun.cpp(86): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  MPIBUN.vcxproj -> C:\Users\Skiry\Documents\Faculty\PDP\MPIBUN - Karatsuba\x64\Debug\MPIBUN.exe
