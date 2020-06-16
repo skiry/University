@@ -1,0 +1,37 @@
+Trapezium method
+Linii de la primul capat pana la al doilea
+
+Repetead trapezium
+Linii de la primul capat, la al doilea, ..., la ultimul
+	Avantaj: mai accurate
+
+Simpson's formula
+Parabola de la primul capat la al doilea
+
+Repetead Simpson's
+Parabola de la primul la al doilea, de la al doilea la al 3lea, etc.
+
+1)
+f=@(x) 2./(1+x.^2);
+trapezium=reptrap(f,0,1,1)
+simpsons=repsim(f,0,1,1)
+clf; hold on;
+fplot(f, [0,1]);
+plot([0 0 1 1], [0 f(0) f(1) 0]);
+
+4)
+f=@(x) x.*log(x);
+simp1=repsim(f,1,2,1)
+err_simp1=(0.6362943688583-simp1)
+
+5)
+f=@(x) 1./(4+sin(20.*x));
+simp10=repsim(f,0,pi,10)
+simp30=repsim(f,0,pi,30)
+
+6)
+f=@(x) (2/sqrt(pi)) *exp(-x.^2);
+simp4=repsim(f,0,0.5,4)
+simp10=repsim(f,0,0.5,10)
+err_simp4=abs(0.52049987-simp4)
+err_simp10=abs(0.52049987-simp10)

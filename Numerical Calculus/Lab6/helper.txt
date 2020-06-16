@@ -1,0 +1,17 @@
+Si(x)=ai+bi(x-xi)+ci(x-xi)^2+di(x-xi)^3, i=1,...,n-1, xE[xi,xi+1]
+
+Si(xi)=f(xi)
+Si-1'(xi)=Si'(xi), i=1,...,n-1
+Si-1''(xi)=Si''(xi), i=2,...,n-1
+
+Cubic spline interpolation acorda sansa celei de a doua derivate sa fie
+	continue
+Nu trece neaparat prin puncte dar e foarte smooth
+Unknown coeffs: 4(n-1); n-1 ec * 4 nec
+Number of equations: 2(n-1)+2(n-2)=4(n-1)-2 => mai e nevoie de 2
+
+
+spline(nodes, values[, X]) - de Boor spline
+spline(nodes, [A values B]) - clamped spline
+
+A,B = f'(x) in primul si ultimul capat

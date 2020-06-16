@@ -1,0 +1,8 @@
+Least square regression method
+
+Gasim un polinom pk de grad cel mult k <= length(nodes) care sa
+minimizeze radical din suma distantelor la patrat dintre punctele
+nodes si dreapta/curba rezultata de pk.
+Cu cat k este mai mare, cu atat eroarea este mai mica
+
+k=length(nodes)-1 => curba trece prin toate punctele => lagrange

@@ -1,0 +1,24 @@
+Hermite Interpolation Polynomial
+
+H(xi) = f(xi), i=1, ..., n
+H'(xi) = f'(xi), i=1, ..., n
+
+La construirea tabelului se dubleaza valorile de xi si cele de f(xi)
+iar la a 3a coloana se pun f'(xi) pe liniile impare
+
+1)
+nodes=[0 3 5 8 13];
+values=[0 225 383 623 993];
+derivatives=[75 77 80 74 72];
+[distance,speed]=HermiteInterpolation(nodes, values, derivatives, 10)
+
+2)
+f=@(x) log(x);
+nodes=[1 2];
+values=[0 0.6931];
+derivatives=[1 0.5];
+res=HermiteInterpolation(nodes, values, derivatives, 1.5)
+abs(log(1.5)-res)
+
+3)
+ex3.m

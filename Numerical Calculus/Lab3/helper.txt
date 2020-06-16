@@ -1,0 +1,24 @@
+1)
+nodes=[1930 1940 1950 1960 1970 1980]
+values=[123203 131669 150697 179323 203212 226505]
+LagrangeBary(nodes, values, 1955)
+LagrangeBary(nodes, values, 1995)
+
+2)
+nodes=[81, 100, 121, 144, 169]
+values=[9,10,11,12,13]
+LagrangeBary(nodes, values, 115)
+
+3)
+f=@(x) (1+cos(pi*x))/(1+x)
+clf
+hold on
+fplot(f, [0, 10])
+hold on
+a=linspace(0,10,21);
+b=a;
+for i=1:21
+b(i)=f(a(i));
+end
+Lx=@(x) LagrangeBary(a,b,x);
+fplot(Lx, [0, 10])

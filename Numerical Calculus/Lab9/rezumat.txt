@@ -1,0 +1,21 @@
+ai o integrala pe care vrei sa o calculezi
+
+reprectangle
+ cu linii paralele fata de ox
+
+reptrap
+ cu trapez, nu dreptunghi ca inainte
+
+repsimpson
+ cu parabole; trec prin mijloc si ele
+
+ex1
+ calculeaza rezultatul integralei folosindu-se de linii paralele, 
+	reprectangle
+
+romberg
+ calculeaza rezultatul integralei folosindu-se de trapez
+
+adquad
+ calculeaza rezultatul integralei folosindu-se de simpson
+
